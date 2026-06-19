@@ -1136,7 +1136,7 @@ loadData();
 </script>
 
 <!-- ═══ STARFIELD BACKGROUND ═══ -->
-<canvas id="starfield-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+<canvas id="starfield-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;"></canvas>
 <script>
 (function(){
   const c=document.getElementById('starfield-canvas');
@@ -1234,7 +1234,7 @@ loadData();
 <!-- ═══ SCROLL SPY STYLE ═══ -->
 <style>
 nav .links a.active{color:var(--gold)!important;background:rgba(200,164,92,.1)!important;}
-section{position:relative;z-index:1;}
+section{position:relative;z-index:2;background:rgba(10,14,23,.88)!important;}
 </style>
 </body>
 </html>
