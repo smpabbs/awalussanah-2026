@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+venv/
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.tmp
+*.bak
+*.log
+
+# Large files (keep in local, not in repo)
+*.xlsx
+*.xls
+*.pptx
+*.ppt
+*.pdf
+*.docx
+*.doc
+
+# Image source files (keep crops in data/walas/)
+walas-crop-*.png
+walas-strip-*.png
+
+# Claude settings
+.claude/
+
+# Backup files
+index\ -\ Copy.html

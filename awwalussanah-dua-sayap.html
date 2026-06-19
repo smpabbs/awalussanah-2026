@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Awwalussanah TA 2026/2027 — SMP ABBS Surakarta</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b110b;
+  --paper:#faf8f2;
+  --surface:#ffffff;
+  --text:#1b1f1a;
+  --text-2:#5a5e54;
+  --text-soft:#8a8d80;
+  --accent:#6B8E4E;
+  --accent-dark:#3f5e30;
+  --accent-light:#eaf1e1;
+  --accent-glow:rgba(107,142,78,.30);
+  --gold:#9a7517;
+  --gold-light:#fbf4e3;
+  --gold-soft:#c9a227;
+  --border:#e7e1d4;
+  --border-2:#f0ece1;
+  --shadow-sm:0 1px 3px rgba(40,50,30,.06);
+  --shadow-md:0 8px 30px rgba(40,50,30,.09);
+  --shadow-lg:0 24px 60px rgba(20,30,15,.16);
+  --r-sm:9px; --r-md:15px; --r-lg:26px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);overflow:hidden;-webkit-font-smoothing:antialiased}
+/* ---- icons ---- */
+.svgdefs{position:absolute;width:0;height:0;overflow:hidden}
+.ic{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;display:block}
+/* ---- background ---- */
+.bg-layer{position:fixed;inset:0;z-index:0;pointer-events:none}
+.bg-glow{background:
+  radial-gradient(ellipse at 16% 14%,rgba(107,142,78,.20) 0%,transparent 50%),
+  radial-gradient(ellipse at 84% 82%,rgba(154,117,23,.16) 0%,transparent 52%),
+  radial-gradient(ellipse at 50% 50%,rgba(107,142,78,.05) 0%,transparent 72%);
+  background-color:#0b110b;}
+.bg-grid{opacity:.06;background-image:
+  linear-gradient(rgba(107,142,78,.6) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(107,142,78,.6) 1px,transparent 1px);
+  background-size:56px 56px;mask-image:radial-gradient(ellipse at center,#000 32%,transparent 78%)}
+.particle{position:fixed;z-index:0;border-radius:50%;pointer-events:none;animation:floatUp linear infinite}
+@keyframes floatUp{0%{transform:translateY(0) scale(1);opacity:0}14%{opacity:.55}86%{opacity:.45}100%{transform:translateY(-92vh) scale(.4);opacity:0}}
+/* ---- deck ---- */
+.deck{position:relative;z-index:1;height:100vh;width:100vw;display:flex;align-items:center;justify-content:center}
+.slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  padding:50px clamp(20px,5vw,80px) 88px;opacity:0;visibility:hidden;
+  transform:translateY(26px) scale(.985);transition:opacity .55s var(--ease),transform .6s var(--ease),visibility .6s}
+.slide.active{opacity:1;visibility:visible;transform:none}
+.slide.prev{transform:translateY(-26px) scale(.985)}
+.card{width:min(1140px,100%);max-height:calc(100vh - 116px);background:var(--paper);border-radius:var(--r-lg);
+  box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.6);position:relative;overflow:hidden;
+  display:flex;flex-direction:column;padding:clamp(26px,3.6vw,52px) clamp(24px,4.4vw,60px)}
+.card::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(ellipse at 100% 0%,rgba(107,142,78,.06),transparent 42%)}
+.card::after{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;
+  background:linear-gradient(var(--accent),var(--gold));opacity:.85}
+.card.scrolly{overflow-y:auto}
+.card.scrolly::-webkit-scrollbar{width:8px}
+.card.scrolly::-webkit-scrollbar-thumb{background:var(--border);border-radius:10px}
+.card.scrolly::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+/* corner motif */
+.corner{position:absolute;top:18px;right:20px;width:70px;height:70px;opacity:.14;color:var(--accent);pointer-events:none}
+/* eyebrow */
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:11.5px;font-weight:700;letter-spacing:.17em;
+  text-transform:uppercase;color:var(--accent-dark);background:var(--accent-light);padding:8px 15px;border-radius:100px;
+  border:1px solid rgba(107,142,78,.3);align-self:flex-start}
+.eyebrow .ic{width:15px;height:15px;stroke-width:2}
+.eyebrow.gold{color:var(--gold);background:var(--gold-light);border-color:rgba(154,117,23,.28)}
+/* type */
+h1,h2,h3{font-family:'Newsreader',serif;font-weight:600;line-height:1.1;color:var(--text)}
+h2{font-size:clamp(27px,3.9vw,45px);margin:.42em 0 .3em}
+h2 .hl{color:var(--accent);font-style:italic}
+.lead{font-size:clamp(14.5px,1.45vw,17.5px);color:var(--text-2);line-height:1.66;max-width:60ch}
+.divider{height:3px;width:58px;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:3px;margin:13px 0 22px}
+/* cover */
+.cover{text-align:center;align-items:center;justify-content:center}
+.emblem{width:104px;height:104px;margin:0 auto 18px;filter:drop-shadow(0 8px 20px var(--accent-glow))}
+.wings{display:flex;align-items:center;justify-content:center;gap:22px;margin:6px 0 24px}
+.wing{display:flex;flex-direction:column;align-items:center;gap:9px;font-size:12.5px;font-weight:600;letter-spacing:.04em;color:var(--text-2)}
+.wing .orb{width:60px;height:60px;border-radius:18px;display:grid;place-items:center;box-shadow:var(--shadow-md)}
+.wing .orb .ic{width:28px;height:28px;stroke-width:1.6}
+.wing.iman .orb{background:var(--gold-light);border:1.5px solid var(--gold-soft);color:var(--gold)}
+.wing.tech .orb{background:var(--accent-light);border:1.5px solid var(--accent);color:var(--accent-dark)}
+.wing-amp{font-family:'Newsreader',serif;font-style:italic;font-size:30px;color:var(--text-soft);align-self:center;margin-top:-14px}
+.cover h1{font-size:clamp(33px,5.6vw,64px);letter-spacing:-.01em}
+.cover .year{color:var(--gold);font-style:italic}
+.cover .subtitle{font-size:clamp(14.5px,1.7vw,19px);color:var(--text-2);margin-top:13px;font-family:'Newsreader',serif;font-style:italic}
+.theme-chip{margin-top:20px;display:inline-flex;align-items:center;gap:9px;padding:11px 24px;border-radius:100px;
+  background:linear-gradient(90deg,var(--accent-light),var(--gold-light));border:1px solid var(--border);
+  font-size:14px;font-weight:600;color:var(--accent-dark)}
+.theme-chip .ic{width:16px;height:16px;color:var(--gold)}
+.cover .school{margin-top:24px;font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent-dark);font-weight:700}
+/* grids */
+.grid{display:grid;gap:15px;margin-top:6px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.tile{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:18px;
+  box-shadow:var(--shadow-sm);transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s;position:relative}
+.tile:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);border-color:var(--accent)}
+.tile .ico{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;margin-bottom:13px;
+  background:var(--accent-light);color:var(--accent-dark)}
+.tile.gold .ico{background:var(--gold-light);color:var(--gold)}
+.tile h3{font-size:16.5px;margin-bottom:5px}
+.tile p{font-size:13px;color:var(--text-2);line-height:1.55}
+.split{display:grid;grid-template-columns:1.05fr 1fr;gap:38px;align-items:center;flex:1}
+@media(max-width:820px){.split{grid-template-columns:1fr}}
+/* stats */
+.stats{display:flex;gap:13px;flex-wrap:wrap;margin-top:18px}
+.stat{flex:1;min-width:118px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);
+  padding:16px 18px;text-align:center;box-shadow:var(--shadow-sm)}
+.stat .num{font-family:'Newsreader',serif;font-size:34px;font-weight:700;color:var(--accent);line-height:1}
+.stat.gold .num{color:var(--gold)}
+.stat .lbl{font-size:11.5px;color:var(--text-soft);margin-top:6px;letter-spacing:.03em}
+/* roadmap */
+.roadmap{display:flex;gap:0;margin-top:26px;flex-wrap:wrap}
+.road-step{flex:1;min-width:210px;position:relative;padding:0 14px}
+.road-step .lvl{font-family:'Newsreader',serif;font-size:14.5px;font-weight:700;color:#fff;background:var(--accent);
+  display:inline-block;padding:5px 16px;border-radius:100px;margin-bottom:13px}
+.road-step:nth-child(2) .lvl{background:var(--accent-dark)}
+.road-step:nth-child(3) .lvl{background:var(--gold)}
+.road-step h3{font-size:18px;margin-bottom:6px}
+.road-step p{font-size:13px;color:var(--text-2);line-height:1.55}
+.road-step::after{content:"";position:absolute;right:-6px;top:10px;width:12px;height:12px;
+  border-top:2px solid var(--accent);border-right:2px solid var(--accent);transform:rotate(45deg)}
+.road-step:last-child::after{display:none}
+@media(max-width:760px){.road-step::after{display:none}}
+/* timeline */
+.timeline{position:relative;margin-top:16px;padding-left:6px}
+.timeline::before{content:"";position:absolute;left:22px;top:10px;bottom:10px;width:2px;background:linear-gradient(var(--accent),var(--gold))}
+.tl-item{display:flex;gap:18px;padding:10px 0;position:relative}
+.tl-dot{flex:none;width:46px;height:46px;border-radius:50%;background:var(--surface);border:2px solid var(--accent);
+  display:grid;place-items:center;z-index:1;box-shadow:var(--shadow-sm);color:var(--accent-dark)}
+.tl-dot .ic{width:21px;height:21px}
+.tl-body{flex:1;padding-top:3px}
+.tl-date{font-size:11.5px;font-weight:700;letter-spacing:.05em;color:var(--gold);text-transform:uppercase}
+.tl-title{font-size:16.5px;font-weight:600;color:var(--text);margin:1px 0 3px;font-family:'Newsreader',serif}
+.tl-desc{font-size:13px;color:var(--text-2);line-height:1.5}
+/* kelas */
+.group-head{display:flex;align-items:center;gap:12px;margin:16px 0 12px}
+.group-head .gh-ic{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:var(--accent-light);color:var(--accent-dark)}
+.group-head.putri .gh-ic{background:var(--gold-light);color:var(--gold)}
+.group-head h3{font-size:19px}
+.group-head .cnt{font-size:12px;font-weight:700;color:var(--text-soft);background:var(--surface);border:1px solid var(--border);padding:3px 11px;border-radius:100px}
+.kelas-grid{display:grid;gap:14px}
+.kelas-grid.p3{grid-template-columns:repeat(3,1fr)}
+.kelas-grid.p2{grid-template-columns:repeat(2,1fr)}
+.kelas-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;box-shadow:var(--shadow-sm)}
+.kelas-card .kc-head{display:flex;align-items:center;justify-content:space-between;padding:11px 15px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:#fff}
+.kelas-card.gold .kc-head{background:linear-gradient(90deg,var(--gold-soft),var(--gold))}
+.kc-head .kc-name{font-family:'Newsreader',serif;font-size:16px;font-weight:700}
+.kc-head .kc-num{font-size:11.5px;font-weight:700;background:rgba(255,255,255,.22);padding:2px 9px;border-radius:100px}
+.kelas-card ol{list-style:none;counter-reset:s;padding:8px 14px 12px;margin:0;max-height:none}
+.kelas-card li{counter-increment:s;font-size:12.3px;color:var(--text-2);line-height:1.42;padding:2.5px 0 2.5px 24px;position:relative;border-bottom:1px solid var(--border-2)}
+.kelas-card li:last-child{border-bottom:none}
+.kelas-card li::before{content:counter(s);position:absolute;left:0;top:2.5px;font-size:10px;font-weight:700;color:var(--accent);
+  width:18px;text-align:right}
+.kelas-card.gold li::before{color:var(--gold)}
+.kelas-note{font-size:12px;color:var(--text-soft);font-style:italic;margin-top:14px;display:flex;align-items:center;gap:7px}
+.kelas-note .ic{width:15px;height:15px;color:var(--gold)}
+@media(max-width:780px){.kelas-grid.p3,.kelas-grid.p2{grid-template-columns:1fr}}
+/* closing */
+.qr-box{width:172px;height:172px;border-radius:var(--r-md);background:#fff;border:2px dashed var(--accent);
+  display:grid;place-items:center;text-align:center;color:var(--text-soft);font-size:12.5px;padding:14px;box-shadow:var(--shadow-sm);gap:6px}
+.qr-box .ic{width:30px;height:30px;color:var(--accent);margin:0 auto}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 26px;border-radius:100px;border:none;cursor:pointer;
+  font-family:'Inter';font-size:15px;font-weight:600;text-decoration:none;transition:transform .25s var(--ease),box-shadow .25s}
+.btn .ic{width:18px;height:18px}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 22px rgba(107,142,78,.35)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(107,142,78,.45)}
+.note{font-size:12px;color:var(--text-soft);margin-top:10px;font-style:italic}
+.editable{background:rgba(154,117,23,.12);border-bottom:1px dashed var(--gold-soft);padding:0 3px;border-radius:3px}
+.checks{list-style:none;display:grid;gap:10px;margin-top:6px}
+.checks li{display:flex;gap:11px;align-items:flex-start;font-size:14.5px;color:var(--text-2);line-height:1.5}
+.checks li b{color:var(--text);font-weight:600}
+/* nav */
+.nav{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:20;display:flex;align-items:center;gap:14px}
+.nav-btn{width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);
+  backdrop-filter:blur(10px);color:#eafae0;cursor:pointer;display:grid;place-items:center;transition:.25s var(--ease)}
+.nav-btn .ic{width:20px;height:20px;stroke-width:2.2}
+.nav-btn:hover{background:var(--accent);border-color:var(--accent);transform:scale(1.08)}
+.nav-btn:disabled{opacity:.28;cursor:default;transform:none;background:rgba(255,255,255,.07)}
+.counter{color:#cfe3c2;font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;min-width:54px;text-align:center}
+.counter b{color:#fff}
+.progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold));z-index:30;transition:width .5s var(--ease)}
+.dots{position:fixed;right:20px;top:50%;transform:translateY(-50%);z-index:20;display:flex;flex-direction:column;gap:9px}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.22);cursor:pointer;transition:.25s;border:none;padding:0}
+.dot.active{background:var(--accent);transform:scale(1.4);box-shadow:0 0 10px var(--accent)}
+.brand-tag{position:fixed;top:16px;left:20px;z-index:20;color:#aac797;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;opacity:.85}
+.hint{position:fixed;bottom:24px;right:24px;z-index:20;color:#8aa57a;font-size:11px;opacity:.7}
+@media(max-width:680px){.dots{display:none}.hint{display:none}.split{gap:22px}}
+@media(max-width:560px){.g3,.g4{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- ===== SVG ICON SPRITE ===== -->
+<svg class="svgdefs" xmlns="http://www.w3.org/2000/svg"><defs>
+<symbol id="i-mosque" viewBox="0 0 24 24"><path d="M4 21V11M20 21V11"/><path d="M4 11a8 8 0 0 1 16 0"/><path d="M12 3.5c1.4 1 1.4 2.8 0 3.8"/><path d="M3 21h18"/><path d="M10 21v-3a2 2 0 0 1 4 0v3"/></symbol>
+<symbol id="i-laptop" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="11" rx="2"/><path d="M2 20h20"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4"/></symbol>
+<symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m16 8-2.2 6L8 16l2-6z"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+<symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 12h6M9 16h4"/></symbol>
+<symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 14a8 8 0 0 1 16 0"/><rect x="2.5" y="14" width="4" height="7" rx="2"/><rect x="17.5" y="14" width="4" height="7" rx="2"/></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></symbol>
+<symbol id="i-tent" viewBox="0 0 24 24"><path d="M3.5 21 12 4l8.5 17"/><path d="M12 4v17"/><path d="m9 21 3-5 3 5"/></symbol>
+<symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 2c1 3.2 4 5 4 9a4 4 0 1 1-8 0c0-2 .9-3.4 2-5"/><path d="M12 22a3 3 0 0 0 3-3c0-1.6-1-2.6-1.6-3.4-.5 1.8-1.4 2.4-1.4 2.4-.7 0-1.3-.6-1.3-1.4 0-.5.2-.9.4-1.3-1 .8-1.6 1.7-1.6 3A3 3 0 0 0 12 22z"/></symbol>
+<symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M8.6 12.4 7 22l5-3 5 3-1.6-9.6"/></symbol>
+<symbol id="i-building" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2"/><path d="M9 21v-4h6v4"/></symbol>
+<symbol id="i-trophy" viewBox="0 0 24 24"><path d="M6 4h12v4a6 6 0 0 1-12 0z"/><path d="M6 6H3.5v1.5A3 3 0 0 0 6.5 10.5M18 6h2.5v1.5A3 3 0 0 1 17.5 10.5"/><path d="M12 14v3M8.5 21h7M10 21v-2.5h4V21"/></symbol>
+<symbol id="i-leaf" viewBox="0 0 24 24"><path d="M11 20.5C6 20.5 4 16 4 12 4 6 11 3.5 20 3.5c0 8-4 14-9 14z"/><path d="M4 20.5C8 16 11 14 16 12.5"/></symbol>
+<symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1.5"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 1.5v3M15 1.5v3M9 19.5v3M15 19.5v3M1.5 9h3M1.5 15h3M19.5 9h3M19.5 15h3"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h6"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/></symbol>
+<symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0 0 18c1.1 0 1.6-.9 1.6-1.6 0-1 .8-1.6 1.7-1.6H18a3 3 0 0 0 3-3c0-5-4-8.8-9-8.8z"/><circle cx="7.5" cy="11.5" r="1"/><circle cx="12" cy="8" r="1"/><circle cx="16" cy="11" r="1"/></symbol>
+<symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.4 4 5.6 4 9s-1.4 6.6-4 9c-2.6-2.4-4-5.6-4-9s1.4-6.6 4-9z"/></symbol>
+<symbol id="i-gamepad" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="5"/><path d="M7 11v2M6 12h2"/><circle cx="15.5" cy="11" r="1"/><circle cx="17.5" cy="13.5" r="1"/></symbol>
+<symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 2 19 9l-7 13-7-13z"/><circle cx="12" cy="9" r="2"/><path d="M12 11v11"/></symbol>
+<symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 2h6M10 2v6.5L5 17a2 2 0 0 0 1.8 3h10.4A2 2 0 0 0 19 17l-5-8.5V2"/><path d="M7.5 14h9"/></symbol>
+<symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></symbol>
+<symbol id="i-car" viewBox="0 0 24 24"><path d="M5 13 7 7h10l2 6"/><path d="M3 13h18v4H3z"/><circle cx="7.5" cy="17.5" r="1.6"/><circle cx="16.5" cy="17.5" r="1.6"/></symbol>
+<symbol id="i-code" viewBox="0 0 24 24"><path d="m9 7-5 5 5 5M15 7l5 5-5 5"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5z"/><path d="m3 12 9 5 9-5M3 17l9 5 9-5"/></symbol>
+<symbol id="i-layout" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 9v12"/></symbol>
+<symbol id="i-rocket" viewBox="0 0 24 24"><path d="M12 2c3 2.2 5 6 5 10l-2.5 2.5h-5L7 12c0-4 2-7.8 5-10z"/><circle cx="12" cy="9" r="1.6"/><path d="M9 15l-2.5 2.5M15 15l2.5 2.5M9.5 19c-1 1-3.5 1.5-3.5 1.5S6 18 7 17"/></symbol>
+<symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/></symbol>
+<symbol id="i-megaphone" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h2l9 5V5L6 10H4a1 1 0 0 0-1 1z"/><path d="M18 8a4 4 0 0 1 0 8"/></symbol>
+<symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.5 6.2a4 4 0 0 0-5.3 5.3L3 17.7 6.3 21l6.2-6.2a4 4 0 0 0 5.3-5.3l-2.4 2.4-2.7-.6-.6-2.7z"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></symbol>
+<symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M12 3l1.7 4.5L18 9.2l-4.3 1.7L12 15l-1.7-4.1L6 9.2l4.3-1.7z"/><path d="M18.5 14.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></symbol>
+<symbol id="i-arrow-l" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
+<symbol id="i-arrow-r" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+<symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 14v7h-7M17 20h.01"/></symbol>
+<symbol id="i-star8" viewBox="0 0 24 24"><path d="m12 2 2.2 5.3L20 5l-2.3 5.7L23 12l-5.3 1.3L20 19l-5.8-2.3L12 22l-2.2-5.3L4 19l2.3-5.7L1 12l5.3-1.3L4 5l5.8 2.3z"/></symbol>
+</defs></svg>
+
+<div class="bg-layer bg-glow"></div>
+<div class="bg-layer bg-grid"></div>
+<span class="particle" style="width:4px;height:4px;background:var(--accent);left:12%;bottom:-10px;animation-duration:17s"></span>
+<span class="particle" style="width:3px;height:3px;background:var(--gold-soft);left:34%;bottom:-10px;animation-duration:22s;animation-delay:3s"></span>
+<span class="particle" style="width:5px;height:5px;background:var(--accent);left:58%;bottom:-10px;animation-duration:19s;animation-delay:6s"></span>
+<span class="particle" style="width:3px;height:3px;background:var(--gold-soft);left:78%;bottom:-10px;animation-duration:24s;animation-delay:2s"></span>
+<span class="particle" style="width:4px;height:4px;background:var(--accent);left:90%;bottom:-10px;animation-duration:20s;animation-delay:8s"></span>
+
+<div class="progress" id="progress"></div>
+<div class="brand-tag">SMP ABBS Surakarta</div>
+<div class="hint">← → atau spasi untuk navigasi</div>
+<div class="dots" id="dots"></div>
+
+<div class="deck" id="deck">
+
+  <!-- 1 COVER -->
+  <section class="slide active">
+    <div class="card cover">
+      <svg class="emblem" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="47" fill="none" stroke="var(--gold)" stroke-width="1.4"/>
+        <circle cx="50" cy="50" r="41" fill="none" stroke="var(--accent)" stroke-width="1" opacity=".45"/>
+        <path d="M50 20 58 42 80 50 58 58 50 80 42 58 20 50 42 42z" fill="var(--accent-light)" stroke="var(--accent-dark)" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M30 30 70 70M70 30 30 70" stroke="var(--accent)" stroke-width="1" opacity=".4"/>
+        <path d="M55 41a11 11 0 1 0 0 18 9 9 0 0 1 0-18z" fill="var(--gold)"/>
+      </svg>
+      <div class="wings">
+        <div class="wing iman"><div class="orb"><svg class="ic"><use href="#i-mosque"/></svg></div>Iman</div>
+        <div class="wing-amp">&amp;</div>
+        <div class="wing tech"><div class="orb"><svg class="ic"><use href="#i-laptop"/></svg></div>Teknologi</div>
+      </div>
+      <h1>AWWALUSSANAH<br><span class="year">Tahun Ajaran 2026 / 2027</span></h1>
+      <p class="subtitle">Selamat Datang Calon Siswa Baru SMP ABBS</p>
+      <div class="theme-chip"><svg class="ic"><use href="#i-sparkles"/></svg> Membentuk Generasi Rabbani yang Melek Teknologi</div>
+      <div class="school">SMP Ar-Risalah Bil Battul Surakarta</div>
+    </div>
+  </section>
+
+  <!-- 2 SAMBUTAN & VISI -->
+  <section class="slide">
+    <div class="card">
+      <svg class="corner" viewBox="0 0 24 24"><use href="#i-star8"/></svg>
+      <span class="eyebrow"><svg class="ic"><use href="#i-mosque"/></svg> Sambutan &amp; Visi</span>
+      <div class="split">
+        <div>
+          <h2>Assalamu'alaikum, <span class="hl">Ananda &amp; Orang Tua</span></h2>
+          <div class="divider"></div>
+          <p class="lead">Selamat bergabung di keluarga besar SMP ABBS Surakarta. Di sini, putra-putri Bapak/Ibu akan tumbuh dengan <b>dua sayap yang seimbang</b> — kecintaan pada Al-Qur'an dan kecakapan teknologi — agar siap menjadi generasi Rabbani yang bermanfaat di zamannya.</p>
+          <p class="note">— <span class="editable">[Nama Waka Kurikulum]</span>, Waka Kurikulum SMP ABBS</p>
+        </div>
+        <div class="grid g2">
+          <div class="tile gold"><div class="ico"><svg class="ic"><use href="#i-target"/></svg></div><h3>Visi</h3><p class="editable">[Teks visi resmi sekolah — menyusul]</p></div>
+          <div class="tile"><div class="ico"><svg class="ic"><use href="#i-compass"/></svg></div><h3>Misi</h3><p class="editable">[Poin misi resmi sekolah — menyusul]</p></div>
+          <div class="tile"><div class="ico"><svg class="ic"><use href="#i-mosque"/></svg></div><h3>Sayap Iman</h3><p>Tahfidz Class Program membentuk hati yang dekat dengan Al-Qur'an.</p></div>
+          <div class="tile gold"><div class="ico"><svg class="ic"><use href="#i-laptop"/></svg></div><h3>Sayap Teknologi</h3><p>Kurikulum ICT membekali keterampilan abad 21 yang aplikatif.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 PROFIL -->
+  <section class="slide">
+    <div class="card">
+      <svg class="corner" viewBox="0 0 24 24"><use href="#i-building"/></svg>
+      <span class="eyebrow"><svg class="ic"><use href="#i-building"/></svg> Profil Sekolah</span>
+      <h2>Lingkungan yang <span class="hl">Menumbuhkan</span></h2>
+      <div class="divider"></div>
+      <div class="stats">
+        <div class="stat"><div class="num">10</div><div class="lbl">Target Hafalan (Juz)</div></div>
+        <div class="stat gold"><div class="num">3</div><div class="lbl">Level Kurikulum ICT</div></div>
+        <div class="stat"><div class="num editable">★</div><div class="lbl">Prestasi (menyusul)</div></div>
+        <div class="stat gold"><div class="num editable">+</div><div class="lbl">Fasilitas Penunjang</div></div>
+      </div>
+      <div class="grid g3" style="margin-top:20px">
+        <div class="tile"><div class="ico"><svg class="ic"><use href="#i-building"/></svg></div><h3>Fasilitas</h3><p class="editable">[Lab komputer, masjid, ruang tahfidz, dll — menyusul]</p></div>
+        <div class="tile gold"><div class="ico"><svg class="ic"><use href="#i-trophy"/></svg></div><h3>Prestasi</h3><p class="editable">[Daftar juara/lomba spesifik — menyusul]</p></div>
+        <div class="tile"><div class="ico"><svg class="ic"><use href="#i-leaf"/></svg></div><h3>Lingkungan</h3><p>Suasana islami, disiplin, dan ramah teknologi untuk tumbuh kembang ananda.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 TCP OVERVIEW -->
+  <section class="slide">
+    <div class="card">
+      <svg class="corner" viewBox="0 0 24 24"><use href="#i-book"/></svg>
+      <span class="eyebrow gold"><svg class="ic"><use href="#i-mosque"/></svg> Sayap Iman — Tahfidz Class Program</span>
+      <div class="split">
+        <div>
+          <h2>Dekat dengan <span class="hl">Al-Qur'an</span>, Setiap Hari</h2>
+          <div class="divider"></div>
+          <p class="lead">Tahfidz Class Program (TCP) adalah jantung pembinaan ruhani di SMP ABBS. Lewat bimbingan terstruktur dan murojaah yang konsisten, setiap siswa diantar menuju target hafalan yang terukur dan melekat.</p>
+          <div class="stats">
+            <div class="stat gold"><div class="num">10</div><div class="lbl">Target Juz</div></div>
+            <div class="stat gold"><div class="num">3</div><div class="lbl">Tahun Pembinaan</div></div>
+          </div>
+        </div>
+        <div class="tile gold" style="text-align:center;padding:36px 28px">
+          <div class="ico" style="width:80px;height:80px;margin:0 auto 16px;border-radius:22px"><svg class="ic" style="width:42px;height:42px"><use href="#i-book"/></svg></div>
+          <h3 style="font-size:23px">Target 10 Juz</h3>
+          <p style="margin-top:7px">Hafalan dibimbing bertahap dengan metode halaqoh dan murojaah harian hingga tuntas dan kuat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 TCP KOMPONEN -->
+  <section class="slide">
+    <div class="card scrolly">
+      <span class="eyebrow gold"><svg class="ic"><use href="#i-book"/></svg> TCP — Komponen Program</span>
+      <h2>Tujuh Pilar <span class="hl">Pembinaan Tahfidz</span></h2>
+      <div class="divider"></div>
+      <div class="grid g4">
+        <div class="tile gold"><div class="ico"><svg class="ic"><use href="#i-users"/></svg></div><h3>Halaqoh Al-Qur'an</h3><p>Pembelajaran berkelompok bersama pembimbing.</p></div>
+        <div class="tile gold"><div class="ico"><svg class="ic"><use href="#i-clipboard"/></svg></div><h3>Laporan Harian</h3><p>Monitoring capaian hafalan setiap hari.</p></div>
+        <div class="tile gold"><div class="ico"><svg class="ic"><use href="#i-headphones"/></svg></div><h3>Media Pembelajaran</h3><p>Fasilitas pendukung tahfidz yang memadai.</p></div>
+        <div class="tile gold"><div class="ico"><svg class="ic"><use href="#i-refresh"/></svg></div><h3>Murojaah Harian</h3><p>Pengulangan rutin agar hafalan melekat kuat.</p></div>
+        <div class="tile gold"><div class="ico"><svg class="ic"><use href="#i-tent"/></svg></div><h3>Camping Qur'an</h3><p>Program intensif menguatkan hafalan &amp; ukhuwah.</p></div>
+        <div class="tile gold"><div class="ico"><svg class="ic"><use href="#i-flame"/></svg></div><h3>Motivasi Tahfidz</h3><p>Seminar &amp; penguatan mental para penghafal.</p></div>
+        <div class="tile gold"><div class="ico"><svg class="ic"><use href="#i-award"/></svg></div><h3>Sertifikasi Juziyah</h3><p>Ujian dan pengakuan resmi per juz.</p></div>
+        <div class="tile"><div class="ico"><svg class="ic"><use href="#i-target"/></svg></div><h3>Target Terukur</h3><p>Capaian 10 juz yang dipantau berkala.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 ICT OVERVIEW -->
+  <section class="slide">
+    <div class="card">
+      <svg class="corner" viewBox="0 0 24 24"><use href="#i-laptop"/></svg>
+      <span class="eyebrow"><svg class="ic"><use href="#i-laptop"/></svg> Sayap Teknologi — Kurikulum ICT</span>
+      <h2>Roadmap Belajar <span class="hl">Teknologi</span> Bertahap</h2>
+      <div class="divider"></div>
+      <p class="lead">Kurikulum ICT dirancang menanjak: dari literasi &amp; produktivitas, naik ke elektronika &amp; logika, hingga membangun aplikasi web nyata. Setiap level membangun keterampilan level berikutnya.</p>
+      <div class="roadmap">
+        <div class="road-step"><span class="lvl">Level 7</span><h3>Fondasi &amp; Kreasi</h3><p>Hardware/Software, MS Office, Appsheet, Canva, Wordpress, Construct, Corel Draw.</p></div>
+        <div class="road-step"><span class="lvl">Level 8</span><h3>Elektronika &amp; Logika</h3><p>Tinkercad, Arduino, MIT App Inventor, Project RC Car.</p></div>
+        <div class="road-step"><span class="lvl">Level 9</span><h3>Web Development</h3><p>HTML, CSS, JavaScript, jQuery, Bootstrap.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 ICT LEVEL 7 -->
+  <section class="slide">
+    <div class="card scrolly">
+      <span class="eyebrow"><svg class="ic"><use href="#i-laptop"/></svg> ICT Level 7 — Fondasi &amp; Kreasi</span>
+      <h2>Mengenal &amp; <span class="hl">Berkarya</span></h2>
+      <div class="divider"></div>
+      <div class="grid g3">
+        <div class="tile"><div class="ico"><svg class="ic"><use href="#i-cpu"/></svg></div><h3>Hardware/Software</h3><p>Mengenal komponen &amp; sistem komputer.</p></div>
+        <div class="tile"><div class="ico"><svg class="ic"><use href="#i-file"/></svg></div><h3>MS Office</h3><p>Word &amp; Excel untuk produktivitas.</p></div>
+        <div class="tile"><div class="ico"><svg class="ic"><use href="#i-phone"/></svg></div><h3>Appsheet</h3><p>Membuat aplikasi APK tanpa coding.</p></div>
+        <div class="tile"><div class="ico"><svg class="ic"><use href="#i-palette"/></svg></div><h3>Canva</h3><p>Multimedia &amp; desain interaktif.</p></div>
+        <div class="tile"><div class="ico"><svg class="ic"><use href="#i-globe"/></svg></div><h3>Wordpress</h3><p>Membangun website sederhana.</p></div>
+        <div class="tile"><div class="ico"><svg class="ic"><use href="#i-gamepad"/></svg></div><h3>Construct</h3><p>Membuat game 2D.</p></div>
+        <div class="tile"><div class="ico"><svg class="ic"><use href="#i-pen"/></svg></div><h3>Corel Draw</h3><p>Desain aset game &amp; logo.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 ICT LEVEL 8 -->
+  <section class="slide">
+    <div class="card">
+      <span class="eyebrow"><svg class="ic"><use href="#i-laptop"/></svg> ICT Level 8 — Elektronika &amp; Logika</span>
+      <h2>Dari Simulasi ke <span class="hl">Dunia Nyata</span></h2>
+      <div class="divider"></div>
+      <div class="grid g4">
+        <div class="tile"><div class="ico"><svg class="ic"><use href="#i-flask"/></svg></div><h3>Tinkercad</h3><p>Simulasi rangkaian elektronika online.</p></div>
+        <div class="tile"><div class="ico"><svg class="ic"><use href="#i-zap"/></svg></div><h3>Arduino</h3><p>Memprogram mikrokontroler nyata.</p></div>
+        <div class="tile"><div class="ico"><svg class="ic"><use href="#i-phone"/></svg></div><h3>MIT App Inventor</h3><p>Membangun aplikasi Android visual.</p></div>
+        <div class="tile gold"><div class="ico"><svg class="ic"><use href="#i-car"/></svg></div><h3>Project RC Car</h3><p>Proyek puncak: merakit mobil RC.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 ICT LEVEL 9 -->
+  <section class="slide">
+    <div class="card">
+      <span class="eyebrow"><svg class="ic"><use href="#i-laptop"/></svg> ICT Level 9 — Web Development</span>
+      <h2>Membangun <span class="hl">Website</span> Sungguhan</h2>
+      <div class="divider"></div>
+      <div class="grid g3">
+        <div class="tile"><div class="ico"><svg class="ic"><use href="#i-code"/></svg></div><h3>HTML</h3><p>Struktur halaman web.</p></div>
+        <div class="tile"><div class="ico"><svg class="ic"><use href="#i-palette"/></svg></div><h3>CSS</h3><p>Mempercantik tampilan.</p></div>
+        <div class="tile"><div class="ico"><svg class="ic"><use href="#i-zap"/></svg></div><h3>JavaScript</h3><p>Interaktivitas halaman.</p></div>
+        <div class="tile"><div class="ico"><svg class="ic"><use href="#i-layers"/></svg></div><h3>jQuery</h3><p>Mempercepat manipulasi web.</p></div>
+        <div class="tile gold"><div class="ico"><svg class="ic"><use href="#i-layout"/></svg></div><h3>Bootstrap</h3><p>Layout responsif &amp; rapi.</p></div>
+        <div class="tile"><div class="ico"><svg class="ic"><use href="#i-rocket"/></svg></div><h3>Portfolio Web</h3><p>Hasil akhir: website karya sendiri.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 PROGRAM PENDUKUNG -->
+  <section class="slide">
+    <div class="card">
+      <span class="eyebrow"><svg class="ic"><use href="#i-mic"/></svg> Program Pendukung ICT</span>
+      <h2>Belajar yang <span class="hl">Tak Berhenti</span> di Kelas</h2>
+      <div class="divider"></div>
+      <div class="grid g4">
+        <div class="tile"><div class="ico"><svg class="ic"><use href="#i-megaphone"/></svg></div><h3>ICT Show</h3><p>Pameran &amp; unjuk karya teknologi siswa.</p></div>
+        <div class="tile"><div class="ico"><svg class="ic"><use href="#i-tent"/></svg></div><h3>ICT Camp</h3><p>Belajar teknologi secara intensif &amp; seru.</p></div>
+        <div class="tile"><div class="ico"><svg class="ic"><use href="#i-wrench"/></svg></div><h3>Workshop ICT</h3><p>Pelatihan keterampilan terapan.</p></div>
+        <div class="tile gold"><div class="ico"><svg class="ic"><use href="#i-clock"/></svg></div><h3>5 Minutes Presentation</h3><p>Melatih percaya diri presentasi.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 MATRIKULASI -->
+  <section class="slide">
+    <div class="card scrolly">
+      <span class="eyebrow gold"><svg class="ic"><use href="#i-clock"/></svg> Informasi Matrikulasi</span>
+      <h2>Langkah <span class="hl">Awalmu</span> di SMP ABBS</h2>
+      <div class="divider"></div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot"><svg class="ic"><use href="#i-sparkles"/></svg></div><div class="tl-body"><div class="tl-date">21 – 23 Juni 2026</div><div class="tl-title">Proses Masuk Grup Kelas</div><div class="tl-desc">Calon siswa bergabung ke grup WhatsApp kelas masing-masing.</div></div></div>
+        <div class="tl-item"><div class="tl-dot"><svg class="ic"><use href="#i-megaphone"/></svg></div><div class="tl-body"><div class="tl-date">24 Juni 2026</div><div class="tl-title">Meeting Perdana</div><div class="tl-desc">Pertemuan pertama untuk seluruh siswa baru.</div></div></div>
+        <div class="tl-item"><div class="tl-dot"><svg class="ic"><use href="#i-book"/></svg></div><div class="tl-body"><div class="tl-date">25 – 27 Juni 2026</div><div class="tl-title">Materi Belajar Mandiri</div><div class="tl-desc">Siswa mempelajari materi awal secara mandiri.</div></div></div>
+        <div class="tl-item"><div class="tl-dot"><svg class="ic"><use href="#i-laptop"/></svg></div><div class="tl-body"><div class="tl-date">29 Juni – 4 Juli 2026</div><div class="tl-title">Pertemuan Online per Kelas</div><div class="tl-desc">Sesi daring per kelas. Jadwal menyusul di grup masing-masing.</div></div></div>
+        <div class="tl-item"><div class="tl-dot"><svg class="ic"><use href="#i-pen"/></svg></div><div class="tl-body"><div class="tl-date">6 – 10 Juli 2026</div><div class="tl-title">Penugasan Terstruktur</div><div class="tl-desc">Tugas terbimbing sebagai penutup matrikulasi.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 PEMBAGIAN KELOMPOK -->
+  <section class="slide">
+    <div class="card scrolly">
+      <span class="eyebrow"><svg class="ic"><use href="#i-users"/></svg> Pembagian Kelompok Kelas</span>
+      <h2>Kelas <span class="hl">Matrikulasi</span> 2026/2027</h2>
+      <div class="divider"></div>
+      <div class="group-head"><div class="gh-ic"><svg class="ic"><use href="#i-users"/></svg></div><h3>Kelas Putra</h3><span class="cnt">83 siswa · 3 kelas</span></div><div class="kelas-grid p3"><div class="kelas-card"><div class="kc-head"><span class="kc-name">7 Putra A</span><span class="kc-num">28 siswa</span></div><ol><li>Elbrian Danish Rachmat Priambodo</li><li>Narendra Erabbani</li><li>Zhafran Ozil Syazani</li><li>Ilyas Bakr Rasyid</li><li>Azzam Nur Asyami</li><li>Muhammad Raffa Al Fatih</li><li>Dafi Akmal Utomo</li><li>Lukman Tri Yoda</li><li>Muhammad Nawaf Syihabuddin Yafiq</li><li>Ismail Arofah</li><li>Aldebaran Zavier Mikhail Abimanyu</li><li>Arkarega Dhirgam Al-Ghifari</li><li>Savino Renzo Arthahadiputra</li><li>Rayyan Gyanara Santoso</li><li>Faqih Abrizam Rivai</li><li>Arsenio Leon Al Athatra Purnama</li><li>Alfreyza Muhammad Armandsyah</li><li>Virgatama Rooneyavril Santoso</li><li>Arjuna Raiful Rafif</li><li>Azka Arsyandion</li><li>Muhammad Fahreza Hardiyanto</li><li>Muhammad Fahri Akhtar Rayyan Hutomo</li><li>Abiyu Rhamdhani Susilo</li><li>Bintang Nafiurizqi</li><li>Ahda Irhab Nabil</li><li>Arjuna Keanu Ardwinolla</li><li>Muhammad Ilyasa Ash Shidiq</li><li>Akma Safaraz Ajunta</li></ol></div><div class="kelas-card"><div class="kc-head"><span class="kc-name">7 Putra B</span><span class="kc-num">28 siswa</span></div><ol><li>Ahmad Rafi&#x27; Asyraf</li><li>Gilbran azzamy ramadhan</li><li>Rasyid Tri Arasyputra</li><li>Muhammad Saladin Al Banna</li><li>Daniswara Pandu Wiatmaja</li><li>Shaka Khalifi Putra</li><li>Muhammad Rafif Nur Alviris</li><li>Alifiandra Tsaqib Atmojo</li><li>Aliffiandra Rafif Qohhaar Pradipta</li><li>Muhammad Rafa Fauzan Kamil</li><li>Kenzie Tsaqif Arkaano</li><li>Arva Putra Riessa</li><li>Arjuna Kenzie Hanafi</li><li>Rahmat Basuki Al Fatih</li><li>Muhammad Gibran Adria Putra</li><li>Muhammad Al Yazid Umran Wahyudin</li><li>Shahzada Arkan Shanmadja</li><li>Xavier Mochammad Armature</li><li>Pranaja Nadzirul Yuwana</li><li>Nafis Nur Abhista</li><li>G. Iqbal Mahendra</li><li>Faiz Muhammad Attaqiy</li><li>Fatih Raufa Arsyad</li><li>Shiddiq Alfarizi Fahrin</li><li>Hafidz Rafie Rabbani</li><li>Al Ghazali Kenzie Ozora Setyawan</li><li>Erick Wildan Shahzada</li><li>Fathir Ardiansyah Alvaro</li></ol></div><div class="kelas-card"><div class="kc-head"><span class="kc-name">7 Putra C</span><span class="kc-num">27 siswa</span></div><ol><li>Abisatya Arkha Hamdan Nugroho</li><li>M. Zidane Hafis Ramadhan</li><li>Muzakki Akhtar</li><li>Muhammad Alvin Pratista</li><li>Muhammad Aufa Pratama</li><li>Pradipta Denanjaya</li><li>Al Ghazali Hamizan Saeeduzzaman</li><li>Zufar Kafi Robbani</li><li>Alif Abdul Ghani</li><li>Hiroshi Bryan Alvaro</li><li>Rafardhan Ara Athalla</li><li>M. Khalid Al Fatih</li><li>Alvin Cahya Wicaksono</li><li>Maulana Alif Hakim</li><li>Ervito Reynard Wardana</li><li>Muhammad Ramadhan Al Fayyad</li><li>Kenzie Al Falih Putra Wisesa</li><li>Rafif Arkana Andriyanto</li><li>Azka Kamaluddin Ghozali</li><li>Fauzi Zahroni</li><li>Azhar Ariadi Prabowo</li><li>Muhammad Abdurrohman</li><li>Zaidan Fahri Hakim</li><li>Faqih Rafay Naqiba</li><li>Izhar Rahadhian</li><li>Akhdan Mirza Ukail Al Fatih</li><li>Danang Ahmad Arka</li></ol></div></div>
+      <div class="group-head putri"><div class="gh-ic"><svg class="ic"><use href="#i-users"/></svg></div><h3>Kelas Putri</h3><span class="cnt">48 siswa · 2 kelas</span></div><div class="kelas-grid p2"><div class="kelas-card gold"><div class="kc-head"><span class="kc-name">7 Putri A</span><span class="kc-num">24 siswa</span></div><ol><li>Frynda Meisyara Aljufri</li><li>Aliya Wafa Kamila</li><li>Naura Titis Prabanggono</li><li>Silmi Adara Putri</li><li>Gendhis Esa Shaliha</li><li>Nadya Kamilah Ramadhani</li><li>Raisya Kayla Zahra Saefuddin</li><li>Nabila Alya Hasanah</li><li>Yumna Fariha</li><li>Nasyra Queenaisya Qaireen</li><li>Kanaya Asy Syifa Queenza Nugraha</li><li>Dhiba Raiqa Kabna Saad</li><li>Reviokta Akifa Naila</li><li>Rumaisa Naeva Atmaja</li><li>Ainiya Faidha Azmi</li><li>Aqeela Hasna Aldisha Wibowo</li><li>Maulida Astika Kirana</li><li>Nur Karimah Farhati</li><li>Aisha Hafiza</li><li>Nadya Joyce Silitonga</li><li>Carmella El Ghaniya Avariella</li><li>Aurora Shaliha Althafunnisa</li><li>Anindita Ainun Mahya</li><li>Qisya Izz Zara Qaireen</li></ol></div><div class="kelas-card gold"><div class="kc-head"><span class="kc-name">7 Putri B</span><span class="kc-num">24 siswa</span></div><ol><li>Najwa Syeeraf Mumtazul Uula</li><li>Jiddan Nagata L</li><li>Ashyfa Aulia Tanzil</li><li>Dafinna Shidqiyya</li><li>Ghania Raisa Fauzi</li><li>Keisha Athaya Ayunda Pratama</li><li>Silmi Latifa</li><li>Khyla Zahra Salsabila Dri Pramurdi</li><li>Arisha Nadhifah Sari</li><li>Athaya Assyfatu Haifa</li><li>Naura Nadhifa A</li><li>Alya Shidqia Wijaya</li><li>Alisha Faiha Salsabila</li><li>Fathi Yuanita</li><li>Jihan Thalita Ulfa</li><li>Hening Swastika</li><li>Adzkia Samha Saufa</li><li>Hafsah Bilqis Aulia Insani</li><li>Nabila Afrah Manahil</li><li>Jasmine Naurra Alby</li><li>Iluya Almakinan Luthfie</li><li>Abigail Chavail</li><li>Daania Almahyra Falihah</li><li>Alisya Anindita Nurviola</li></ol></div></div>
+      <div class="kelas-note"><svg class="ic"><use href="#i-sparkles"/></svg> Pembagian kelas bersifat sementara untuk matrikulasi &amp; dapat berubah. Nama urut sesuai kelompok masing-masing.</div>
+    </div>
+  </section>
+
+  <!-- 13 PENUTUP -->
+  <section class="slide">
+    <div class="card cover">
+      <span class="eyebrow" style="align-self:center"><svg class="ic"><use href="#i-sparkles"/></svg> Mari Bergabung</span>
+      <h2 style="text-align:center">Sampai Jumpa di <span class="hl">SMP ABBS!</span></h2>
+      <p class="lead" style="text-align:center;margin:0 auto 22px">Pastikan putra-putri Bapak/Ibu telah bergabung di grup WhatsApp kelas. Seluruh informasi lanjutan akan diumumkan melalui grup.</p>
+      <div style="display:flex;gap:36px;align-items:center;justify-content:center;flex-wrap:wrap">
+        <div class="qr-box"><svg class="ic"><use href="#i-qr"/></svg>QR Code Grup WA<br>(menyusul)</div>
+        <div style="text-align:left;max-width:280px">
+          <a class="btn btn-primary editable" href="#"><svg class="ic"><use href="#i-phone"/></svg> Bergabung ke Grup WA</a>
+          <p class="note">Scan QR atau klik tombol untuk masuk grup kelas.<br>Link &amp; data siswa per kelas <b>menyusul</b>.</p>
+        </div>
+      </div>
+      <div class="school" style="margin-top:30px">جزاكم الله خيرا — Barakallahu fiikum</div>
+    </div>
+  </section>
+
+</div>
+
+<div class="nav">
+  <button class="nav-btn" id="prev" title="Sebelumnya"><svg class="ic"><use href="#i-arrow-l"/></svg></button>
+  <div class="counter"><b id="cur">1</b> / <span id="total">13</span></div>
+  <button class="nav-btn" id="next" title="Berikutnya"><svg class="ic"><use href="#i-arrow-r"/></svg></button>
+</div>
+
+<script>
+(function(){
+  const slides=[...document.querySelectorAll('.slide')];
+  const total=slides.length;
+  let i=0;
+  const dotsWrap=document.getElementById('dots');
+  const prog=document.getElementById('progress');
+  const cur=document.getElementById('cur');
+  document.getElementById('total').textContent=total;
+  slides.forEach((_,n)=>{const b=document.createElement('button');b.className='dot'+(n===0?' active':'');b.addEventListener('click',()=>go(n));dotsWrap.appendChild(b);});
+  const dots=[...dotsWrap.children];
+  function go(n){
+    n=Math.max(0,Math.min(total-1,n));
+    slides[i].classList.remove('active');slides[i].classList.toggle('prev',n>i);
+    slides[n].classList.remove('prev');slides[n].classList.add('active');
+    dots[i].classList.remove('active');dots[n].classList.add('active');
+    i=n;cur.textContent=i+1;prog.style.width=((i+1)/total*100)+'%';
+    document.getElementById('prev').disabled=(i===0);document.getElementById('next').disabled=(i===total-1);
+    const sc=slides[i].querySelector('.scrolly');if(sc)sc.scrollTop=0;
+  }
+  document.getElementById('prev').addEventListener('click',()=>go(i-1));
+  document.getElementById('next').addEventListener('click',()=>go(i+1));
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();go(i+1);}
+    if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(i-1);}
+    if(e.key==='Home')go(0);if(e.key==='End')go(total-1);
+  });
+  let tx=0,ty=0;
+  document.addEventListener('touchstart',e=>{tx=e.changedTouches[0].screenX;ty=e.changedTouches[0].screenY;},{passive:true});
+  document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].screenX-tx,dy=e.changedTouches[0].screenY-ty;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy))go(dx<0?i+1:i-1);},{passive:true});
+  prog.style.width=(1/total*100)+'%';document.getElementById('prev').disabled=true;
+})();
+</script>
+</body>
+</html>

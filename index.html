@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWALUSSANAH 2026/2027 - SMP ABBS Surakarta</title>
+<style>
+/* ================= RESET & BASE ================= */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0e17; --bg2:#0f1525; --card:#141b2d;
+  --gold:#d4a843; --gold-dim:#a8852e; --teal:#2dd4bf;
+  --text:#e2e8f0; --muted:#8492a8; --border:#1e2940;
+  --radius:16px;
+}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+body{
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--text);overflow-x:hidden;
+  line-height:1.6
+}
+
+/* ================= SECTIONS ================= */
+section{
+  scroll-snap-align:start;
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding:68px 1.5rem 1.5rem;
+  position:relative;overflow-y:auto
+}
+.section-inner{max-width:1100px;width:100%;margin:0 auto;position:relative;z-index:1}
+
+/* ================= NAVBAR ================= */
+nav{
+  position:fixed;top:0;left:0;width:100%;z-index:100;
+  background:rgba(10,14,23,.75);backdrop-filter:blur(20px) saturate(1.5);
+  border-bottom:1px solid rgba(30,41,64,.5);
+  padding:0 1.5rem;height:56px;
+  display:flex;align-items:center;justify-content:center
+}
+nav .logo{display:flex;align-items:center;gap:8px;text-decoration:none}
+nav .logo img{height:30px;width:auto;border-radius:5px}
+nav .links{display:flex;align-items:center;gap:2px}
+nav .links a{
+  color:var(--muted);text-decoration:none;font-size:.8rem;font-weight:500;
+  padding:.35rem .8rem;border-radius:7px;transition:all .25s
+}
+nav .links a:hover{color:var(--text);background:rgba(255,255,255,.04)}
+nav .links a.cta{
+  background:linear-gradient(135deg,var(--gold),var(--gold-dim));
+  color:var(--bg);padding:.35rem 1rem;border-radius:50px;font-weight:600;margin-left:4px
+}
+nav .links a.cta:hover{background:var(--gold);transform:scale(1.03)}
+
+/* ================= TYPO ================= */
+h1{font-size:clamp(2rem,5vw,3.6rem);font-weight:800;line-height:1.1}
+h2{font-size:clamp(1.5rem,3.5vw,2.5rem);font-weight:700;margin-bottom:.3em}
+h3{font-size:clamp(1rem,1.8vw,1.35rem);font-weight:600}
+.gold{color:var(--gold)}.teal{color:var(--teal)}.muted{color:var(--muted)}
+
+/* ================= HERO ================= */
+#hero{
+  background:var(--bg);
+  text-align:center;flex-direction:column;gap:.5rem;overflow:hidden
+}
+/* animated gradient mesh overlay */
+#hero::before{
+  content:'';position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse 60% 40% at 30% 20%, rgba(212,168,67,.12) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 35% at 70% 30%, rgba(45,212,191,.08) 0%, transparent 55%),
+    radial-gradient(ellipse 45% 40% at 20% 70%, rgba(212,168,67,.06) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 35% at 80% 75%, rgba(45,212,191,.07) 0%, transparent 50%);
+  animation:meshPan 12s ease-in-out infinite alternate
+}
+@keyframes meshPan{
+  0%{transform:scale(1) rotate(0deg)}
+  50%{transform:scale(1.08) rotate(1deg)}
+  100%{transform:scale(1) rotate(-1deg)}
+}
+/* floating glowing orbs */
+.hero-orb{
+  position:absolute;border-radius:50%;
+  animation:floatOrb var(--dur) ease-in-out infinite alternate;
+  pointer-events:none;z-index:0;mix-blend-mode:screen
+}
+@keyframes floatOrb{
+  0%{transform:translate(0,0) scale(.95);opacity:.35}
+  100%{transform:translate(var(--dx,40px),var(--dy,-40px)) scale(var(--sc,1.15));opacity:.6}
+}
+.hero-orb:nth-child(1){
+  width:400px;height:400px;
+  background:radial-gradient(circle,rgba(212,168,67,.2),transparent 65%);
+  top:-120px;left:-80px;
+  --dur:7s; --dx:60px; --dy:40px; --sc:1.1
+}
+.hero-orb:nth-child(2){
+  width:350px;height:350px;
+  background:radial-gradient(circle,rgba(45,212,191,.15),transparent 65%);
+  bottom:5%;right:-60px;
+  --dur:9s; --dx:-50px; --dy:-50px; --sc:1.2
+}
+.hero-orb:nth-child(3){
+  width:250px;height:250px;
+  background:radial-gradient(circle,rgba(212,168,67,.12),transparent 65%);
+  top:40%;left:60%;
+  --dur:6s; --dx:-30px; --dy:-60px; --sc:1.25
+}
+.hero-orb:nth-child(4){
+  width:280px;height:280px;
+  background:radial-gradient(circle,rgba(45,212,191,.12),transparent 65%);
+  top:15%;right:15%;
+  --dur:10s; --dx:40px; --dy:50px; --sc:1.15
+}
+.hero-orb:nth-child(5){
+  width:200px;height:200px;
+  background:radial-gradient(circle,rgba(212,168,67,.08),transparent 65%);
+  bottom:30%;left:10%;
+  --dur:8s; --dx:45px; --dy:-20px; --sc:1.1
+}
+.hero-logo-img{width:clamp(90px,14vw,150px);height:auto;margin-bottom:.6rem}
+.hero-school-name{
+  font-size:clamp(1rem,2vw,1.3rem);font-weight:600;
+  color:var(--text);letter-spacing:1px;margin-bottom:.1rem
+}
+#hero h1{margin-bottom:.2rem}
+.hero-sub{
+  font-size:clamp(.9rem,1.5vw,1.1rem);color:var(--muted);
+  max-width:580px;margin:0 auto 1.2rem
+}
+.hero-info{
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+  flex-wrap:wrap;margin:0 0 1.5rem
+}
+.hero-info .hi-item{
+  font-size:clamp(.8rem,1.2vw,.9rem);color:var(--muted);
+  background:rgba(255,255,255,.03);border:1px solid var(--border);
+  padding:.35rem 1rem;border-radius:50px
+}
+.hero-info .hi-divider{color:var(--border);font-size:.7rem}
+.hero-btns{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:.4rem;
+  padding:.7rem 1.6rem;border-radius:50px;font-weight:600;
+  text-decoration:none;transition:all .3s;font-size:.88rem;border:none;cursor:pointer
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--gold),var(--gold-dim));color:var(--bg)
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(212,168,67,.2)}
+.btn-outline{
+  background:transparent;border:1px solid var(--border);color:var(--text)
+}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+.hero-scroll{
+  position:absolute;bottom:1.2rem;left:50%;transform:translateX(-50%);
+  animation:bounce 2s infinite;color:var(--muted);font-size:.68rem;opacity:.5;
+  display:flex;flex-direction:column;align-items:center;gap:1px
+}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-6px)}}
+
+/* ================= SECTION HEADER ================= */
+.section-header{text-align:center;margin-bottom:2rem}
+.section-tag{
+  display:inline-block;font-size:.68rem;font-weight:600;text-transform:uppercase;
+  letter-spacing:2px;color:var(--gold);background:rgba(212,168,67,.07);
+  padding:.2rem .9rem;border-radius:50px;margin-bottom:.5rem
+}
+
+/* ================= CARDS ================= */
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+.grid-3{grid-template-columns:repeat(3,1fr)}@media(max-width:700px){.grid-3{grid-template-columns:1fr 1fr}}@media(max-width:480px){.grid-3{grid-template-columns:1fr}}
+.card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1.4rem 1.3rem;transition:all .3s
+}
+.card:hover{
+  transform:translateY(-3px);border-color:rgba(212,168,67,.2);
+  box-shadow:0 10px 35px rgba(0,0,0,.25)
+}
+.card .icon{font-size:1.8rem;margin-bottom:.5rem}
+.card h3{margin-bottom:.3rem}
+.card p{color:var(--muted);font-size:.83rem;line-height:1.55}
+
+/* ================= ICT — 3 LEVEL JENJANG ================= */
+.ict-grid{
+  display:flex;flex-direction:column;align-items:center;
+  gap:.4rem;max-width:340px;margin:0 auto 1.2rem
+}
+.ict-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;overflow:hidden;width:100%;
+  transition:all .3s
+}
+.ict-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 36px rgba(0,0,0,.3)
+}
+.ict-card-top{
+  padding:.6rem .9rem .4rem;
+  display:flex;align-items:center;gap:.6rem;
+  border-bottom:1px solid var(--border);
+  background:color-mix(in srgb,var(--ca) 6%,transparent)
+}
+.ict-lv{
+  font-size:.65rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:1.2px;opacity:.45
+}
+.ict-ill{
+  margin-left:auto;width:32px;height:32px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;
+  background:color-mix(in srgb,var(--ca) 12%,transparent);
+  border:1px solid color-mix(in srgb,var(--ca) 25%,transparent)
+}
+.ict-card-body{padding:.55rem .9rem}
+.ict-card-body h3{font-size:.82rem;margin-bottom:.4rem;color:var(--text)}
+.ict-rows{display:flex;flex-direction:column;gap:.22rem}
+.ict-row{
+  display:flex;align-items:center;gap:.45rem;
+  padding:.25rem .4rem;border-radius:6px;
+  background:color-mix(in srgb,var(--ca) 8%,transparent);
+  border:1px solid color-mix(in srgb,var(--ca) 15%,transparent);
+  transition:all .2s
+}
+.ict-row:hover{
+  background:color-mix(in srgb,var(--ca) 14%,transparent);
+  border-color:color-mix(in srgb,var(--ca) 25%,transparent)
+}
+.ictr-icon{font-size:.75rem;flex-shrink:0;width:1.2rem;text-align:center}
+.ictr-text{font-size:.62rem;color:var(--muted);font-weight:500;line-height:1.25}
+.ict-card-foot{
+  padding:.35rem .9rem;font-size:.65rem;color:var(--muted);
+  border-top:1px solid var(--border);
+  background:color-mix(in srgb,var(--ca) 3%,transparent)
+}
+.ict-arrow{
+  font-size:1rem;color:var(--border);opacity:.35;
+  padding:0;line-height:1
+}
+.ict-support-text{
+  text-align:center;font-size:.72rem;color:var(--muted);margin-top:.6rem
+}
+.ict-support-text span{
+  color:var(--teal);font-weight:600
+}
+@media(min-width:700px){
+  .ict-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:860px;margin:0 auto 1.2rem}
+  .ict-arrow{display:none}
+}
+@media(max-width:699px){
+  .ict-card-top{padding:.55rem .85rem .35rem}
+  .ict-card-body{padding:.45rem .85rem}
+  .ict-card-foot{padding:.3rem .85rem}
+}
+
+/* ================= TCP — TAHFIDZ CLASS PROGRAM ================= */
+.tcp-stat{
+  display:flex;align-items:center;justify-content:center;
+  gap:.6rem;margin:0 auto 1rem;padding:.45rem 1rem;
+  background:color-mix(in srgb,var(--gold) 8%,transparent);
+  border:1px solid color-mix(in srgb,var(--gold) 18%,transparent);
+  border-radius:50px;width:fit-content;font-size:.78rem
+}
+.tcp-stat-icon{font-size:1.1rem}
+.tcp-grid{
+  display:flex;flex-direction:column;align-items:center;
+  gap:.4rem;max-width:340px;margin:0 auto
+}
+.tcp-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;overflow:hidden;width:100%;
+  transition:all .3s
+}
+.tcp-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 36px rgba(0,0,0,.3)
+}
+.tcp-card-top{
+  padding:.6rem .9rem .4rem;
+  display:flex;align-items:center;gap:.6rem;
+  border-bottom:1px solid var(--border);
+  background:color-mix(in srgb,var(--gold) 6%,transparent)
+}
+.tcp-lv{
+  font-size:.65rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:1.2px;opacity:.45
+}
+.tcp-ill{
+  margin-left:auto;width:32px;height:32px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;
+  background:color-mix(in srgb,var(--gold) 12%,transparent);
+  border:1px solid color-mix(in srgb,var(--gold) 25%,transparent)
+}
+.tcp-card-body{padding:.55rem .9rem}
+.tcp-rows{display:flex;flex-direction:column;gap:.45rem}
+.tcp-row{
+  display:flex;align-items:flex-start;gap:.5rem;
+  padding:.35rem .5rem;border-radius:8px;
+  background:color-mix(in srgb,var(--gold) 6%,transparent);
+  border:1px solid color-mix(in srgb,var(--gold) 12%,transparent);
+  transition:all .2s
+}
+.tcp-row:hover{
+  background:color-mix(in srgb,var(--gold) 11%,transparent);
+  border-color:color-mix(in srgb,var(--gold) 20%,transparent)
+}
+.tcpr-icon{font-size:.85rem;flex-shrink:0;width:1.3rem;text-align:center;margin-top:1px}
+.tcpr-text{font-size:.68rem;color:var(--muted);line-height:1.4}
+.tcpr-text strong{color:var(--text);font-weight:600}
+@media(min-width:700px){
+  .tcp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:860px;margin:0 auto}
+}
+@media(max-width:699px){
+  .tcp-card-top{padding:.55rem .85rem .35rem}
+  .tcp-card-body{padding:.45rem .85rem}
+}
+
+/* ================= KURIKULUM — SINERGI VENN ================= */
+#kurikulum{
+  background:
+    radial-gradient(ellipse 60% 35% at 50% 60%, rgba(212,168,67,.04) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 20% 30%, rgba(45,212,191,.03) 0%, transparent 50%),
+    var(--bg)
+}
+.venn-wrap{
+  position:relative;width:100%;max-width:600px;height:480px;
+  margin:.4rem auto 1.8rem
+}
+.venn-stage{
+  position:absolute;top:50%;left:50%;
+  width:580px;height:500px;
+  transform:translate(-50%,-50%);
+  transform-origin:center center
+}
+/* Lingkaran */
+.venn-circle{
+  position:absolute;width:340px;height:340px;border-radius:50%;
+  border:1.5px solid var(--c);
+  background:radial-gradient(circle at 50% 50%, var(--fill) 0%, transparent 72%);
+  box-shadow:0 0 60px -8px var(--c) inset;
+  transition:all .4s;cursor:default;
+  animation:vennFloat var(--dur,8s) ease-in-out infinite alternate
+}
+.venn-circle:hover{box-shadow:0 0 80px -4px var(--c) inset, 0 0 38px -6px var(--c)}
+@keyframes vennFloat{
+  0%{transform:translate(0,0)}
+  100%{transform:translate(var(--fx,0),var(--fy,0))}
+}
+.vc-kurmer{left:120px;top:2px;  --c:var(--gold);  --fill:rgba(212,168,67,.25); --dur:9s;  --fx:0px;  --fy:-6px}
+.vc-ict   {left:38px; top:140px; --c:var(--teal);  --fill:rgba(45,212,191,.25); --dur:7.5s;--fx:-6px; --fy:5px}
+.vc-tcp   {left:202px;top:140px; --c:#a78bfa;       --fill:rgba(167,139,250,.25);--dur:8.5s;--fx:6px;  --fy:5px}
+/* Label lingkaran — pakai backdrop biar teks terbaca */
+.venn-lab{
+  position:absolute;z-index:5;text-align:center;line-height:1.2;
+  pointer-events:none;transform:translate(-50%,-50%);
+  background:rgba(10,14,23,.7);backdrop-filter:blur(4px);
+  padding:.35rem .85rem;border-radius:10px;
+  border:1px solid rgba(255,255,255,.07);
+  min-width:120px
+}
+.venn-lab strong{display:block;font-size:.85rem;font-weight:700;color:#fff;letter-spacing:.2px}
+.venn-lab small{display:block;font-size:.62rem;color:var(--muted);letter-spacing:.3px;margin-top:1px}
+.vl-kurmer{top:172px;left:290px}
+.vl-ict   {top:316px;left:208px}
+.vl-tcp   {top:316px;left:372px}
+/* Irisan 3 (inti) */
+.venn-core{
+  position:absolute;z-index:8;top:270px;left:50%;
+  transform:translate(-50%,-50%);
+  display:flex;align-items:center;justify-content:center;
+  width:56px;height:56px;pointer-events:none
+}
+.venn-core::before{
+  content:'';position:absolute;inset:-4px;border-radius:50%;
+  background:radial-gradient(circle,rgba(212,168,67,.35) 0%,rgba(212,168,67,.10) 42%,transparent 70%);
+  animation:vennPulse 2.4s ease-in-out infinite;z-index:-1
+}
+@keyframes vennPulse{0%,100%{transform:scale(.82);opacity:.4}50%{transform:scale(1.22);opacity:.95}}
+.venn-core .vc-ic{font-size:1.3rem;filter:drop-shadow(0 2px 5px rgba(0,0,0,.5))}
+@media(max-width:600px){
+  .venn-wrap{height:360px}
+  .venn-stage{transform:translate(-50%,-50%) scale(.62)}
+}
+/* Hub bar */
+.kur-hub{
+  display:flex;align-items:center;justify-content:center;gap:.6rem;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:60px;padding:.6rem 1.8rem;
+  max-width:420px;margin:0 auto .5rem;text-align:center
+}
+.kur-hub .kh-icon{font-size:1.1rem}
+.kur-hub span{font-size:.72rem;color:var(--muted);line-height:1.3}
+.kur-hub strong{color:var(--gold);font-weight:700}
+
+
+/* ================= TIMELINE ================= */
+#timeline{background:radial-gradient(ellipse 50% 35% at 50% 80%, rgba(212,168,67,.03) 0%, transparent 60%),var(--bg)}
+.tl-track{
+  position:relative;height:26px;max-width:860px;margin:0 auto 0
+}
+.tl-track-line{
+  position:absolute;top:12px;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent 3%,var(--gold),var(--teal),transparent 97%);
+  border-radius:2px
+}
+@media(max-width:899px){.tl-track{display:none}}
+
+.tl-cards{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;
+  max-width:860px;margin:0 auto
+}
+@media(max-width:899px){
+  .tl-cards{grid-template-columns:1fr;gap:.5rem;max-width:400px}
+}
+
+.tl-card{
+  display:flex;flex-direction:column;align-items:center;gap:.35rem
+}
+@media(min-width:900px){
+  .tl-card{margin-top:-.4rem}
+}
+
+.tl-dot{
+  width:10px;height:10px;border-radius:50%;
+  background:var(--gold);border:3px solid var(--bg);
+  box-shadow:0 0 0 2px var(--gold),0 0 12px rgba(212,168,67,.2);
+  flex-shrink:0;position:relative;z-index:2
+}
+
+.tl-body{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:.6rem .7rem .55rem;width:100%;
+  transition:all .25s;text-align:center;
+  display:flex;flex-direction:column;align-items:center;
+  border-top:2px solid color-mix(in srgb,var(--gold) 20%,transparent)
+}
+.tl-body:hover{
+  border-color:rgba(212,168,67,.2);
+  box-shadow:0 8px 24px rgba(0,0,0,.2);
+  transform:translateY(-1px)
+}
+.tl-date{
+  display:inline-block;
+  background:rgba(212,168,67,.1);color:var(--gold);
+  font-size:.55rem;font-weight:700;padding:.12rem .5rem;
+  border-radius:50px;margin-bottom:.3rem;
+  border:1px solid rgba(212,168,67,.15)
+}
+.tl-icon{font-size:1.1rem;margin-bottom:.1rem}
+.tl-body h4{font-size:.78rem;margin-bottom:0;line-height:1.3;color:var(--text)}
+.tl-body p{
+  font-size:.65rem;color:var(--muted);line-height:1.35;
+  margin-top:.3rem;margin-bottom:0
+}
+
+@media(max-width:899px){
+  .tl-card{flex-direction:row;align-items:flex-start;gap:.6rem}
+  .tl-dot{margin-top:10px;width:9px;height:9px}
+  .tl-body{text-align:left;border-top:none}
+  .tl-body p{margin-top:.15rem}
+}
+
+/* ================= CARI KELAS ================= */
+#cari-kelas{
+  background:
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(212,168,67,.04) 0%, transparent 60%),
+    var(--bg)
+}
+
+/* Search Layout */
+.search-layout{
+  max-width:480px;margin:0 auto;
+  display:flex;flex-direction:column;gap:1.8rem
+}
+
+/* Search Box */
+.search-box label{
+  display:block;font-size:.75rem;font-weight:500;
+  color:var(--muted);margin-bottom:.5rem;text-align:center;
+  letter-spacing:.3px
+}
+.search-box .input-wrap{
+  display:flex;align-items:center;gap:.5rem;
+  background:var(--card);border:1.5px solid var(--border);
+  border-radius:14px;padding:0 1.1rem;
+  transition:all .25s ease
+}
+.search-box .input-wrap:focus-within{
+  border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(212,168,67,.1),0 4px 16px rgba(0,0,0,.2)
+}
+.search-box .input-wrap .icon{
+  color:var(--muted);font-size:.95rem;flex-shrink:0
+}
+.search-box .input-wrap input{
+  flex:1;padding:.85rem 0;background:transparent;border:none;
+  color:var(--text);font-size:.9rem;outline:none
+}
+.search-box .input-wrap input::placeholder{color:var(--muted);opacity:.6}
+
+/* Suggestions */
+.suggestions{
+  margin-top:6px;background:var(--card);
+  border:1px solid var(--border);border-radius:12px;
+  max-height:260px;overflow-y:auto;display:none;
+  box-shadow:0 8px 24px rgba(0,0,0,.25)
+}
+.suggestions.show{display:block}
+.suggestions .item{
+  padding:.65rem 1rem;cursor:pointer;
+  border-bottom:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+  transition:all .15s ease
+}
+.suggestions .item:last-child{border-bottom:none}
+.suggestions .item:hover{background:rgba(212,168,67,.06)}
+.suggestions .item .name{font-weight:500;font-size:.85rem}
+.suggestions .item .cls{
+  font-size:.68rem;color:var(--teal);
+  padding:.15rem .55rem;border-radius:50px;
+  background:rgba(45,212,191,.08);white-space:nowrap
+}
+.suggestions .item.active{background:rgba(212,168,67,.1)}
+
+/* Detail Card Container */
+.detail-wrap{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:0;overflow:hidden;
+  box-shadow:0 4px 20px rgba(0,0,0,.15)
+}
+.detail-wrap .ph{
+  padding:2.5rem 1.5rem;color:var(--muted);
+  font-size:.82rem;text-align:center
+}
+.detail-wrap .ph .big{font-size:2.2rem;margin-bottom:.4rem;opacity:.5}
+.detail-card{width:100%;animation:fadeUp .3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* Card Header — Banner */
+.card-hd{
+  padding:.85rem 1.2rem;
+  display:flex;align-items:center;gap:.65rem;
+  background:linear-gradient(135deg,rgba(212,168,67,.06),rgba(212,168,67,.02));
+  border-bottom:1px solid rgba(212,168,67,.1)
+}
+.card-hd .icon{font-size:1.05rem;flex-shrink:0}
+.card-hd .txt{flex:1;min-width:0}
+.card-hd .title{
+  font-weight:600;font-size:.8rem;color:var(--gold);
+  line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.card-hd .sub{
+  font-size:.65rem;color:var(--muted);margin-top:2px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+
+/* Card Body */
+.card-bd{padding:1.4rem 1.2rem;text-align:center}
+
+/* Avatar */
+.card-bd .avatar{
+  width:52px;height:52px;border-radius:50%;
+  margin:0 auto .45rem;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.05rem;font-weight:700;color:white;
+  box-shadow:0 4px 12px rgba(0,0,0,.2)
+}
+
+/* Student Info */
+.card-bd .s-name{
+  font-size:.95rem;font-weight:700;
+  margin-bottom:.15rem;line-height:1.3
+}
+.card-bd .s-asal{
+  font-size:.7rem;color:var(--muted);margin-bottom:.55rem
+}
+.card-bd .class-badge{
+  display:inline-block;font-size:.68rem;font-weight:600;
+  padding:.2rem .85rem;border-radius:50px;
+  letter-spacing:.3px
+}
+
+/* Divider */
+.card-bd .divider{
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--border),transparent);
+  margin:.85rem 0
+}
+
+/* Wali Kelas Row */
+.card-bd .walas-row{
+  display:flex;align-items:center;gap:.7rem;
+  justify-content:center;text-align:left;
+  padding:.5rem .6rem;border-radius:10px;
+  background:rgba(255,255,255,.02);
+  border:1px solid rgba(255,255,255,.03)
+}
+.card-bd .walas-row .walas-foto{
+  width:38px;height:38px;border-radius:50%;
+  flex-shrink:0;object-fit:cover;
+  border:2px solid var(--border)
+}
+.card-bd .walas-row .walas-avatar{
+  width:38px;height:38px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;font-weight:600;color:white
+}
+.card-bd .walas-txt .lbl{
+  font-size:.62rem;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.5px;
+  margin-bottom:1px
+}
+.card-bd .walas-txt .nm{
+  font-weight:600;font-size:.8rem;line-height:1.3
+}
+.card-bd .walas-txt .wa{
+  font-size:.65rem;color:var(--muted);margin-top:1px
+}
+
+/* Action Buttons */
+.card-bd .wa-btns{
+  display:flex;gap:.5rem;justify-content:center;
+  flex-wrap:wrap;margin-top:.75rem
+}
+.card-bd .wa-btns .btn{
+  font-size:.7rem;padding:.4rem .9rem;gap:.3rem;
+  border-radius:8px;font-weight:600;
+  transition:all .2s ease
+}
+.card-bd .wa-btns .btn:hover{transform:translateY(-1px)}
+
+/* QR Link */
+.card-bd .qrimg{
+  display:inline-flex;align-items:center;justify-content:center;
+  gap:5px;margin-top:.6rem;
+  padding:.45rem 1rem;border:1px dashed var(--border);
+  border-radius:8px;color:var(--muted);
+  font-size:.6rem;text-decoration:none;
+  transition:all .2s ease
+}
+.card-bd .qrimg svg{width:14px;height:14px}
+.card-bd .qrimg:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ================= LOADING ================= */
+.loading{text-align:center;padding:1rem;color:var(--muted);font-size:.85rem}
+.loading .spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;margin-bottom:.4rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ================= FOOTER ================= */
+footer{
+  scroll-snap-align:end;
+  text-align:center;padding:1.2rem 1.5rem;
+  color:var(--muted);font-size:.78rem;
+  border-top:1px solid var(--border);background:var(--bg)
+}
+footer a{color:var(--gold);text-decoration:none}
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<nav>
+  <div class="links">
+    <a href="#hero">Home</a>
+    <a href="#kurikulum">Kurikulum</a>
+    <a href="#ict">ICT</a>
+    <a href="#tcp">TCP</a>
+    <a href="#timeline">Jadwal</a>
+    <a href="#cari-kelas" class="cta">Cari Kelas</a>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<section id="hero">
+  <div class="hero-orb"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-orb"></div>
+  <div class="section-inner">
+    <img class="hero-logo-img" src="https://i.ibb.co.com/yFn890yV/logo-smpabbs.png" alt="SMP ABBS">
+    <div class="hero-school-name">SMP ABBS Surakarta</div>
+    <h1>AWALUSSANAH<br><span class="gold">TA 2026/2027</span></h1>
+    <p class="hero-sub">Sinergi Al-Qur'an, Sains, dan Teknologi — Mencetak Generasi Berkarakter, Berprestasi, dan Berdaya Saing Global</p>
+    <div class="hero-info">
+      <span class="hi-item">📅 21 Juni 2026</span>
+      <span class="hi-divider">•</span>
+      <span class="hi-item">📍 Dwangsa Solo Hotel, by Lorin</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#cari-kelas" class="btn btn-primary">🔍 Cari Kelasmu</a>
+      <a href="#kurikulum" class="btn btn-outline">Pelajari Kurikulum</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+</section>
+
+<!-- ================= KURIKULUM ================= -->
+<section id="kurikulum">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">Kurikulum</div>
+      <h2>Muatan <span class="gold">Kurikulum Kami</span></h2>
+      <p class="muted" style="font-size:.82rem">Perpaduan Kurikulum Dinas (Kurmer) dengan ICT & Tahfidz sebagai program unggulan</p>
+    </div>
+
+    <!-- Diagram venn sinergi 3 kurikulum -->
+    <div class="venn-wrap">
+      <div class="venn-stage">
+        <!-- 3 lingkaran -->
+        <div class="venn-circle vc-kurmer"></div>
+        <div class="venn-circle vc-ict"></div>
+        <div class="venn-circle vc-tcp"></div>
+
+        <!-- Nama kurikulum -->
+        <div class="venn-lab vl-kurmer"><strong>Kurikulum Dinas</strong></div>
+        <div class="venn-lab vl-ict"><strong>ICT</strong></div>
+        <div class="venn-lab vl-tcp"><strong>TCP</strong></div>
+
+        <!-- Titik pusat -->
+        <div class="venn-core">
+          <span class="vc-ic">🎯</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hub bar -->
+    <div class="kur-hub">
+      <span class="kh-icon">🎯</span>
+      <span><strong>Sinergi 3 Kurikulum</strong> — Lulusan Rabbani, Berkarakter, Berilmu, & Melek Teknologi</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ICT ================= -->
+<section id="ict" style="background:radial-gradient(ellipse 45% 40% at 20% 50%, rgba(45,212,191,.03) 0%, transparent 50%),var(--bg)">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">Program Unggulan</div>
+      <h2>ICT <span class="teal">Class Program</span></h2>
+      <p class="muted" style="font-size:.82rem">3 jenjang keterampilan teknologi — dari fondasi digital hingga web development</p>
+    </div>
+
+    <!-- 3 level ICT -->
+    <div class="ict-grid">
+      <!-- Level 7 -->
+      <div class="ict-card">
+        <div class="ict-card-top" style="--ca:var(--teal)">
+          <span class="ict-lv">Level 7</span>
+          <div class="ict-ill">🖥️</div>
+        </div>
+        <div class="ict-card-body">
+          <h3>Fondasi &amp; Kreasi</h3>
+          <div class="ict-rows">
+            <div class="ict-row"><span class="ictr-icon">💻</span><span class="ictr-text">Hardware &amp; Software</span></div>
+            <div class="ict-row"><span class="ictr-icon">📊</span><span class="ictr-text">MS Office</span></div>
+            <div class="ict-row"><span class="ictr-icon">🎨</span><span class="ictr-text">Canva</span></div>
+            <div class="ict-row"><span class="ictr-icon">✏️</span><span class="ictr-text">Inkscape</span></div>
+            <div class="ict-row"><span class="ictr-icon">🎮</span><span class="ictr-text">Construct 3</span></div>
+          </div>
+        </div>
+        <div class="ict-card-foot">🔰 Pengenalan teknologi dasar &amp; kreativitas digital</div>
+      </div>
+
+      <!-- Arrow -->
+      <div class="ict-arrow">⬇</div>
+
+      <!-- Level 8 -->
+      <div class="ict-card">
+        <div class="ict-card-top" style="--ca:var(--gold)">
+          <span class="ict-lv">Level 8</span>
+          <div class="ict-ill">⚡</div>
+        </div>
+        <div class="ict-card-body">
+          <h3>Elektronika &amp; Logika</h3>
+          <div class="ict-rows">
+            <div class="ict-row"><span class="ictr-icon">🔧</span><span class="ictr-text">Tinkercad 3D</span></div>
+            <div class="ict-row"><span class="ictr-icon">⚡</span><span class="ictr-text">Arduino</span></div>
+            <div class="ict-row"><span class="ictr-icon">📡</span><span class="ictr-text">IoT Dasar</span></div>
+            <div class="ict-row"><span class="ictr-icon">📱</span><span class="ictr-text">MIT App Inventor</span></div>
+            <div class="ict-row"><span class="ictr-icon">🏎️</span><span class="ictr-text">Project RC Car</span></div>
+            <div class="ict-row"><span class="ictr-icon">🤖</span><span class="ictr-text">Robot Sumo</span></div>
+            <div class="ict-row"><span class="ictr-icon">⚽</span><span class="ictr-text">Robot Soccer</span></div>
+            <div class="ict-row"><span class="ictr-icon">💡</span><span class="ictr-text">Inovasi Technology</span></div>
+          </div>
+        </div>
+        <div class="ict-card-foot">⚡ Logika pemrograman &amp; elektronika terapan</div>
+      </div>
+
+      <!-- Arrow -->
+      <div class="ict-arrow">⬇</div>
+
+      <!-- Level 9 -->
+      <div class="ict-card">
+        <div class="ict-card-top" style="--ca:var(--teal)">
+          <span class="ict-lv">Level 9</span>
+          <div class="ict-ill">🌐</div>
+        </div>
+        <div class="ict-card-body">
+          <h3>Web Development</h3>
+          <div class="ict-rows">
+            <div class="ict-row"><span class="ictr-icon">🌐</span><span class="ictr-text">HTML</span></div>
+            <div class="ict-row"><span class="ictr-icon">🎨</span><span class="ictr-text">CSS</span></div>
+            <div class="ict-row"><span class="ictr-icon">⚡</span><span class="ictr-text">JavaScript</span></div>
+            <div class="ict-row"><span class="ictr-icon">🔗</span><span class="ictr-text">jQuery</span></div>
+            <div class="ict-row"><span class="ictr-icon">📦</span><span class="ictr-text">Bootstrap</span></div>
+            <div class="ict-row"><span class="ictr-icon">🚀</span><span class="ictr-text">Deployment</span></div>
+          </div>
+        </div>
+        <div class="ict-card-foot">🌐 Membangun website dari nol hingga publish</div>
+      </div>
+    </div>
+
+    <!-- Program pendukung -->
+    <p class="ict-support-text">✨ Program Pendukung: <span>ICT Show</span> · <span>ICT Camp</span> · <span>Workshop ICT</span> · <span>5 Minutes Presentation</span></p>
+  </div>
+</section>
+
+<!-- ================= TCP ================= -->
+<section id="tcp" style="background:radial-gradient(ellipse 45% 40% at 80% 50%, rgba(212,168,67,.03) 0%, transparent 50%),var(--bg)">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">Program Unggulan</div>
+      <h2>Tahfidz Class <span class="gold">Program</span></h2>
+      <p class="muted" style="font-size:.82rem">Dekat dengan Al-Qur'an — mencetak generasi hafidz Qur'an</p>
+    </div>
+
+    <!-- Target stat -->
+    <div class="tcp-stat">
+      <div class="tcp-stat-icon">🎯</div>
+      <div><strong>Target:</strong> <span class="gold">10 Juz</span> dalam 3 tahun</div>
+    </div>
+
+    <!-- 3 kelompok program -->
+    <div class="tcp-grid">
+      <!-- Kelompok 1: Pembelajaran Inti -->
+      <div class="tcp-card">
+        <div class="tcp-card-top">
+          <span class="tcp-lv">Pembelajaran Inti</span>
+          <div class="tcp-ill">📖</div>
+        </div>
+        <div class="tcp-card-body">
+          <div class="tcp-rows">
+            <div class="tcp-row"><span class="tcpr-icon">👥</span><span class="tcpr-text"><strong>Halaqoh Al-Qur'an</strong><br>Kelompok kecil hafalan intensif dengan bimbingan guru tahfidz</span></div>
+            <div class="tcp-row"><span class="tcpr-icon">🔄</span><span class="tcpr-text"><strong>Murojaah Harian</strong><br>Pengulangan hafalan rutin untuk mempertahankan &amp; memperkuat hafalan</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kelompok 2: Monitoring -->
+      <div class="tcp-card">
+        <div class="tcp-card-top">
+          <span class="tcp-lv">Monitoring &amp; Evaluasi</span>
+          <div class="tcp-ill">📊</div>
+        </div>
+        <div class="tcp-card-body">
+          <div class="tcp-rows">
+            <div class="tcp-row"><span class="tcpr-icon">📋</span><span class="tcpr-text"><strong>Laporan Harian</strong><br>Monitoring hafalan harian via buku laporan &amp; aplikasi</span></div>
+            <div class="tcp-row"><span class="tcpr-icon">🎯</span><span class="tcpr-text"><strong>Sertifikasi Juziyah</strong><br>Ujian per juz dengan sertifikat resmi capaian hafalan</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kelompok 3: Pendukung -->
+      <div class="tcp-card">
+        <div class="tcp-card-top">
+          <span class="tcp-lv">Fasilitas &amp; Program</span>
+          <div class="tcp-ill">🌟</div>
+        </div>
+        <div class="tcp-card-body">
+          <div class="tcp-rows">
+            <div class="tcp-row"><span class="tcpr-icon">📱</span><span class="tcpr-text"><strong>Media Pembelajaran</strong><br>Audio murojaah, aplikasi hafalan &amp; konten digital pendukung</span></div>
+            <div class="tcp-row"><span class="tcpr-icon">🏕️</span><span class="tcpr-text"><strong>Camping Qur'an</strong><br>Program intensif tahfidz di alam terbuka untuk akselerasi hafalan</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TIMELINE ================= -->
+<section id="timeline" style="background:radial-gradient(ellipse 50% 35% at 50% 80%, rgba(212,168,67,.03) 0%, transparent 60%),var(--bg)">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">Jadwal</div>
+      <h2>Timeline <span class="gold">Matrikulasi</span></h2>
+      <p class="muted" style="font-size:.82rem">Perjalanan menyambut tahun ajaran baru 2026/2027</p>
+    </div>
+
+    <!-- Desktop track -->
+    <div class="tl-track"><div class="tl-track-line"></div></div>
+
+    <!-- Timeline cards -->
+    <div class="tl-cards">
+      <div class="tl-card">
+        <div class="tl-dot"></div>
+        <div class="tl-body">
+          <span class="tl-date">21 – 23 Juni</span>
+          <div class="tl-icon">📱</div>
+          <h4>Masuk Grup WhatsApp</h4>
+          <p>Informasi kegiatan disampaikan melalui grup WA masing-masing kelas</p>
+        </div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-dot"></div>
+        <div class="tl-body">
+          <span class="tl-date">24 Juni</span>
+          <div class="tl-icon">🎥</div>
+          <h4>Opening Matrikulasi</h4>
+          <p>Acara pembukaan matrikulasi dilaksanakan secara daring</p>
+        </div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-dot"></div>
+        <div class="tl-body">
+          <span class="tl-date">25 – 27 Juni</span>
+          <div class="tl-icon">📚</div>
+          <h4>Belajar Mandiri</h4>
+          <p>Modul pembelajaran &amp; agenda harian dari wali kelas</p>
+        </div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-dot"></div>
+        <div class="tl-body">
+          <span class="tl-date">29 Jun – 3 Jul</span>
+          <div class="tl-icon">💻</div>
+          <h4>Online Harian</h4>
+          <p>1,5 jam pembelajaran online per kelas sesuai jadwal</p>
+        </div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-dot"></div>
+        <div class="tl-body">
+          <span class="tl-date">6 – 10 Juli</span>
+          <div class="tl-icon">📝</div>
+          <h4>Penugasan Mandiri</h4>
+          <p>Tugas mandiri dari wali kelas masing-masing</p>
+        </div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-dot"></div>
+        <div class="tl-body">
+          <span class="tl-date">13 Juli</span>
+          <div class="tl-icon">🏫</div>
+          <h4>Awal Masuk &amp; MPLS</h4>
+          <p>Pembagian kelas resmi &amp; kegiatan MPLS dimulai</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CARI KELAS ================= -->
+<section id="cari-kelas">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">🔍 Cari Kelas</div>
+      <h2>Temukan <span class="gold">Kelasmu</span></h2>
+      <p class="muted" style="font-size:.82rem">Ketik namamu untuk info kelas, wali kelas, & grup WhatsApp</p>
+    </div>
+    <div class="search-layout">
+      <div class="search-left">
+        <div class="search-box">
+          <label>Ketik namamu</label>
+          <div class="input-wrap">
+            <span class="icon">🔎</span>
+            <input type="text" id="searchInput" placeholder="Misal: Alisya Anindita..." autocomplete="off">
+          </div>
+        </div>
+        <div class="suggestions" id="suggestions"></div>
+      </div>
+      <div class="detail-wrap" id="detailWrap">
+        <div class="ph" id="ph">
+          <div class="big">🔍</div>
+          <p>Ketik namamu untuk melihat<br>kelas & wali kelas</p>
+        </div>
+        <div class="detail-card" id="detailCard"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <p>SMP ABBS Surakarta — TA 2026/2027</p>
+  <p style="margin-top:3px">© 2026 Kurikulum SMP ABBS</p>
+</footer>
+
+<!-- ================= SCRIPT ================= -->
+<script>
+let SISWA = [];
+let WALAS = {};
+
+// Load data dari JSON file
+async function loadData(){
+  try {
+    const res = await fetch('data/siswa.json');
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    SISWA = data.siswa;
+    initApp();
+  } catch(e) {
+    document.getElementById('cari-kelas').innerHTML += `
+      <div class="loading" style="position:absolute;bottom:2rem;left:50%;transform:translateX(-50%)">
+        <p style="color:var(--gold)">⚠️ Gagal load data siswa. Refresh atau cek file <code>data/siswa.json</code></p>
+      </div>`;
+    console.error('Load data gagal:', e);
+  }
+}
+
+function initApp(){
+  // Init wali kelas
+  WALAS = {
+    "7 Putra A": {nama:"Daffa Danendra Rizqi Nugraha, S.Pd.",foto:"data/walas/walas-4.png",wa:"628...",link_wa:"https://chat.whatsapp.com/...",warna:"#2563eb"},
+    "7 Putra B": {nama:"Hang Sakti Abdullah, S.Pd.",foto:"data/walas/walas-5.png",wa:"628...",link_wa:"https://chat.whatsapp.com/...",warna:"#059669"},
+    "7 Putra C": {nama:"Ifan Destya Adi Tama, S.Pd, Gr.",foto:"data/walas/walas-3.png",wa:"628...",link_wa:"https://chat.whatsapp.com/...",warna:"#d97706"},
+    "7 Putri A": {nama:"Aulia Qisthi Rosyada, S.Pd., Gr.",foto:"data/walas/walas-1.png",wa:"628...",link_wa:"https://chat.whatsapp.com/...",warna:"#db2777"},
+    "7 Putri B": {nama:"Charlieta Nova Putri Fedito, S.Kom",foto:"data/walas/walas-2.png",wa:"628...",link_wa:"https://chat.whatsapp.com/...",warna:"#7c3aed"}
+  };
+}
+
+// ===== INISIAL =====
+function inisial(n){return n.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase()}
+
+// ===== SEARCH =====
+const input = document.getElementById('searchInput');
+const suggestions = document.getElementById('suggestions');
+const detailCard = document.getElementById('detailCard');
+const ph = document.getElementById('ph');
+let selectedIdx = -1;
+let filtered = [];
+
+input.addEventListener('input', function(){
+  const q = this.value.toLowerCase().trim();
+  selectedIdx = -1;
+  
+  if(SISWA.length === 0) return;
+  if(q.length < 2){ suggestions.classList.remove('show'); return; }
+  
+  filtered = SISWA.filter(s => s.n.toLowerCase().includes(q)).slice(0,8);
+  if(filtered.length === 0){ suggestions.classList.remove('show'); return; }
+  
+  suggestions.innerHTML = filtered.map((s,i) =>
+    `<div class="item ${i===selectedIdx?'active':''}" onclick="pilihSiswa(${i})">
+      <span class="name">${s.n}</span>
+      <span class="cls">${s.kelas}</span>
+    </div>`
+  ).join('');
+  suggestions.classList.add('show');
+});
+
+input.addEventListener('keydown', function(e){
+  if(!suggestions.classList.contains('show')) return;
+  if(e.key==='ArrowDown'){ e.preventDefault(); selectedIdx=Math.min(selectedIdx+1,filtered.length-1); highlight(); }
+  if(e.key==='ArrowUp'){ e.preventDefault(); selectedIdx=Math.max(selectedIdx-1,0); highlight(); }
+  if(e.key==='Enter' && selectedIdx>=0){ e.preventDefault(); pilihSiswa(selectedIdx); }
+});
+
+function highlight(){
+  suggestions.querySelectorAll('.item').forEach((el,i)=>{el.classList.toggle('active', i===selectedIdx)});
+}
+
+function pilihSiswa(idx){
+  const s = filtered[idx];
+  if(!s) return;
+  suggestions.classList.remove('show');
+  input.value = s.n;
+  
+  const walas = WALAS[s.kelas];
+  const wrn = (WALAS[s.kelas] && WALAS[s.kelas].warna) || '#d4a843';
+  const inis = walas ? inisial(walas.nama) : '?';
+  const fotoWalas = walas && walas.foto ? `<img class="walas-foto" src="${walas.foto}" alt="${walas.nama}">` : `<div class="walas-avatar" style="background:linear-gradient(135deg,${wrn},${wrn}88)">${inis}</div>`;
+  
+  ph.style.display = 'none';
+  detailCard.innerHTML = `
+    <div class="card-hd">
+      <span class="icon">🎉</span>
+      <div class="txt">
+        <div class="title">Barokalloh! Kamu masuk ke <strong>${s.kelas}</strong></div>
+        <div class="sub">Kelas sementara sampai MPLS selesai &bull; Kelas real setelah MPLS</div>
+      </div>
+    </div>
+    <div class="card-bd">
+      <div class="avatar" style="background:linear-gradient(135deg,${wrn},${wrn}88)">${inisial(s.n)}</div>
+      <div class="s-name">${s.n}</div>
+      <div class="s-asal">${s.s}</div>
+      <div class="class-badge" style="background:${wrn}22;color:${wrn};border:1px solid ${wrn}44">${s.kelas}</div>
+      ${walas ? `<div class="divider"></div>
+      <div class="walas-row">
+        ${fotoWalas}
+        <div class="walas-txt">
+          <div class="lbl">Wali Kelas</div>
+          <div class="nm">${walas.nama}</div>
+          <div class="wa">${walas.wa}</div>
+        </div>
+      </div>
+      <div class="wa-btns">
+        <a href="https://wa.me/${walas.wa}" target="_blank" class="btn btn-primary" style="background:#25D366">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chat Wali Kelas
+        </a>
+        <a href="${walas.link_wa}" target="_blank" class="btn btn-outline">💬 Grup WA</a>
+      </div>
+      <a href="${walas.link_wa}" target="_blank" class="qrimg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h7v7H3V3zm11 0h7v7h-7V3zM3 14h7v7H3v-7zm14-3h4v4h-4v-4zm-3-3h3v3h-3V8zm-4-2h2v2H9V6zM6 9h2v2H6V9z"/></svg>
+        QR Grup WA
+      </a>` : '<p class="muted" style="padding:1rem">Data wali kelas belum tersedia</p>'}
+    </div>
+  `;
+}
+
+// Tutup suggestions
+document.addEventListener('click', e => {
+  if(!e.target.closest('.search-left')) suggestions.classList.remove('show');
+});
+
+// ===== LOAD =====
+loadData();
+</script>
+</body>
+</html>
