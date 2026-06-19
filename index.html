@@ -16,7 +16,7 @@
 html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
 body{
   font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
-  background:var(--bg);color:var(--text);overflow-x:hidden;
+  background:transparent;color:var(--text);overflow-x:hidden;
   line-height:1.6
 }
 
@@ -60,18 +60,13 @@ h3{font-size:clamp(1rem,1.8vw,1.35rem);font-weight:600}
 
 /* ================= HERO ================= */
 #hero{
-  background:var(--bg);
+  background:transparent;
   text-align:center;flex-direction:column;gap:.5rem;overflow:hidden
 }
-/* animated gradient mesh overlay */
+/* gradient mesh overlay removed — starfield handles the background */
 #hero::before{
   content:'';position:absolute;inset:0;z-index:0;
-  background:
-    radial-gradient(ellipse 60% 40% at 30% 20%, rgba(212,168,67,.12) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 35% at 70% 30%, rgba(45,212,191,.08) 0%, transparent 55%),
-    radial-gradient(ellipse 45% 40% at 20% 70%, rgba(212,168,67,.06) 0%, transparent 50%),
-    radial-gradient(ellipse 40% 35% at 80% 75%, rgba(45,212,191,.07) 0%, transparent 50%);
-  animation:meshPan 12s ease-in-out infinite alternate
+  background:none;animation:none;
 }
 @keyframes meshPan{
   0%{transform:scale(1) rotate(0deg)}
@@ -79,11 +74,7 @@ h3{font-size:clamp(1rem,1.8vw,1.35rem);font-weight:600}
   100%{transform:scale(1) rotate(-1deg)}
 }
 /* floating glowing orbs */
-.hero-orb{
-  position:absolute;border-radius:50%;
-  animation:floatOrb var(--dur) ease-in-out infinite alternate;
-  pointer-events:none;z-index:0;mix-blend-mode:screen
-}
+.hero-orb{display:none;}
 @keyframes floatOrb{
   0%{transform:translate(0,0) scale(.95);opacity:.35}
   100%{transform:translate(var(--dx,40px),var(--dy,-40px)) scale(var(--sc,1.15));opacity:.6}
@@ -319,10 +310,7 @@ h3{font-size:clamp(1rem,1.8vw,1.35rem);font-weight:600}
 
 /* ================= KURIKULUM — SINERGI VENN ================= */
 #kurikulum{
-  background:
-    radial-gradient(ellipse 60% 35% at 50% 60%, rgba(212,168,67,.04) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 30% at 20% 30%, rgba(45,212,191,.03) 0%, transparent 50%),
-    var(--bg)
+  background:transparent;
 }
 .venn-wrap{
   position:relative;width:100%;max-width:600px;height:480px;
@@ -464,9 +452,7 @@ h3{font-size:clamp(1rem,1.8vw,1.35rem);font-weight:600}
 
 /* ================= CARI KELAS ================= */
 #cari-kelas{
-  background:
-    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(212,168,67,.04) 0%, transparent 60%),
-    var(--bg)
+  background:transparent;
 }
 
 /* Search Layout */
@@ -750,7 +736,7 @@ footer a{color:var(--gold);text-decoration:none}
 </section>
 
 <!-- ================= ICT ================= -->
-<section id="ict" style="background:radial-gradient(ellipse 45% 40% at 20% 50%, rgba(45,212,191,.03) 0%, transparent 50%),var(--bg)">
+<section id="ict">
   <div class="section-inner">
     <div class="section-header">
       <div class="section-tag">Program Unggulan</div>
@@ -834,7 +820,7 @@ footer a{color:var(--gold);text-decoration:none}
 </section>
 
 <!-- ================= TCP ================= -->
-<section id="tcp" style="background:radial-gradient(ellipse 45% 40% at 80% 50%, rgba(212,168,67,.03) 0%, transparent 50%),var(--bg)">
+<section id="tcp">
   <div class="section-inner">
     <div class="section-header">
       <div class="section-tag">Program Unggulan</div>
@@ -896,7 +882,7 @@ footer a{color:var(--gold);text-decoration:none}
 </section>
 
 <!-- ================= TIMELINE ================= -->
-<section id="timeline" style="background:radial-gradient(ellipse 50% 35% at 50% 80%, rgba(212,168,67,.03) 0%, transparent 60%),var(--bg)">
+<section id="timeline">
   <div class="section-inner">
     <div class="section-header">
       <div class="section-tag">Jadwal</div>
@@ -974,6 +960,9 @@ footer a{color:var(--gold);text-decoration:none}
       <div class="section-tag">🔍 Cari Kelas</div>
       <h2>Temukan <span class="gold">Kelasmu</span></h2>
       <p class="muted" style="font-size:.82rem">Ketik namamu untuk info kelas, wali kelas, & grup WhatsApp</p>
+      <div style="margin-top:10px;padding:12px 16px;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.2);border-radius:8px;font-size:.8rem;color:var(--gold);max-width:500px;">
+        ⚠️ <strong>Penting:</strong> Pembagian kelas saat ini bersifat <strong>SEMENTARA</strong> dan dapat berubah. Kelas resmi akan diinfokan setelah pelaksanaan MPLS.
+      </div>
     </div>
     <div class="search-layout">
       <div class="search-left">
@@ -1309,7 +1298,8 @@ nav .links a.active{color:var(--gold)!important;background:rgba(200,164,92,.1)!i
 @keyframes float3{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,25px)}}
 
 /* sections sit above starfield */
-section{position:relative;z-index:2;background:rgba(10,14,23,.82)!important;}
+section{position:relative;z-index:2;background:transparent!important;}
+section>*{position:relative;z-index:1;}
 </style>
 </body>
 </html>
