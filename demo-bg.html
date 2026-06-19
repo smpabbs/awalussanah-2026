@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Demo Background Animasi — Awalussanah 2026</title>
+<title>Demo Background Animasi v2 — Awalussanah 2026</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
 
@@ -13,17 +13,19 @@
   /* ── NAV ── */
   .demo-nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(10,14,23,.85); backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(200,164,92,.15);
-    padding: .8rem 2rem; display: flex; gap: .6rem; justify-content: center; flex-wrap: wrap;
+    background: rgba(10,14,23,.92); backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(200,164,92,.12);
+    padding: .7rem 1.5rem; display: flex; gap: .5rem; justify-content: center; flex-wrap: wrap;
   }
   .demo-nav a {
-    color: #888; text-decoration: none; font-size: .85rem; font-weight: 600;
-    padding: .45rem 1rem; border-radius: 20px; transition: all .3s;
-    border: 1px solid transparent;
+    color: #666; text-decoration: none; font-size: .78rem; font-weight: 600;
+    padding: .4rem .9rem; border-radius: 20px; transition: all .35s ease;
+    border: 1px solid transparent; letter-spacing: .3px;
   }
-  .demo-nav a:hover, .demo-nav a.active {
-    color: #c8a45c; border-color: rgba(200,164,92,.3); background: rgba(200,164,92,.08);
+  .demo-nav a:hover { color: #aaa; }
+  .demo-nav a.active {
+    color: #c8a45c; border-color: rgba(200,164,92,.25); background: rgba(200,164,92,.07);
+    box-shadow: 0 0 12px rgba(200,164,92,.08);
   }
 
   /* ── SECTION ── */
@@ -33,85 +35,71 @@
   }
   .demo-section .label {
     position: absolute; top: 4.5rem; left: 50%; transform: translateX(-50%);
-    font-size: .7rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase;
-    color: rgba(200,164,92,.6); z-index: 10;
+    font-size: .65rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase;
+    color: rgba(200,164,92,.5); z-index: 10;
   }
   .demo-section h2 {
-    font-size: 2rem; font-weight: 800; color: #c8a45c; text-align: center;
-    margin-bottom: .5rem; z-index: 2; text-shadow: 0 0 30px rgba(200,164,92,.3);
+    font-size: 1.8rem; font-weight: 800; color: #c8a45c; text-align: center;
+    margin-bottom: .5rem; z-index: 2; text-shadow: 0 0 40px rgba(200,164,92,.2);
   }
   .demo-section p {
-    text-align: center; max-width: 500px; z-index: 2; color: #aaa;
-    font-size: .95rem; line-height: 1.6;
+    text-align: center; max-width: 480px; z-index: 2; color: #999;
+    font-size: .9rem; line-height: 1.7;
   }
   .demo-section .card {
-    margin-top: 1.5rem; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
-    border-radius: 14px; padding: 1.5rem 2rem; z-index: 2; text-align: center;
-    backdrop-filter: blur(8px); max-width: 400px;
+    margin-top: 1.5rem; background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.06);
+    border-radius: 16px; padding: 1.4rem 2rem; z-index: 2; text-align: center;
+    backdrop-filter: blur(10px); max-width: 380px;
+    box-shadow: 0 8px 32px rgba(0,0,0,.3);
   }
-  .demo-section .card h3 { color: #2dd4bf; font-size: 1.1rem; margin-bottom: .3rem; }
-  .demo-section .card span { color: #888; font-size: .85rem; }
+  .demo-section .card h3 { color: #2dd4bf; font-size: 1.05rem; margin-bottom: .3rem; }
+  .demo-section .card span { color: #777; font-size: .82rem; }
+
+  /* canvas layers */
+  .demo-section canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
 
   /* ═══════════════════════════════════════════
-     A — PARTICLE NETWORK
+     F — ETHEREAL PARTICLES (elegant, sparse)
      ═══════════════════════════════════════════ */
-  #particles { background: #0a0e17; }
-  #particles canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+  #ethereal { background: #0a0e17; }
 
   /* ═══════════════════════════════════════════
-     B — AURORA WAVE
+     G — NEBULA CLOUDS (soft morphing blobs)
      ═══════════════════════════════════════════ */
-  #aurora { background: #0a0e17; }
-  #aurora .aurora-layer {
-    position: absolute; inset: 0; z-index: 1; overflow: hidden; opacity: .6;
+  #nebula { background: #0a0e17; }
+  .nebula-orb {
+    position: absolute; border-radius: 50%; filter: blur(100px); z-index: 1;
+    animation: nebDrift ease-in-out infinite;
   }
-  #aurora .aurora-layer div {
-    position: absolute; width: 200%; height: 200%; top: -50%; left: -50%;
-    border-radius: 40%;
-    animation: auroraFloat linear infinite;
-    filter: blur(80px);
-  }
-  #aurora .aurora-layer .a1 {
-    background: radial-gradient(circle, rgba(45,212,191,.35) 0%, transparent 60%);
-    animation-duration: 12s;
-  }
-  #aurora .aurora-layer .a2 {
-    background: radial-gradient(circle, rgba(200,164,92,.3) 0%, transparent 60%);
-    animation-duration: 15s; animation-delay: -4s;
-  }
-  #aurora .aurora-layer .a3 {
-    background: radial-gradient(circle, rgba(139,92,246,.2) 0%, transparent 60%);
-    animation-duration: 18s; animation-delay: -8s;
-  }
-  @keyframes auroraFloat {
-    0%   { transform: translate(0,0) rotate(0deg) scale(1); }
-    33%  { transform: translate(10%,-8%) rotate(60deg) scale(1.1); }
-    66%  { transform: translate(-8%,6%) rotate(120deg) scale(.95); }
-    100% { transform: translate(0,0) rotate(180deg) scale(1); }
+  .nebula-orb.n1 { width: 600px; height: 600px; top: -10%; left: -10%; background: radial-gradient(circle, rgba(45,212,191,.18) 0%, transparent 70%); animation-duration: 20s; }
+  .nebula-orb.n2 { width: 500px; height: 500px; bottom: -15%; right: -5%; background: radial-gradient(circle, rgba(200,164,92,.15) 0%, transparent 70%); animation-duration: 25s; animation-delay: -6s; }
+  .nebula-orb.n3 { width: 400px; height: 400px; top: 30%; left: 40%; background: radial-gradient(circle, rgba(139,92,246,.1) 0%, transparent 70%); animation-duration: 22s; animation-delay: -12s; }
+  @keyframes nebDrift {
+    0%,100% { transform: translate(0,0) scale(1); }
+    25% { transform: translate(5%,-4%) scale(1.05); }
+    50% { transform: translate(-3%,6%) scale(.97); }
+    75% { transform: translate(4%,2%) scale(1.03); }
   }
 
   /* ═══════════════════════════════════════════
-     C — FLOATING GRID
+     H — STARFIELD (twinkle + shooting stars)
      ═══════════════════════════════════════════ */
-  #grid { background: #0a0e17; }
-  #grid canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+  #starfield { background: radial-gradient(ellipse at 50% 50%, #0f1420 0%, #080c14 100%); }
 
   /* ═══════════════════════════════════════════
-     D — HEXAGON MESH
+     I — LUMINOUS WAVES (smooth sine flow)
      ═══════════════════════════════════════════ */
-  #hex { background: #0a0e17; }
-  #hex canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+  #waves { background: #0a0e17; }
 
   /* ═══════════════════════════════════════════
-     E — DATA RAIN
+     J — PULSE RINGS (concentric rings)
      ═══════════════════════════════════════════ */
-  #rain { background: #0a0e17; }
-  #rain canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+  #pulse { background: radial-gradient(ellipse at 50% 50%, #0c1019 0%, #080b12 100%); }
 
   /* ── FOOTER ── */
   .footer {
-    text-align: center; padding: 2rem; font-size: .75rem; color: #555;
-    border-top: 1px solid rgba(255,255,255,.05);
+    text-align: center; padding: 2rem; font-size: .72rem; color: #444;
+    border-top: 1px solid rgba(255,255,255,.04);
   }
 </style>
 </head>
@@ -119,75 +107,77 @@
 
 <!-- NAV -->
 <nav class="demo-nav" id="nav">
-  <a href="#particles">A · Particle</a>
-  <a href="#aurora">B · Aurora</a>
-  <a href="#grid">C · Grid</a>
-  <a href="#hex">D · Hexagon</a>
-  <a href="#rain">E · Rain</a>
+  <a href="#ethereal">F · Ethereal</a>
+  <a href="#nebula">G · Nebula</a>
+  <a href="#starfield">H · Starfield</a>
+  <a href="#waves">I · Waves</a>
+  <a href="#pulse">J · Pulse</a>
 </nav>
 
-<!-- A — PARTICLE NETWORK -->
-<section class="demo-section" id="particles">
-  <span class="label">Opsi A</span>
-  <h2>Particle Network</h2>
-  <p>Partikel kecil bergerak lambat mengambang dengan garis-garis tipis yang menghubungkan partikel terdekat. Warna gold + teal transparan.</p>
+<!-- F — ETHEREAL PARTICLES -->
+<section class="demo-section" id="ethereal">
+  <span class="label">Opsi F</span>
+  <h2>Ethereal Particles</h2>
+  <p>Partikel besar & lembut bergerak sangat lambat — setiap partikel punya glow radius besar. Jarak antar partikel lega, kesan elegan & tenang.</p>
   <div class="card">
     <h3>🎓 Kelas 7A</h3>
     <span>Daffa Danendra, S.Pd.</span>
   </div>
 </section>
 
-<!-- B — AURORA WAVE -->
-<section class="demo-section" id="aurora">
-  <span class="label">Opsi B</span>
-  <h2>Aurora Wave</h2>
-  <p>Gelombang cahaya aurora bergerak perlahan — teal-to-gold gradient yang mengalir seperti aurora borealis.</p>
+<!-- G — NEBULA CLOUDS -->
+<section class="demo-section" id="nebula">
+  <span class="label">Opsi G</span>
+  <h2>Nebula Clouds</h2>
+  <p>Awan-awan warna besar bergerak sangat perlahan — soft glow teal, gold, ungu yang tumpang tindih seperti nebula luar angkasa.</p>
   <div class="card">
     <h3>🎓 Kelas 7B</h3>
     <span>Hang Sakti Abdullah, S.Pd.</span>
   </div>
-  <div class="aurora-layer"><div class="a1"></div><div class="a2"></div><div class="a3"></div></div>
+  <div class="nebula-orb n1"></div>
+  <div class="nebula-orb n2"></div>
+  <div class="nebula-orb n3"></div>
 </section>
 
-<!-- C — FLOATING GRID -->
-<section class="demo-section" id="grid">
-  <span class="label">Opsi C</span>
-  <h2>Floating Grid Lines</h2>
-  <p>Garis-garis kisi tipis bergerak slow-motion — efek holographic / cyber grid dengan gold lines di dark background.</p>
+<!-- H — STARFIELD -->
+<section class="demo-section" id="starfield">
+  <span class="label">Opsi H</span>
+  <h2>Starfield</h2>
+  <p>Bintang-bintang kecil berkedip dengan kedalaman berbeda (parallax). Sesekali ada shooting star melintas — nuansa malam yang elegan.</p>
   <div class="card">
     <h3>🎓 Kelas 7C</h3>
     <span>Ifan Destya Adi Tama, S.Pd.</span>
   </div>
 </section>
 
-<!-- D — HEXAGON MESH -->
-<section class="demo-section" id="hex">
-  <span class="label">Opsi D</span>
-  <h2>Hexagon Mesh</h2>
-  <p>Pola hexagon transparan bergerak subtle — honeycomb futuristic dengan gold/teal glow pada tepi.</p>
+<!-- I — LUMINOUS WAVES -->
+<section class="demo-section" id="waves">
+  <span class="label">Opsi I</span>
+  <h2>Luminous Waves</h2>
+  <p>Gelombang-gelombang halus dari partikel kecil yang mengalir horizontal — seperti sungai cahaya yang mengalir perlahan.</p>
   <div class="card">
     <h3>🎓 Kelas 7D</h3>
     <span>Aulia Qisthi Rosyada, S.Pd.</span>
   </div>
 </section>
 
-<!-- E — DATA RAIN -->
-<section class="demo-section" id="rain">
-  <span class="label">Opsi E</span>
-  <h2>Data Rain (Matrix Lite)</h2>
-  <p>Karakter & angka berjalan vertikal — coding/tech vibes yang elegan dengan warna gold transparan.</p>
+<!-- J — PULSE RINGS -->
+<section class="demo-section" id="pulse">
+  <span class="label">Opsi J</span>
+  <h2>Pulse Rings</h2>
+  <p>Lingkaran-lingkaran halus yang memuai dari tengah layar — seperti radar atau sonar yang memancar secara periodik.</p>
   <div class="card">
     <h3>🎓 Kelas 7E</h3>
     <span>Charlieta Nova Putri Fedito, S.Kom.</span>
   </div>
 </section>
 
-<div class="footer">Demo Background Animasi — SMP ABBS Surakarta · Matrikulasi 2026</div>
+<div class="footer">Demo Background Animasi v2 — SMP ABBS Surakarta · Matrikulasi 2026</div>
 
 <script>
-/* ─────────────────────────────────────────
+/* ═══════════════════════════════════════════
    SCROLL SPY (menu menyala)
-   ───────────────────────────────────────── */
+   ═══════════════════════════════════════════ */
 const sections = document.querySelectorAll('.demo-section');
 const navLinks = document.querySelectorAll('.demo-nav a');
 const obs = new IntersectionObserver(entries => {
@@ -200,229 +190,275 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.35 });
 sections.forEach(s => obs.observe(s));
 
-/* ─────────────────────────────────────────
-   A — PARTICLE NETWORK
-   ───────────────────────────────────────── */
+/* ═══════════════════════════════════════════
+   F — ETHEREAL PARTICLES
+   Sparse, large, soft-glow particles
+   ═══════════════════════════════════════════ */
 (function() {
   const c = document.createElement('canvas');
-  document.getElementById('particles').appendChild(c);
+  document.getElementById('ethereal').appendChild(c);
   const ctx = c.getContext('2d');
-  let W, H, particles = [];
-  const MAX = 80, CONN_DIST = 140;
+  let W, H, t = 0;
 
   function resize() { W = c.width = c.offsetWidth; H = c.height = c.offsetHeight; }
   window.addEventListener('resize', resize); resize();
 
-  class P {
-    constructor() { this.reset(); }
-    reset() {
-      this.x = Math.random() * W;
-      this.y = Math.random() * H;
-      this.r = Math.random() * 1.8 + .5;
-      this.vx = (Math.random() - .5) * .3;
-      this.vy = (Math.random() - .5) * .3;
-      this.alpha = Math.random() * .5 + .2;
-    }
-    update() {
-      this.x += this.vx; this.y += this.vy;
-      if (this.x < 0 || this.x > W) this.vx *= -1;
-      if (this.y < 0 || this.y > H) this.vy *= -1;
-    }
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(200,164,92,${this.alpha})`;
+  const PARTICLES = [];
+  const COUNT = 30;  // sparse
+
+  for (let i = 0; i < COUNT; i++) {
+    PARTICLES.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 3 + 2,        // larger
+      vx: (Math.random() - .5) * .15,   // slower
+      vy: (Math.random() - .5) * .12,
+      alpha: Math.random() * .4 + .15,
+      glow: Math.random() * 40 + 20,    // soft glow radius
+      hue: Math.random() > .5 ? 'gold' : 'teal',
+      phase: Math.random() * Math.PI * 2
+    });
+  }
+
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    t += 0.01;
+
+    PARTICLES.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < -20) p.x = W + 20;
+      if (p.x > W + 20) p.x = -20;
+      if (p.y < -20) p.y = H + 20;
+      if (p.y > H + 20) p.y = -20;
+
+      const pulse = 0.8 + 0.2 * Math.sin(t * 2 + p.phase);
+      const color = p.hue === 'gold' ? '200,164,92' : '45,212,191';
+
+      // glow layer
+      const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.glow * pulse);
+      grad.addColorStop(0, `rgba(${color},${p.alpha * .4})`);
+      grad.addColorStop(1, `rgba(${color},0)`);
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.glow * pulse, 0, Math.PI * 2);
+      ctx.fillStyle = grad; ctx.fill();
+
+      // core
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r * pulse, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${color},${p.alpha})`;
       ctx.fill();
-    }
-  }
+    });
 
-  for (let i = 0; i < MAX; i++) particles.push(new P());
-
-  function frame() {
-    ctx.clearRect(0, 0, W, H);
-    for (let i = 0; i < particles.length; i++) {
-      particles[i].update(); particles[i].draw();
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < CONN_DIST) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(45,212,191,${.12 * (1 - dist / CONN_DIST)})`;
-          ctx.lineWidth = .6;
-          ctx.stroke();
-        }
-      }
-    }
     requestAnimationFrame(frame);
   }
   frame();
 })();
 
-/* ─────────────────────────────────────────
-   C — FLOATING GRID
-   ───────────────────────────────────────── */
+/* ═══════════════════════════════════════════
+   H — STARFIELD
+   Parallax stars + shooting stars
+   ═══════════════════════════════════════════ */
 (function() {
   const c = document.createElement('canvas');
-  document.getElementById('grid').appendChild(c);
-  const ctx = c.getContext('2d');
-  let W, H, t = 0;
-
-  function resize() { W = c.width = c.offsetWidth; H = c.height = c.offsetHeight; }
-  window.addEventListener('resize', resize); resize();
-
-  function frame() {
-    ctx.clearRect(0, 0, W, H);
-    const gap = 60;
-    const offset = (t * .15) % gap;
-
-    // vertical
-    for (let x = -gap + offset; x <= W + gap; x += gap) {
-      const a = .06 + .04 * Math.sin(t * .005 + x * .01);
-      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H);
-      ctx.strokeStyle = `rgba(200,164,92,${a})`;
-      ctx.lineWidth = .5; ctx.stroke();
-    }
-    // horizontal
-    for (let y = -gap + offset * .6; y <= H + gap; y += gap) {
-      const a = .06 + .04 * Math.cos(t * .004 + y * .01);
-      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y);
-      ctx.strokeStyle = `rgba(45,212,191,${a})`;
-      ctx.lineWidth = .5; ctx.stroke();
-    }
-
-    // intersection dots
-    for (let x = -gap + offset; x <= W + gap; x += gap) {
-      for (let y = -gap + offset * .6; y <= H + gap; y += gap) {
-        const a = .15 + .1 * Math.sin(t * .008 + x * .02 + y * .02);
-        ctx.beginPath(); ctx.arc(x, y, 1.5, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(200,164,92,${a})`; ctx.fill();
-      }
-    }
-
-    t++;
-    requestAnimationFrame(frame);
-  }
-  frame();
-})();
-
-/* ─────────────────────────────────────────
-   D — HEXAGON MESH
-   ───────────────────────────────────────── */
-(function() {
-  const c = document.createElement('canvas');
-  document.getElementById('hex').appendChild(c);
-  const ctx = c.getContext('2d');
-  let W, H, t = 0;
-  const R = 30; // hex radius
-
-  function resize() { W = c.width = c.offsetWidth; H = c.height = c.offsetHeight; }
-  window.addEventListener('resize', resize); resize();
-
-  function hexPath(cx, cy, r) {
-    ctx.beginPath();
-    for (let i = 0; i < 6; i++) {
-      const angle = Math.PI / 3 * i - Math.PI / 6;
-      const x = cx + r * Math.cos(angle);
-      const y = cy + r * Math.sin(angle);
-      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-    }
-    ctx.closePath();
-  }
-
-  function frame() {
-    ctx.clearRect(0, 0, W, H);
-    const h = R * Math.sqrt(3);
-    const cols = Math.ceil(W / (R * 1.5)) + 2;
-    const rows = Math.ceil(H / h) + 2;
-    const drift = t * .02;
-
-    for (let row = 0; row < rows; row++) {
-      for (let col = 0; col < cols; col++) {
-        const cx = col * R * 1.5;
-        const cy = row * h + (col % 2 ? h / 2 : 0);
-        const dist = Math.sqrt(
-          Math.pow(cx - W / 2, 2) + Math.pow(cy - H / 2, 2)
-        );
-        const wave = Math.sin(dist * .008 - drift) * .5 + .5;
-        const a = .03 + wave * .08;
-
-        hexPath(cx, cy, R - 1);
-        ctx.strokeStyle = `rgba(200,164,92,${a})`;
-        ctx.lineWidth = .7;
-        ctx.stroke();
-
-        // glow on some hexagons
-        if (wave > .7) {
-          hexPath(cx, cy, R - 1);
-          ctx.strokeStyle = `rgba(45,212,191,${(wave - .7) * .4})`;
-          ctx.lineWidth = 1.2;
-          ctx.stroke();
-        }
-      }
-    }
-    t++;
-    requestAnimationFrame(frame);
-  }
-  frame();
-})();
-
-/* ─────────────────────────────────────────
-   E — DATA RAIN (Matrix Lite)
-   ───────────────────────────────────────── */
-(function() {
-  const c = document.createElement('canvas');
-  document.getElementById('rain').appendChild(c);
+  document.getElementById('starfield').appendChild(c);
   const ctx = c.getContext('2d');
   let W, H;
-  const FONT = 14, CHARS = '01アイウエオカキクケコ∞∑∫Δ√π'.split('');
-  let columns = [];
 
-  function resize() {
-    W = c.width = c.offsetWidth; H = c.height = c.offsetHeight;
-    const cols = Math.floor(W / FONT);
-    columns = [];
-    for (let i = 0; i < cols; i++) {
-      columns.push({
-        y: Math.random() * H,
-        speed: Math.random() * 1.5 + .5,
-        chars: [],
-        len: Math.floor(Math.random() * 15) + 8
+  function resize() { W = c.width = c.offsetWidth; H = c.height = c.offsetHeight; init(); }
+  window.addEventListener('resize', resize);
+
+  const LAYERS = [
+    { stars: 60, speed: .08, minR: .3, maxR: .8, alpha: .3 },  // far
+    { stars: 35, speed: .15, minR: .5, maxR: 1.2, alpha: .5 }, // mid
+    { stars: 15, speed: .3, minR: .8, maxR: 1.8, alpha: .7 },  // near
+  ];
+
+  let allStars = [];
+  let shootingStars = [];
+
+  function init() {
+    allStars = [];
+    LAYERS.forEach(layer => {
+      for (let i = 0; i < layer.stars; i++) {
+        allStars.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          r: Math.random() * (layer.maxR - layer.minR) + layer.minR,
+          speed: layer.speed,
+          alpha: layer.alpha,
+          twinkle: Math.random() * Math.PI * 2,
+          isGold: Math.random() > .6
+        });
+      }
+    });
+  }
+  resize();
+
+  function maybeShoot() {
+    if (Math.random() < .003 && shootingStars.length < 2) {
+      shootingStars.push({
+        x: Math.random() * W * .7,
+        y: Math.random() * H * .4,
+        len: Math.random() * 80 + 40,
+        speed: Math.random() * 6 + 4,
+        angle: Math.PI / 4 + (Math.random() - .5) * .3,
+        alpha: 1,
+        life: 0
       });
     }
   }
-  window.addEventListener('resize', resize); resize();
 
   function frame() {
-    ctx.fillStyle = 'rgba(10,14,23,.08)';
-    ctx.fillRect(0, 0, W, H);
-    ctx.font = `${FONT}px monospace`;
+    ctx.clearRect(0, 0, W, H);
+    const t = Date.now() * .001;
 
-    columns.forEach((col, i) => {
-      const x = i * FONT;
-      // head
-      const headChar = CHARS[Math.floor(Math.random() * CHARS.length)];
-      ctx.fillStyle = 'rgba(200,164,92,.9)';
-      ctx.fillText(headChar, x, col.y);
+    // stars
+    allStars.forEach(s => {
+      s.x += s.speed * .3;
+      if (s.x > W + 5) { s.x = -5; s.y = Math.random() * H; }
+      const twinkle = .6 + .4 * Math.sin(t * (1 + s.speed * 2) + s.twinkle);
+      const color = s.isGold ? '200,164,92' : '255,255,255';
+      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${color},${s.alpha * twinkle})`;
+      ctx.fill();
+    });
 
-      // trail
-      for (let j = 1; j < col.len; j++) {
-        const yTrail = col.y - j * FONT;
-        if (yTrail < 0) continue;
-        const a = .5 * (1 - j / col.len);
-        ctx.fillStyle = `rgba(45,212,191,${a})`;
-        const ch = CHARS[Math.floor(Math.random() * CHARS.length)];
-        ctx.fillText(ch, x, yTrail);
-      }
+    // shooting stars
+    maybeShoot();
+    shootingStars = shootingStars.filter(ss => {
+      ss.life++; ss.alpha = Math.max(0, 1 - ss.life / 40);
+      const dx = Math.cos(ss.angle) * ss.speed;
+      const dy = Math.sin(ss.angle) * ss.speed;
+      ss.x += dx; ss.y += dy;
 
-      col.y += col.speed;
-      if (col.y - col.len * FONT > H) {
-        col.y = -FONT;
-        col.speed = Math.random() * 1.5 + .5;
+      const tailX = ss.x - Math.cos(ss.angle) * ss.len;
+      const tailY = ss.y - Math.sin(ss.angle) * ss.len;
+
+      const grad = ctx.createLinearGradient(tailX, tailY, ss.x, ss.y);
+      grad.addColorStop(0, `rgba(200,164,92,0)`);
+      grad.addColorStop(1, `rgba(255,255,255,${ss.alpha * .8})`);
+      ctx.beginPath(); ctx.moveTo(tailX, tailY); ctx.lineTo(ss.x, ss.y);
+      ctx.strokeStyle = grad; ctx.lineWidth = 1.5; ctx.stroke();
+
+      // head glow
+      ctx.beginPath(); ctx.arc(ss.x, ss.y, 2, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${ss.alpha})`; ctx.fill();
+
+      return ss.alpha > 0;
+    });
+
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+/* ═══════════════════════════════════════════
+   I — LUMINOUS WAVES
+   Horizontal flowing particles in wave patterns
+   ═══════════════════════════════════════════ */
+(function() {
+  const c = document.createElement('canvas');
+  document.getElementById('waves').appendChild(c);
+  const ctx = c.getContext('2d');
+  let W, H, t = 0;
+
+  function resize() { W = c.width = c.offsetWidth; H = c.height = c.offsetHeight; }
+  window.addEventListener('resize', resize); resize();
+
+  const WAVES = [
+    { y: .3, amp: 30, freq: .008, speed: .015, color: '45,212,191', alpha: .12, count: 60 },
+    { y: .5, amp: 25, freq: .01,  speed: .02,  color: '200,164,92', alpha: .1,  count: 50 },
+    { y: .7, amp: 20, freq: .012, speed: .012, color: '139,92,246', alpha: .08, count: 40 },
+  ];
+
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    t += 1;
+
+    WAVES.forEach(wave => {
+      for (let i = 0; i < wave.count; i++) {
+        const progress = i / wave.count;
+        const x = progress * W;
+        const yBase = H * wave.y;
+        const y = yBase + Math.sin(x * wave.freq + t * wave.speed) * wave.amp
+                    + Math.sin(x * wave.freq * 1.5 + t * wave.speed * .7) * wave.amp * .3;
+
+        const pulse = .7 + .3 * Math.sin(t * .03 + i * .2);
+
+        // glow
+        const grad = ctx.createRadialGradient(x, y, 0, x, y, 12 * pulse);
+        grad.addColorStop(0, `rgba(${wave.color},${wave.alpha * pulse})`);
+        grad.addColorStop(1, `rgba(${wave.color},0)`);
+        ctx.beginPath(); ctx.arc(x, y, 12 * pulse, 0, Math.PI * 2);
+        ctx.fillStyle = grad; ctx.fill();
+
+        // core dot
+        ctx.beginPath(); ctx.arc(x, y, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${wave.color},${wave.alpha * 2 * pulse})`;
+        ctx.fill();
       }
     });
+
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+/* ═══════════════════════════════════════════
+   J — PULSE RINGS
+   Concentric rings expanding from center
+   ═══════════════════════════════════════════ */
+(function() {
+  const c = document.createElement('canvas');
+  document.getElementById('pulse').appendChild(c);
+  const ctx = c.getContext('2d');
+  let W, H, t = 0;
+
+  function resize() { W = c.width = c.offsetWidth; H = c.height = c.offsetHeight; }
+  window.addEventListener('resize', resize); resize();
+
+  const MAX_RINGS = 8;
+  const rings = [];
+  for (let i = 0; i < MAX_RINGS; i++) {
+    rings.push({
+      r: i * 60,
+      maxR: Math.max(W, H) * .7,
+      speed: .3 + Math.random() * .2,
+      alpha: .08,
+      color: i % 2 === 0 ? '200,164,92' : '45,212,191',
+      lineWidth: .8
+    });
+  }
+
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    t += 1;
+    const cx = W / 2, cy = H / 2;
+
+    rings.forEach(ring => {
+      ring.r += ring.speed;
+      if (ring.r > ring.maxR) ring.r = 0;
+
+      const progress = ring.r / ring.maxR;
+      const alpha = ring.alpha * (1 - progress);
+
+      ctx.beginPath(); ctx.arc(cx, cy, ring.r, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(${ring.color},${alpha})`;
+      ctx.lineWidth = ring.lineWidth;
+      ctx.stroke();
+    });
+
+    // center glow
+    const cPulse = .6 + .4 * Math.sin(t * .02);
+    const cGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 80 * cPulse);
+    cGrad.addColorStop(0, `rgba(200,164,92,.08)`);
+    cGrad.addColorStop(1, 'rgba(200,164,92,0)');
+    ctx.beginPath(); ctx.arc(cx, cy, 80 * cPulse, 0, Math.PI * 2);
+    ctx.fillStyle = cGrad; ctx.fill();
+
+    // center dot
+    ctx.beginPath(); ctx.arc(cx, cy, 3, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(200,164,92,${.3 + .2 * cPulse})`;
+    ctx.fill();
+
     requestAnimationFrame(frame);
   }
   frame();
