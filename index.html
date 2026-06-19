@@ -384,7 +384,7 @@ h3{font-size:clamp(1rem,1.8vw,1.35rem);font-weight:600}
 
 
 /* ================= TIMELINE ================= */
-#timeline{background:radial-gradient(ellipse 50% 35% at 50% 80%, rgba(212,168,67,.03) 0%, transparent 60%),var(--bg)}
+#timeline{background:transparent;}
 .tl-track{
   position:relative;height:26px;max-width:860px;margin:0 auto 0
 }
@@ -651,7 +651,8 @@ footer{
   scroll-snap-align:end;
   text-align:center;padding:1.2rem 1.5rem;
   color:var(--muted);font-size:.78rem;
-  border-top:1px solid var(--border);background:var(--bg)
+  border-top:1px solid var(--border);background:transparent;
+  position:relative;z-index:2;
 }
 footer a{color:var(--gold);text-decoration:none}
 </style>
