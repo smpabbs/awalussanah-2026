@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo Background Animasi — Awalussanah 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #0a0e17; color: #e0e0e0; }
+
+  /* ── NAV ── */
+  .demo-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(10,14,23,.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,164,92,.15);
+    padding: .8rem 2rem; display: flex; gap: .6rem; justify-content: center; flex-wrap: wrap;
+  }
+  .demo-nav a {
+    color: #888; text-decoration: none; font-size: .85rem; font-weight: 600;
+    padding: .45rem 1rem; border-radius: 20px; transition: all .3s;
+    border: 1px solid transparent;
+  }
+  .demo-nav a:hover, .demo-nav a.active {
+    color: #c8a45c; border-color: rgba(200,164,92,.3); background: rgba(200,164,92,.08);
+  }
+
+  /* ── SECTION ── */
+  .demo-section {
+    min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; position: relative; overflow: hidden; padding: 6rem 2rem 3rem;
+  }
+  .demo-section .label {
+    position: absolute; top: 4.5rem; left: 50%; transform: translateX(-50%);
+    font-size: .7rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase;
+    color: rgba(200,164,92,.6); z-index: 10;
+  }
+  .demo-section h2 {
+    font-size: 2rem; font-weight: 800; color: #c8a45c; text-align: center;
+    margin-bottom: .5rem; z-index: 2; text-shadow: 0 0 30px rgba(200,164,92,.3);
+  }
+  .demo-section p {
+    text-align: center; max-width: 500px; z-index: 2; color: #aaa;
+    font-size: .95rem; line-height: 1.6;
+  }
+  .demo-section .card {
+    margin-top: 1.5rem; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+    border-radius: 14px; padding: 1.5rem 2rem; z-index: 2; text-align: center;
+    backdrop-filter: blur(8px); max-width: 400px;
+  }
+  .demo-section .card h3 { color: #2dd4bf; font-size: 1.1rem; margin-bottom: .3rem; }
+  .demo-section .card span { color: #888; font-size: .85rem; }
+
+  /* ═══════════════════════════════════════════
+     A — PARTICLE NETWORK
+     ═══════════════════════════════════════════ */
+  #particles { background: #0a0e17; }
+  #particles canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+
+  /* ═══════════════════════════════════════════
+     B — AURORA WAVE
+     ═══════════════════════════════════════════ */
+  #aurora { background: #0a0e17; }
+  #aurora .aurora-layer {
+    position: absolute; inset: 0; z-index: 1; overflow: hidden; opacity: .6;
+  }
+  #aurora .aurora-layer div {
+    position: absolute; width: 200%; height: 200%; top: -50%; left: -50%;
+    border-radius: 40%;
+    animation: auroraFloat linear infinite;
+    filter: blur(80px);
+  }
+  #aurora .aurora-layer .a1 {
+    background: radial-gradient(circle, rgba(45,212,191,.35) 0%, transparent 60%);
+    animation-duration: 12s;
+  }
+  #aurora .aurora-layer .a2 {
+    background: radial-gradient(circle, rgba(200,164,92,.3) 0%, transparent 60%);
+    animation-duration: 15s; animation-delay: -4s;
+  }
+  #aurora .aurora-layer .a3 {
+    background: radial-gradient(circle, rgba(139,92,246,.2) 0%, transparent 60%);
+    animation-duration: 18s; animation-delay: -8s;
+  }
+  @keyframes auroraFloat {
+    0%   { transform: translate(0,0) rotate(0deg) scale(1); }
+    33%  { transform: translate(10%,-8%) rotate(60deg) scale(1.1); }
+    66%  { transform: translate(-8%,6%) rotate(120deg) scale(.95); }
+    100% { transform: translate(0,0) rotate(180deg) scale(1); }
+  }
+
+  /* ═══════════════════════════════════════════
+     C — FLOATING GRID
+     ═══════════════════════════════════════════ */
+  #grid { background: #0a0e17; }
+  #grid canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+
+  /* ═══════════════════════════════════════════
+     D — HEXAGON MESH
+     ═══════════════════════════════════════════ */
+  #hex { background: #0a0e17; }
+  #hex canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+
+  /* ═══════════════════════════════════════════
+     E — DATA RAIN
+     ═══════════════════════════════════════════ */
+  #rain { background: #0a0e17; }
+  #rain canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center; padding: 2rem; font-size: .75rem; color: #555;
+    border-top: 1px solid rgba(255,255,255,.05);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="demo-nav" id="nav">
+  <a href="#particles">A · Particle</a>
+  <a href="#aurora">B · Aurora</a>
+  <a href="#grid">C · Grid</a>
+  <a href="#hex">D · Hexagon</a>
+  <a href="#rain">E · Rain</a>
+</nav>
+
+<!-- A — PARTICLE NETWORK -->
+<section class="demo-section" id="particles">
+  <span class="label">Opsi A</span>
+  <h2>Particle Network</h2>
+  <p>Partikel kecil bergerak lambat mengambang dengan garis-garis tipis yang menghubungkan partikel terdekat. Warna gold + teal transparan.</p>
+  <div class="card">
+    <h3>🎓 Kelas 7A</h3>
+    <span>Daffa Danendra, S.Pd.</span>
+  </div>
+</section>
+
+<!-- B — AURORA WAVE -->
+<section class="demo-section" id="aurora">
+  <span class="label">Opsi B</span>
+  <h2>Aurora Wave</h2>
+  <p>Gelombang cahaya aurora bergerak perlahan — teal-to-gold gradient yang mengalir seperti aurora borealis.</p>
+  <div class="card">
+    <h3>🎓 Kelas 7B</h3>
+    <span>Hang Sakti Abdullah, S.Pd.</span>
+  </div>
+  <div class="aurora-layer"><div class="a1"></div><div class="a2"></div><div class="a3"></div></div>
+</section>
+
+<!-- C — FLOATING GRID -->
+<section class="demo-section" id="grid">
+  <span class="label">Opsi C</span>
+  <h2>Floating Grid Lines</h2>
+  <p>Garis-garis kisi tipis bergerak slow-motion — efek holographic / cyber grid dengan gold lines di dark background.</p>
+  <div class="card">
+    <h3>🎓 Kelas 7C</h3>
+    <span>Ifan Destya Adi Tama, S.Pd.</span>
+  </div>
+</section>
+
+<!-- D — HEXAGON MESH -->
+<section class="demo-section" id="hex">
+  <span class="label">Opsi D</span>
+  <h2>Hexagon Mesh</h2>
+  <p>Pola hexagon transparan bergerak subtle — honeycomb futuristic dengan gold/teal glow pada tepi.</p>
+  <div class="card">
+    <h3>🎓 Kelas 7D</h3>
+    <span>Aulia Qisthi Rosyada, S.Pd.</span>
+  </div>
+</section>
+
+<!-- E — DATA RAIN -->
+<section class="demo-section" id="rain">
+  <span class="label">Opsi E</span>
+  <h2>Data Rain (Matrix Lite)</h2>
+  <p>Karakter & angka berjalan vertikal — coding/tech vibes yang elegan dengan warna gold transparan.</p>
+  <div class="card">
+    <h3>🎓 Kelas 7E</h3>
+    <span>Charlieta Nova Putri Fedito, S.Kom.</span>
+  </div>
+</section>
+
+<div class="footer">Demo Background Animasi — SMP ABBS Surakarta · Matrikulasi 2026</div>
+
+<script>
+/* ─────────────────────────────────────────
+   SCROLL SPY (menu menyala)
+   ───────────────────────────────────────── */
+const sections = document.querySelectorAll('.demo-section');
+const navLinks = document.querySelectorAll('.demo-nav a');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      document.querySelector(`.demo-nav a[href="#${e.target.id}"]`)?.classList.add('active');
+    }
+  });
+}, { threshold: 0.35 });
+sections.forEach(s => obs.observe(s));
+
+/* ─────────────────────────────────────────
+   A — PARTICLE NETWORK
+   ───────────────────────────────────────── */
+(function() {
+  const c = document.createElement('canvas');
+  document.getElementById('particles').appendChild(c);
+  const ctx = c.getContext('2d');
+  let W, H, particles = [];
+  const MAX = 80, CONN_DIST = 140;
+
+  function resize() { W = c.width = c.offsetWidth; H = c.height = c.offsetHeight; }
+  window.addEventListener('resize', resize); resize();
+
+  class P {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * W;
+      this.y = Math.random() * H;
+      this.r = Math.random() * 1.8 + .5;
+      this.vx = (Math.random() - .5) * .3;
+      this.vy = (Math.random() - .5) * .3;
+      this.alpha = Math.random() * .5 + .2;
+    }
+    update() {
+      this.x += this.vx; this.y += this.vy;
+      if (this.x < 0 || this.x > W) this.vx *= -1;
+      if (this.y < 0 || this.y > H) this.vy *= -1;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(200,164,92,${this.alpha})`;
+      ctx.fill();
+    }
+  }
+
+  for (let i = 0; i < MAX; i++) particles.push(new P());
+
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    for (let i = 0; i < particles.length; i++) {
+      particles[i].update(); particles[i].draw();
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < CONN_DIST) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(45,212,191,${.12 * (1 - dist / CONN_DIST)})`;
+          ctx.lineWidth = .6;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+/* ─────────────────────────────────────────
+   C — FLOATING GRID
+   ───────────────────────────────────────── */
+(function() {
+  const c = document.createElement('canvas');
+  document.getElementById('grid').appendChild(c);
+  const ctx = c.getContext('2d');
+  let W, H, t = 0;
+
+  function resize() { W = c.width = c.offsetWidth; H = c.height = c.offsetHeight; }
+  window.addEventListener('resize', resize); resize();
+
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    const gap = 60;
+    const offset = (t * .15) % gap;
+
+    // vertical
+    for (let x = -gap + offset; x <= W + gap; x += gap) {
+      const a = .06 + .04 * Math.sin(t * .005 + x * .01);
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H);
+      ctx.strokeStyle = `rgba(200,164,92,${a})`;
+      ctx.lineWidth = .5; ctx.stroke();
+    }
+    // horizontal
+    for (let y = -gap + offset * .6; y <= H + gap; y += gap) {
+      const a = .06 + .04 * Math.cos(t * .004 + y * .01);
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y);
+      ctx.strokeStyle = `rgba(45,212,191,${a})`;
+      ctx.lineWidth = .5; ctx.stroke();
+    }
+
+    // intersection dots
+    for (let x = -gap + offset; x <= W + gap; x += gap) {
+      for (let y = -gap + offset * .6; y <= H + gap; y += gap) {
+        const a = .15 + .1 * Math.sin(t * .008 + x * .02 + y * .02);
+        ctx.beginPath(); ctx.arc(x, y, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(200,164,92,${a})`; ctx.fill();
+      }
+    }
+
+    t++;
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+/* ─────────────────────────────────────────
+   D — HEXAGON MESH
+   ───────────────────────────────────────── */
+(function() {
+  const c = document.createElement('canvas');
+  document.getElementById('hex').appendChild(c);
+  const ctx = c.getContext('2d');
+  let W, H, t = 0;
+  const R = 30; // hex radius
+
+  function resize() { W = c.width = c.offsetWidth; H = c.height = c.offsetHeight; }
+  window.addEventListener('resize', resize); resize();
+
+  function hexPath(cx, cy, r) {
+    ctx.beginPath();
+    for (let i = 0; i < 6; i++) {
+      const angle = Math.PI / 3 * i - Math.PI / 6;
+      const x = cx + r * Math.cos(angle);
+      const y = cy + r * Math.sin(angle);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+  }
+
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    const h = R * Math.sqrt(3);
+    const cols = Math.ceil(W / (R * 1.5)) + 2;
+    const rows = Math.ceil(H / h) + 2;
+    const drift = t * .02;
+
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        const cx = col * R * 1.5;
+        const cy = row * h + (col % 2 ? h / 2 : 0);
+        const dist = Math.sqrt(
+          Math.pow(cx - W / 2, 2) + Math.pow(cy - H / 2, 2)
+        );
+        const wave = Math.sin(dist * .008 - drift) * .5 + .5;
+        const a = .03 + wave * .08;
+
+        hexPath(cx, cy, R - 1);
+        ctx.strokeStyle = `rgba(200,164,92,${a})`;
+        ctx.lineWidth = .7;
+        ctx.stroke();
+
+        // glow on some hexagons
+        if (wave > .7) {
+          hexPath(cx, cy, R - 1);
+          ctx.strokeStyle = `rgba(45,212,191,${(wave - .7) * .4})`;
+          ctx.lineWidth = 1.2;
+          ctx.stroke();
+        }
+      }
+    }
+    t++;
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+/* ─────────────────────────────────────────
+   E — DATA RAIN (Matrix Lite)
+   ───────────────────────────────────────── */
+(function() {
+  const c = document.createElement('canvas');
+  document.getElementById('rain').appendChild(c);
+  const ctx = c.getContext('2d');
+  let W, H;
+  const FONT = 14, CHARS = '01アイウエオカキクケコ∞∑∫Δ√π'.split('');
+  let columns = [];
+
+  function resize() {
+    W = c.width = c.offsetWidth; H = c.height = c.offsetHeight;
+    const cols = Math.floor(W / FONT);
+    columns = [];
+    for (let i = 0; i < cols; i++) {
+      columns.push({
+        y: Math.random() * H,
+        speed: Math.random() * 1.5 + .5,
+        chars: [],
+        len: Math.floor(Math.random() * 15) + 8
+      });
+    }
+  }
+  window.addEventListener('resize', resize); resize();
+
+  function frame() {
+    ctx.fillStyle = 'rgba(10,14,23,.08)';
+    ctx.fillRect(0, 0, W, H);
+    ctx.font = `${FONT}px monospace`;
+
+    columns.forEach((col, i) => {
+      const x = i * FONT;
+      // head
+      const headChar = CHARS[Math.floor(Math.random() * CHARS.length)];
+      ctx.fillStyle = 'rgba(200,164,92,.9)';
+      ctx.fillText(headChar, x, col.y);
+
+      // trail
+      for (let j = 1; j < col.len; j++) {
+        const yTrail = col.y - j * FONT;
+        if (yTrail < 0) continue;
+        const a = .5 * (1 - j / col.len);
+        ctx.fillStyle = `rgba(45,212,191,${a})`;
+        const ch = CHARS[Math.floor(Math.random() * CHARS.length)];
+        ctx.fillText(ch, x, yTrail);
+      }
+
+      col.y += col.speed;
+      if (col.y - col.len * FONT > H) {
+        col.y = -FONT;
+        col.speed = Math.random() * 1.5 + .5;
+      }
+    });
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+</script>
+</body>
+</html>
