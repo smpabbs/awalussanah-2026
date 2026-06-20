@@ -477,63 +477,27 @@ h3{font-size:clamp(1rem,1.8vw,1.35rem);font-weight:600}
 .emodul-support{text-align:center;font-size:.75rem;color:var(--muted);margin-top:1rem}
 
 /* ================= SPEK LAPTOP ================= */
-.laptop-scene{position:relative;max-width:750px;margin:0 auto;height:340px;display:flex;align-items:center;justify-content:center}
-
-/* Laptop */
-.laptop{position:relative;z-index:2;flex-shrink:0}
-.laptop-screen{position:relative;width:220px;height:145px;background:linear-gradient(145deg,#1a1e2e,#0d1017);border:2px solid #333;border-radius:8px 8px 0 0;overflow:hidden;box-shadow:0 0 30px rgba(212,168,92,.08),inset 0 0 40px rgba(0,0,0,.5)}
-.laptop-screen-inner{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem;background:linear-gradient(180deg,rgba(212,168,92,.04) 0%,rgba(45,212,191,.03) 100%)}
-.laptop-logo{font-size:1.8rem;opacity:.6}
-.laptop-text{font-size:.7rem;color:var(--text);text-align:center;line-height:1.4;font-weight:600}
-.laptop-specs-bar{display:flex;gap:4px;margin-top:.2rem}
-.laptop-specs-bar span{font-size:.4rem;padding:2px 6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:3px;color:var(--muted)}
-.laptop-camera{position:absolute;top:4px;left:50%;transform:translateX(-50%);width:5px;height:5px;background:#1a1e2e;border-radius:50%;border:1px solid #444}
-.laptop-hinge{width:240px;height:6px;background:linear-gradient(180deg,#3a3a3a,#2a2a2a);margin:0 auto;border-radius:0 0 2px 2px;box-shadow:0 2px 8px rgba(0,0,0,.3)}
-.laptop-base{width:260px;height:10px;background:linear-gradient(180deg,#2d2d2d,#222);margin:0 auto;border-radius:0 0 6px 6px;position:relative}
-.laptop-trackpad{position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:80px;height:3px;background:#333;border-radius:0 0 4px 4px}
-
-/* Callouts */
-.callout{position:absolute;display:flex;align-items:center;z-index:3}
-.callout-left{right:calc(50% + 140px);flex-direction:row-reverse}
-.callout-right{left:calc(50% + 140px)}
-.callout-content{display:flex;align-items:center;gap:.5rem;padding:.45rem .7rem;background:var(--card);border:1px solid var(--border);border-radius:8px;white-space:nowrap;transition:all .3s;box-shadow:0 4px 15px rgba(0,0,0,.15)}
-.callout-content:hover{border-color:rgba(212,168,92,.3);box-shadow:0 6px 20px rgba(0,0,0,.25);transform:translateY(-1px)}
-.callout-icon{font-size:1.1rem;flex-shrink:0}
-.callout-text{display:flex;flex-direction:column;line-height:1.2}
-.callout-text strong{font-size:.6rem;color:var(--gold);text-transform:uppercase;letter-spacing:.3px}
-.callout-text span{font-size:.65rem;color:var(--text);font-weight:600}
-.callout-line{width:30px;height:1px;background:linear-gradient(90deg,transparent,rgba(212,168,92,.4));flex-shrink:0}
-.callout-left .callout-line{background:linear-gradient(270deg,transparent,rgba(212,168,92,.4))}
-.callout-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;box-shadow:0 0 8px rgba(212,168,92,.4);animation:callout-pulse 2s ease-in-out infinite}
-@keyframes callout-pulse{0%,100%{box-shadow:0 0 8px rgba(212,168,92,.3)}50%{box-shadow:0 0 14px rgba(212,168,92,.6)}}
-
-/* Vertical positioning */
-.callout-1{top:60px}
-.callout-2{top:140px}
-.callout-3{top:220px}
-.callout-4{top:60px}
-.callout-5{top:140px}
-.callout-6{top:220px}
-
-/* Mobile */
-@media(max-width:700px){
-  .laptop-scene{height:auto;flex-direction:column;gap:1.5rem;padding:1rem 0}
-  .callout{position:relative!important;right:auto!important;left:auto!important;top:auto!important;flex-direction:row!important;justify-content:center}
-  .callout-left .callout-line,.callout-right .callout-line{width:20px}
-  .callout-line{background:linear-gradient(90deg,transparent,rgba(212,168,92,.4))!important}
-  .laptop-screen{width:180px;height:120px}
-  .laptop-base{width:210px}
-  .laptop-hinge{width:200px}
-  .laptop-text{font-size:.6rem}
-  .laptop-specs-bar span{font-size:.35rem;padding:1px 4px}
+.spek-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;max-width:620px;margin:0 auto}
+.spek-card{--sc:var(--gold);position:relative;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem .6rem;display:flex;align-items:center;gap:.6rem;transition:all .3s;overflow:hidden}
+.spek-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--sc),transparent);opacity:.6}
+.spek-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,color-mix(in srgb,var(--sc) 6%,transparent),transparent 70%);pointer-events:none}
+.spek-card:hover{border-color:color-mix(in srgb,var(--sc) 30%,transparent);box-shadow:0 8px 25px rgba(0,0,0,.2),0 0 20px color-mix(in srgb,var(--sc) 8%,transparent);transform:translateY(-3px)}
+.spek-card-icon{font-size:1.5rem;width:42px;height:42px;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--sc) 10%,transparent);border:1px solid color-mix(in srgb,var(--sc) 15%,transparent);border-radius:10px;flex-shrink:0;position:relative;z-index:1}
+.spek-card-body{position:relative;z-index:1;display:flex;flex-direction:column;line-height:1.2}
+.spek-card-label{font-size:.55rem;font-weight:700;color:var(--sc);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.spek-card-value{font-size:.9rem;font-weight:700;color:var(--text)}
+.spek-card-sub{font-size:.6rem;color:var(--muted);margin-top:1px}
+@media(max-width:500px){
+  .spek-grid{grid-template-columns:repeat(2,1fr);gap:.5rem}
+  .spek-card{padding:.7rem .5rem}
+  .spek-card-icon{width:36px;height:36px;font-size:1.2rem}
+  .spek-card-value{font-size:.8rem}
 }
 @media(max-height:650px){
-  .laptop-scene{height:auto;gap:1rem}
-  .laptop-screen{width:180px;height:120px}
-  .laptop-base{width:210px}
-  .laptop-hinge{width:200px}
-  .callout-content{padding:.3rem .5rem}
-  .callout-text span{font-size:.58rem}
+  .spek-grid{gap:.4rem}
+  .spek-card{padding:.6rem .4rem}
+  .spek-card-icon{width:32px;height:32px;font-size:1rem}
+  .spek-card-value{font-size:.75rem}
 }
 
 /* Responsive */
@@ -1490,96 +1454,48 @@ footer a{color:var(--gold);text-decoration:none}
       <p class="muted" style="font-size:.82rem">Rekomendasi spesifikasi laptop yang harus dimiliki siswa</p>
     </div>
 
-    <!-- Laptop Mockup with Callouts -->
-    <div class="laptop-scene">
-      <!-- Left callouts -->
-      <div class="callout callout-left callout-1">
-        <div class="callout-content">
-          <div class="callout-icon">⚙️</div>
-          <div class="callout-text">
-            <strong>Processor</strong>
-            <span>Intel Core i3<br>Gen 7 ke atas</span>
-          </div>
-        </div>
-        <div class="callout-line"></div>
-        <div class="callout-dot"></div>
-      </div>
-      <div class="callout callout-left callout-2">
-        <div class="callout-content">
-          <div class="callout-icon">🧠</div>
-          <div class="callout-text">
-            <strong>RAM</strong>
-            <span>Minimal 8 GB</span>
-          </div>
-        </div>
-        <div class="callout-line"></div>
-        <div class="callout-dot"></div>
-      </div>
-      <div class="callout callout-left callout-3">
-        <div class="callout-content">
-          <div class="callout-icon">💾</div>
-          <div class="callout-text">
-            <strong>Penyimpanan</strong>
-            <span>SSD</span>
-          </div>
-        </div>
-        <div class="callout-line"></div>
-        <div class="callout-dot"></div>
-      </div>
-
-      <!-- Right callouts -->
-      <div class="callout callout-right callout-4">
-        <div class="callout-dot"></div>
-        <div class="callout-line"></div>
-        <div class="callout-content">
-          <div class="callout-icon">🖥️</div>
-          <div class="callout-text">
-            <strong>Display</strong>
-            <span>14 inch</span>
-          </div>
+    <div class="spek-grid">
+      <div class="spek-card" style="--sc:#2dd4bf">
+        <div class="spek-card-icon">🏷️</div>
+        <div class="spek-card-body">
+          <div class="spek-card-label">Merek</div>
+          <div class="spek-card-value">Bebas</div>
         </div>
       </div>
-      <div class="callout callout-right callout-5">
-        <div class="callout-dot"></div>
-        <div class="callout-line"></div>
-        <div class="callout-content">
-          <div class="callout-icon">🪟</div>
-          <div class="callout-text">
-            <strong>Windows</strong>
-            <span>10</span>
-          </div>
+      <div class="spek-card" style="--sc:#a78bfa">
+        <div class="spek-card-icon">⚙️</div>
+        <div class="spek-card-body">
+          <div class="spek-card-label">Processor</div>
+          <div class="spek-card-value">Intel Core i3</div>
+          <div class="spek-card-sub">Gen 7 ke atas</div>
         </div>
       </div>
-      <div class="callout callout-right callout-6">
-        <div class="callout-dot"></div>
-        <div class="callout-line"></div>
-        <div class="callout-content">
-          <div class="callout-icon">🏷️</div>
-          <div class="callout-text">
-            <strong>Merek</strong>
-            <span>Bebas</span>
-          </div>
+      <div class="spek-card" style="--sc:#f472b6">
+        <div class="spek-card-icon">🧠</div>
+        <div class="spek-card-body">
+          <div class="spek-card-label">RAM</div>
+          <div class="spek-card-value">Minimal 8 GB</div>
         </div>
       </div>
-
-      <!-- Laptop -->
-      <div class="laptop">
-        <div class="laptop-screen">
-          <div class="laptop-screen-inner">
-            <div class="laptop-logo">🖥️</div>
-            <div class="laptop-text">Ready for<br><span class="gold">Learning</span></div>
-            <div class="laptop-specs-bar">
-              <span>Intel i3</span>
-              <span>8GB RAM</span>
-              <span>SSD</span>
-              <span>14"</span>
-            </div>
-          </div>
-          <div class="laptop-camera"></div>
+      <div class="spek-card" style="--sc:#60a5fa">
+        <div class="spek-card-icon">🪟</div>
+        <div class="spek-card-body">
+          <div class="spek-card-label">Windows</div>
+          <div class="spek-card-value">10</div>
         </div>
-        <div class="laptop-hinge"></div>
-        <div class="laptop-base">
-          <div class="laptop-trackpad"></div>
+      </div>
+      <div class="spek-card" style="--sc:#d4a843">
+        <div class="spek-card-icon">🖥️</div>
+        <div class="spek-card-body">
+          <div class="spek-card-label">Display</div>
+          <div class="spek-card-value">14 inch</div>
+        </div>
+      </div>
+      <div class="spek-card" style="--sc:#34d399">
+        <div class="spek-card-icon">💾</div>
+        <div class="spek-card-body">
+          <div class="spek-card-label">Penyimpanan</div>
+          <div class="spek-card-value">SSD</div>
         </div>
       </div>
     </div>
