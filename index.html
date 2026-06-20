@@ -196,7 +196,7 @@ h3{font-size:clamp(1rem,1.8vw,1.35rem);font-weight:600}
 .btn-outline:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
 
 /* ================= SECTION HEADER ================= */
-.section-header{text-align:center;margin-bottom:.6rem}
+.section-header{text-align:center;margin-bottom:1rem}
 .section-tag{
   display:inline-block;font-size:.68rem;font-weight:600;text-transform:uppercase;
   letter-spacing:2px;color:var(--gold);background:rgba(212,168,67,.07);
@@ -358,13 +358,13 @@ h3{font-size:clamp(1rem,1.8vw,1.35rem);font-weight:600}
   background:transparent;
 }
 .venn-wrap{
-  position:relative;width:100%;max-width:600px;height:330px;
-  margin:.5rem auto 1rem
+  position:relative;width:100%;max-width:560px;height:310px;
+  margin:3rem auto 1rem
 }
 .venn-stage{
   position:absolute;top:50%;left:50%;
   width:580px;height:500px;
-  transform:translate(-50%,-50%);
+  transform:translate(-50%,-50%) scale(.78);
   transform-origin:center center
 }
 .venn-circle{
@@ -756,25 +756,25 @@ footer a{color:var(--gold);text-decoration:none}
 
 /* ---- Kurikulum compact (short) ---- */
 @media(max-height:650px){
-  .venn-wrap{height:260px}
-  .venn-stage{transform:translate(-50%,-50%) scale(.74)}
+  .venn-wrap{height:240px;margin-top:2rem}
+  .venn-stage{transform:translate(-50%,-50%) scale(.7)}
   .kur-hub{padding:.35rem 1rem;max-width:360px}
   .kur-hub span{font-size:.65rem}
 }
 @media(max-height:600px){
-  .venn-wrap{height:220px}
-  .venn-stage{transform:translate(-50%,-50%) scale(.6)}
+  .venn-wrap{height:180px;margin-top:1.5rem}
+  .venn-stage{transform:translate(-50%,-50%) scale(.5)}
   .kur-hub{padding:.25rem .8rem}
   .kur-hub span{font-size:.6rem}
   .kur-hub .kh-icon{font-size:.85rem}
 }
 @media(max-width:600px) and (max-height:650px){
-  .venn-wrap{height:200px}
-  .venn-stage{transform:translate(-50%,-50%) scale(.5)}
+  .venn-wrap{height:170px;margin-top:1.5rem}
+  .venn-stage{transform:translate(-50%,-50%) scale(.42)}
 }
 @media(max-width:600px) and (max-height:600px){
-  .venn-wrap{height:160px}
-  .venn-stage{transform:translate(-50%,-50%) scale(.4)}
+  .venn-wrap{height:130px;margin-top:1rem}
+  .venn-stage{transform:translate(-50%,-50%) scale(.32)}
 }
 
 /* ---- ICT compact (short) ---- */
