@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Pembagian Kelas SMP ABBS 2026/2027</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0e17;--card:#111827;--gold:#c8a45c;--teal:#2dd4bf;--text:#e0e0e0;--muted:#777;--border:rgba(255,255,255,.06)}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+/* Nav */
+.topbar{position:sticky;top:0;z-index:10;background:rgba(10,14,23,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;align-items:center;justify-content:space-between}
+.topbar .logo{font-size:1rem;font-weight:700;color:var(--gold)}
+.topbar .subtitle{font-size:.75rem;color:var(--muted)}
+.stats{display:flex;gap:1rem;align-items:center}
+.stat{text-align:center}
+.stat .num{font-size:1.4rem;font-weight:800;color:var(--gold)}
+.stat .lbl{font-size:.65rem;color:var(--muted);letter-spacing:.5px;text-transform:uppercase}
+
+/* Tab navigation */
+.tabs{display:flex;gap:.5rem;padding:1rem 2rem;border-bottom:1px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{height:3px}
+.tabs::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+.tab{padding:.5rem 1rem;border-radius:8px;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .3s;white-space:nowrap;border:1px solid transparent;color:var(--muted)}
+.tab:hover{color:var(--text);background:rgba(255,255,255,.03)}
+.tab.active{color:var(--gold);background:rgba(200,164,92,.08);border-color:rgba(200,164,92,.2)}
+.tab .badge{display:inline-block;margin-left:.4rem;padding:.1rem .4rem;border-radius:10px;font-size:.65rem;font-weight:700;background:rgba(200,164,92,.15);color:var(--gold)}
+
+/* Content */
+.content{max-width:1000px;margin:0 auto;padding:1.5rem 2rem}
+
+/* Class header */
+.class-header{background:linear-gradient(135deg,rgba(200,164,92,.08),rgba(45,212,191,.05));border:1px solid rgba(200,164,92,.15);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem}
+.class-header h2{font-size:1.3rem;font-weight:800;color:var(--gold);margin-bottom:.3rem}
+.class-header .walas{font-size:.85rem;color:var(--muted)}
+.class-header .walas strong{color:var(--teal)}
+.class-header .counts{display:flex;gap:1rem;margin-top:.8rem}
+.count-badge{padding:.3rem .8rem;border-radius:20px;font-size:.75rem;font-weight:600}
+.count-badge.laki{background:rgba(45,212,191,.1);color:var(--teal);border:1px solid rgba(45,212,191,.2)}
+.count-badge.perempuan{background:rgba(200,164,92,.1);color:var(--gold);border:1px solid rgba(200,164,92,.2)}
+.count-badge.total{background:rgba(255,255,255,.05);color:var(--text);border:1px solid var(--border)}
+
+/* Table */
+.table-wrap{border:1px solid var(--border);border-radius:12px;overflow:hidden}
+table{width:100%;border-collapse:collapse}
+thead{background:rgba(200,164,92,.08)}
+th{padding:.7rem 1rem;text-align:left;font-size:.7rem;font-weight:700;color:var(--gold);letter-spacing:.5px;text-transform:uppercase;border-bottom:1px solid var(--border)}
+td{padding:.6rem 1rem;font-size:.82rem;border-bottom:1px solid var(--border);transition:background .2s}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,.02)}
+.no{color:var(--muted);font-weight:600;width:40px}
+.nama{font-weight:600}
+.gender{width:80px;text-align:center}
+.gender.laki{color:var(--teal)}
+.gender.perempuan{color:var(--gold)}
+.asal{color:var(--muted);font-size:.78rem}
+.wa-cell{width:140px}
+.wa-cell input{width:100%;padding:.3rem .5rem;border-radius:6px;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--text);font-size:.78rem;font-family:inherit;transition:border-color .2s}
+.wa-cell input:focus{outline:none;border-color:var(--gold)}
+.wa-cell input::placeholder{color:#444}
+
+/* Print */
+@media print{
+  body{background:#fff;color:#000}
+  .topbar,.tabs,.wa-cell input{display:none!important}
+  .class-header{background:#f5f5f5;border-color:#ddd}
+  .class-header h2{color:#333}
+  .class-header .walas{color:#666}
+  .table-wrap{border-color:#ddd}
+  th{background:#f0f0f0;color:#333}
+  td{color:#333;border-color:#ddd}
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .topbar{padding:.6rem 1rem;flex-direction:column;gap:.5rem}
+  .tabs{padding:.5rem 1rem}
+  .content{padding:1rem}
+  .class-header{padding:1rem}
+  table{font-size:.75rem}
+  th,td{padding:.5rem .6rem}
+  .asal{max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+}
+
+/* All classes view */
+.all-classes{display:none}
+.all-classes.show{display:block}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div>
+    <div class="logo">📋 PEMBAGIAN KELAS</div>
+    <div class="subtitle">SMP ABBS Surakarta · Matrikulasi 2026/2027</div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="num" id="totalSiswa">132</div><div class="lbl">Siswa</div></div>
+    <div class="stat"><div class="num" id="totalKelas">5</div><div class="lbl">Kelas</div></div>
+    <div class="stat"><div class="num" id="totalL">0</div><div class="lbl">Laki-laki</div></div>
+    <div class="stat"><div class="num" id="totalP">0</div><div class="lbl">Perempuan</div></div>
+  </div>
+</div>
+
+<div class="tabs" id="tabs"></div>
+<div class="content" id="content"></div>
+
+<script>
+const WALAS = {
+  "7 Putra A": "Daffa Danendra Rizqi Nugraha, S.Pd.",
+  "7 Putra B": "Hang Sakti Abdullah, S.Pd.",
+  "7 Putra C": "Ifan Destya Adi Tama, S.Pd, Gr",
+  "7 Putri A": "Aulia Qisthi Rosyada, S.Pd., Gr",
+  "7 Putri B": "Charlieta Nova Putri Fedito, S.Kom."
+};
+
+// Inline data
+const DATA = [{"n": "Abid Aqila Putra Sebrian", "g": "L", "s": "SD Muhammadiyah 1 Ketelan Surakarta", "kelas": "7 Putra A"}, {"n": "Abigail Chavail", "g": "P", "s": "SDN Mangkubumen Lor", "kelas": "7 Putri B"}, {"n": "Abisatya Arkha Hamdan Nugroho", "g": "L", "s": "SDIT Insan Kamil", "kelas": "7 Putra C"}, {"n": "Abiyu Rhamdhani Susilo", "g": "L", "s": "SDTQ Al Abidin", "kelas": "7 Putra B"}, {"n": "Adzkia Samha Saufa", "g": "P", "s": "MIN Kota Jayapura", "kelas": "7 Putri A"}, {"n": "Ahda Irhab Nabil", "g": "L", "s": "SDIT Sahabat Selokaten", "kelas": "7 Putra C"}, {"n": "Ahmad Rafi' Asyraf", "g": "L", "s": "SDN 2 Pamotan", "kelas": "7 Putra A"}, {"n": "Ainiya Faidha Azmi", "g": "P", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putri A"}, {"n": "Aisha Hafiza", "g": "P", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putri B"}, {"n": "Akhdan Mirza Ukail Al Fatih", "g": "L", "s": "SD Birul Walidain", "kelas": "7 Putra B"}, {"n": "Akma Safaraz Ajunta", "g": "L", "s": "Sdit Muhammadiyah Al-Kautsar", "kelas": "7 Putra A"}, {"n": "Al Ghazali Hamizan Saeeduzzaman", "g": "L", "s": "SDIT Az Zahra Sragen", "kelas": "7 Putra C"}, {"n": "Al Ghazali Kenzie Ozora Setyawan", "g": "L", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putra C"}, {"n": "Aldebaran Zavier Mikhail Abimanyu", "g": "L", "s": "SDII Al Abidin Surakarta", "kelas": "7 Putra B"}, {"n": "Alfreyza Muhammad Armandsyah", "g": "L", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putra C"}, {"n": "Alif Abdul Ghani", "g": "L", "s": "SDII Al Abidin Surakarta", "kelas": "7 Putra C"}, {"n": "Aliffiandra Rafif Qohhaar Pradipta", "g": "L", "s": "SDN Kroyo/ SBI Kroyo", "kelas": "7 Putra A"}, {"n": "Alifiandra Tsaqib Atmojo", "g": "L", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putra B"}, {"n": "Alisha Faiha Salsabila", "g": "P", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putri A"}, {"n": "Alisya Anindita Nurviola", "g": "P", "s": "SDII Al Abidin Surakarta", "kelas": "7 Putri B"}, {"n": "Aliya Wafa Kamila", "g": "P", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putri B"}, {"n": "Alvin Cahya Wicaksono", "g": "L", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putra A"}, {"n": "Alya Shidqia Wijaya", "g": "P", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putri A"}, {"n": "Anindita Ainun Mahya", "g": "P", "s": "SDN 03 Lalung", "kelas": "7 Putri B"}, {"n": "Aqeela Hasna Aldisha Wibowo", "g": "P", "s": "SD Muhammadiyah Terpadu Masaran (SD MT)", "kelas": "7 Putri A"}, {"n": "Arisha Nadhifah Sari", "g": "P", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putri B"}, {"n": "Arjuna Keanu Ardwinolla", "g": "L", "s": "SDII Al Abidin Surakarta", "kelas": "7 Putra A"}, {"n": "Arjuna Kenzie Hanafi", "g": "L", "s": "SD Muhammadiyah PK Tumang", "kelas": "7 Putra B"}, {"n": "Arjuna Raiful Rafif", "g": "L", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putra A"}, {"n": "Arkarega Dhirgam Al-Ghifari", "g": "L", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putra C"}, {"n": "Arsenio Leon Al Athatra Purnama", "g": "L", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putra C"}, {"n": "Arva Putra Riessa", "g": "L", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putra A"}, {"n": "Ashyfa Aulia Tanzil", "g": "P", "s": "SD NEGERI 07 PENARIK", "kelas": "7 Putri B"}, {"n": "Athaya Assyfatu Haifa", "g": "P", "s": "SDIT Muhammadiyah Pegandon", "kelas": "7 Putri A"}, {"n": "Aurora Shaliha Althafunnisa", "g": "P", "s": "SDII Al Abidin Boyolali", "kelas": "7 Putri B"}, {"n": "Azhar Ariadi Prabowo", "g": "L", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putra C"}, {"n": "Azka Arsyandion", "g": "L", "s": "Madrasah Arifah Gowa", "kelas": "7 Putra B"}, {"n": "Azka Kamaluddin Ghozali", "g": "L", "s": "SDI IPK Muhammadiyah Delanggu", "kelas": "7 Putra A"}, {"n": "Azzam Nur Asyami", "g": "L", "s": "SDIT Lukman Al Hakim", "kelas": "7 Putra A"}, {"n": "Bintang Nafiurizqi", "g": "L", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putra B"}, {"n": "Carmella El Ghaniya Avariella", "g": "P", "s": "SDII Al Abidin Surakarta", "kelas": "7 Putri B"}, {"n": "Daania Almahyra Falihah", "g": "P", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putri A"}, {"n": "Dafi Akmal Utomo", "g": "L", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putra C"}, {"n": "Dafinna Shidqiyya", "g": "P", "s": "SD Ummahat Simo", "kelas": "7 Putri A"}, {"n": "Danang Ahmad Arka", "g": "L", "s": "SD Alam Karawang", "kelas": "7 Putra C"}, {"n": "Daniswara Pandu Wiatmaja", "g": "L", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putra A"}, {"n": "Dhiba Raiqa Kabna Saad", "g": "P", "s": "SDIT Insan Mulia", "kelas": "7 Putri A"}, {"n": "Elbrian Danish Rachmat Priambodo", "g": "L", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putra A"}, {"n": "Erick Wildan Shahzada", "g": "L", "s": "SD Muhammadiyah 4 Surakarta", "kelas": "7 Putra C"}, {"n": "Ervito Reynard Wardana", "g": "L", "s": "SDIT GIS Yaban", "kelas": "7 Putra A"}, {"n": "Faiz Muhammad Attaqiy", "g": "L", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putra B"}, {"n": "Faqih Abrizam Rivai", "g": "L", "s": "MIS Miftahul Munir Ternate", "kelas": "7 Putra B"}, {"n": "Faqih Rafay Naqiba", "g": "L", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putra C"}, {"n": "Fathi Yuanita", "g": "P", "s": "SDII Al Abidin Surakarta", "kelas": "7 Putri B"}, {"n": "Fathir Ardiansyah Alvaro", "g": "L", "s": "SDII Al Abidin Surakarta", "kelas": "7 Putra B"}, {"n": "Fatih Raufa Arsyad", "g": "L", "s": "SDIT QURROTA A'YUN YOGYAKARTA", "kelas": "7 Putra C"}, {"n": "Fauzi Zahroni", "g": "L", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putra B"}, {"n": "Frynda Meisyara Aljufri", "g": "P", "s": "SDMT Masaran", "kelas": "7 Putri B"}, {"n": "G. Iqbal Mahendra", "g": "L", "s": "MIM Gedongan", "kelas": "7 Putra A"}, {"n": "Gendhis Esa Shaliha", "g": "P", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putri A"}, {"n": "Ghania Raisa Fauzi", "g": "P", "s": "Qu'anic School Dewan Dakwah", "kelas": "7 Putri B"}, {"n": "Gilbran azzamy ramadhan", "g": "L", "s": "SD Muhammadiyah PK Boyolali", "kelas": "7 Putra C"}, {"n": "Hafidz Rafie Rabbani", "g": "L", "s": "Sekolah Murid Merdeka", "kelas": "7 Putra A"}, {"n": "Hafsah Bilqis Aulia Insani", "g": "P", "s": "SDN 1 Godong", "kelas": "7 Putri B"}, {"n": "Hening Swastika", "g": "P", "s": "SDIT Al Furqon Maospati", "kelas": "7 Putri A"}, {"n": "Hiroshi Bryan Alvaro", "g": "L", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putra A"}, {"n": "Iluya Almakinan Luthfie", "g": "P", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putri A"}, {"n": "Ilyas Bakr Rasyid", "g": "L", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putra C"}, {"n": "Ismail Arofah", "g": "L", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putra C"}, {"n": "Izhar Rahadhian", "g": "L", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putra A"}, {"n": "Jasmine Naurra Alby", "g": "P", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putri B"}, {"n": "Jiddan Nagata L", "g": "P", "s": "SDIT AR RAHMAN SLOGOHIMO", "kelas": "7 Putri A"}, {"n": "Jihan Thalita Ulfa", "g": "P", "s": "SDIT Uswatun Hasanah Padang Jaya", "kelas": "7 Putri B"}, {"n": "Kanaya Asy Syifa Queenza Nugraha", "g": "P", "s": "SDN Sanggrahan Surakarta", "kelas": "7 Putri B"}, {"n": "Keisha Athaya Ayunda Pratama", "g": "P", "s": "SDII Al Abidin Surakarta", "kelas": "7 Putri B"}, {"n": "Kenzie Al Falih Putra Wisesa", "g": "L", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putra B"}, {"n": "Kenzie Tsaqif Arkaano", "g": "L", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putra C"}, {"n": "Khyla Zahra Salsabila Dri Pramurdi", "g": "P", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putri A"}, {"n": "Lukman Tri Yoda", "g": "L", "s": "SDII Al Abidin Surakarta", "kelas": "7 Putra A"}, {"n": "M. Khalid Al Fatih", "g": "L", "s": "SD Islam Al Fatah", "kelas": "7 Putra C"}, {"n": "M. Zidane Hafis Ramadhan", "g": "L", "s": "SD Negeri 1 Babahrot Kab Aceh Barat Daya", "kelas": "7 Putra C"}, {"n": "Maulana Alif Hakim", "g": "L", "s": "SD Birrul Walidain Muhammadiyah Sragen", "kelas": "7 Putra B"}, {"n": "Maulida Astika Kirana", "g": "P", "s": "SDII Al Abidin Surakarta", "kelas": "7 Putri A"}, {"n": "Muhammad Abdurrohman", "g": "L", "s": "SD Islam Athirah 2", "kelas": "7 Putra A"}, {"n": "Muhammad Al Yazid Umran Wahyudin", "g": "L", "s": "SDN 02 Karanganyar", "kelas": "7 Putra A"}, {"n": "Muhammad Alvin Pratista", "g": "L", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putra C"}, {"n": "Muhammad Aufa Pratama", "g": "L", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putra A"}, {"n": "Muhammad Fahreza Hardiyanto", "g": "L", "s": "SDN Kroyo/ SBI Kroyo", "kelas": "7 Putra A"}, {"n": "Muhammad Fahri Akhtar Rayyan Hutomo", "g": "L", "s": "SDII Al Abidin Surakarta", "kelas": "7 Putra B"}, {"n": "Muhammad Gibran Adria Putra", "g": "L", "s": "SDII Al Abidin Surakarta", "kelas": "7 Putra B"}, {"n": "Muhammad Ilyasa Ash Shidiq", "g": "L", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putra B"}, {"n": "Muhammad Nawaf Syihabuddin Yafiq", "g": "L", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putra A"}, {"n": "Muhammad Rafa Fauzan Kamil", "g": "L", "s": "SD MPU Gedongan Colomadu", "kelas": "7 Putra A"}, {"n": "Muhammad Raffa Al Fatih", "g": "L", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putra A"}, {"n": "Muhammad Rafif Nur Alviris", "g": "L", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putra B"}, {"n": "Muhammad Ramadhan Al Fayyad", "g": "L", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putra A"}, {"n": "Muhammad Saladin Al Banna", "g": "L", "s": "SD Djama'atul Ichwan", "kelas": "7 Putra A"}, {"n": "Muzakki Akhtar", "g": "L", "s": "SDIT Bina Ilmi Palembang", "kelas": "7 Putra B"}, {"n": "Nabila Afrah Manahil", "g": "P", "s": "SDIT Ulul Albab Pekalongan", "kelas": "7 Putri A"}, {"n": "Nabila Alya Hasanah", "g": "P", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putri B"}, {"n": "Nadya Joyce Silitonga", "g": "P", "s": "SDN 1 Cepiring", "kelas": "7 Putri A"}, {"n": "Nadya Kamilah Ramadhani", "g": "P", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putri B"}, {"n": "Nafis Nur Abhista", "g": "L", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putra C"}, {"n": "Najwa Syeeraf Mumtazul Uula", "g": "P", "s": "SDII Al Abidin Surakarta", "kelas": "7 Putri A"}, {"n": "Narendra Erabbani", "g": "L", "s": "SD HJ. ISRIATI MOENADI Semarang", "kelas": "7 Putra C"}, {"n": "Nasyra Queenaisya Qaireen", "g": "P", "s": "MIN 1 Purbalingga", "kelas": "7 Putri A"}, {"n": "Naura Nadhifa A", "g": "P", "s": "SD Muhammadiyah Terpadu Masaran (SD MT)", "kelas": "7 Putri B"}, {"n": "Naura Titis Prabanggono", "g": "P", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putri A"}, {"n": "Nur Karimah Farhati", "g": "P", "s": "PTQ Cahaya Nusantara", "kelas": "7 Putri B"}, {"n": "Pradipta Denanjaya", "g": "L", "s": "SDIT ALIF SMART Surakarta", "kelas": "7 Putra B"}, {"n": "Pranaja Nadzirul Yuwana", "g": "L", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putra B"}, {"n": "Qisya Izz Zara Qaireen", "g": "P", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putri A"}, {"n": "Rafardhan Ara Athalla", "g": "L", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putra B"}, {"n": "Rafif Arkana Andriyanto", "g": "L", "s": "SD MPU Gedongan Colomadu", "kelas": "7 Putra C"}, {"n": "Rahmat Basuki Al Fatih", "g": "L", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putra B"}, {"n": "Raisya Kayla Zahra Saefuddin", "g": "P", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putri A"}, {"n": "Rasyid Tri Arasyputra", "g": "L", "s": "MIN 2 Grobogan", "kelas": "7 Putra B"}, {"n": "Rayyan Gyanara Santoso", "g": "L", "s": "SD Muhammadiyah 16 Surakarta", "kelas": "7 Putra C"}, {"n": "Reviokta Akifa Naila", "g": "P", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putri B"}, {"n": "Rumaisa Naeva Atmaja", "g": "P", "s": "SDIT Permata Hati Jayapura", "kelas": "7 Putri A"}, {"n": "Savino Renzo Arthahadiputra", "g": "L", "s": "SDTQ Al Abidin Surakarta", "kelas": "7 Putra B"}, {"n": "Shahzada Arkan Shanmadja", "g": "L", "s": "SDII Al Abidin Surakarta", "kelas": "7 Putra C"}, {"n": "Shaka Khalifi Putra", "g": "L", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putra C"}, {"n": "Shiddiq Alfarizi Fahrin", "g": "L", "s": "SDN 1 Tinabogan", "kelas": "7 Putra B"}, {"n": "Silmi Adara Putri", "g": "P", "s": "SD Islam Al Amanah Sidoharjo Wonogiri", "kelas": "7 Putri B"}, {"n": "Silmi Latifa", "g": "P", "s": "SD Muhammadiyah Alternatif 1 Kota Magelang", "kelas": "7 Putri A"}, {"n": "Virgatama Rooneyavril Santoso", "g": "L", "s": "SD Birrul Walidain Muhammadiyah Sragen", "kelas": "7 Putra C"}, {"n": "Xavier Mochammad Armature", "g": "L", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putra A"}, {"n": "Yumna Fariha", "g": "P", "s": "SD Yapis Kaimana", "kelas": "7 Putri B"}, {"n": "Zaidan Fahri Hakim", "g": "L", "s": "SD Bukit Asam", "kelas": "7 Putra B"}, {"n": "Zhafran Ozil Syazani", "g": "L", "s": "SDTQ Mujahidin", "kelas": "7 Putra B"}, {"n": "Zufar Kafi Robbani", "g": "L", "s": "SDICT Al Abidin Surakarta", "kelas": "7 Putra B"}];
+
+const kelasOrder = ["7 Putra A","7 Putra B","7 Putra C","7 Putri A","7 Putri B"];
+const byKelas = {};
+kelasOrder.forEach(k => byKelas[k] = []);
+DATA.forEach(s => {
+  if (byKelas[s.kelas]) byKelas[s.kelas].push(s);
+});
+kelasOrder.forEach(k => byKelas[k].sort((a,b) => a.n.localeCompare(b.n)));
+
+// Stats
+let tL = 0, tP = 0;
+DATA.forEach(s => s.g === 'L' ? tL++ : tP++);
+document.getElementById('totalL').textContent = tL;
+document.getElementById('totalP').textContent = tP;
+
+// Tabs
+const tabsEl = document.getElementById('tabs');
+const contentEl = document.getElementById('content');
+let activeTab = 'all';
+
+function renderTabs() {
+  tabsEl.innerHTML = '';
+  // All tab
+  const allTab = document.createElement('div');
+  allTab.className = 'tab' + (activeTab === 'all' ? ' active' : '');
+  allTab.innerHTML = '📋 Semua Kelas <span class="badge">' + DATA.length + '</span>';
+  allTab.onclick = () => switchTab('all');
+  tabsEl.appendChild(allTab);
+
+  kelasOrder.forEach(k => {
+    const tab = document.createElement('div');
+    tab.className = 'tab' + (activeTab === k ? ' active' : '');
+    const short = k.replace('7 ', '7 ');
+    tab.innerHTML = short + ' <span class="badge">' + byKelas[k].length + '</span>';
+    tab.onclick = () => switchTab(k);
+    tabsEl.appendChild(tab);
+  });
+}
+
+function renderTable(kelas, list) {
+  const isPutri = kelas.includes('Putri');
+  let lCount = list.filter(s => s.g === 'L').length;
+  let pCount = list.filter(s => s.g === 'P').length;
+
+  let html = '<div class="class-header">';
+  html += '<h2>' + kelas + '</h2>';
+  html += '<div class="walas">Wali Kelas: <strong>' + (WALAS[kelas] || '-') + '</strong></div>';
+  html += '<div class="counts">';
+  html += '<span class="count-badge laki">♂ ' + lCount + ' Laki-laki</span>';
+  html += '<span class="count-badge perempuan">♀ ' + pCount + ' Perempuan</span>';
+  html += '<span class="count-badge total">Total: ' + list.length + ' Siswa</span>';
+  html += '</div></div>';
+
+  html += '<div class="table-wrap"><table>';
+  html += '<thead><tr><th>No</th><th>Nama Siswa</th><th style="text-align:center">JK</th><th>Asal Sekolah</th><th>No. WA</th></tr></thead>';
+  html += '<tbody>';
+  list.forEach((s, i) => {
+    html += '<tr>';
+    html += '<td class="no">' + (i+1) + '</td>';
+    html += '<td class="nama">' + s.n + '</td>';
+    html += '<td class="gender ' + (s.g === 'L' ? 'laki' : 'perempuan') + '">' + (s.g === 'L' ? '♂ L' : '♀ P') + '</td>';
+    html += '<td class="asal">' + s.s + '</td>';
+    html += '<td class="wa-cell"><input type="tel" placeholder="08xxx..." data-nama="' + s.n.replace(/"/g, '&quot;') + '"></td>';
+    html += '</tr>';
+  });
+  html += '</tbody></table></div>';
+  return html;
+}
+
+function renderAll() {
+  let html = '';
+  kelasOrder.forEach(k => {
+    html += renderTable(k, byKelas[k]);
+  });
+  contentEl.innerHTML = html;
+}
+
+function renderOne(kelas) {
+  contentEl.innerHTML = renderTable(kelas, byKelas[kelas]);
+}
+
+function switchTab(tab) {
+  activeTab = tab;
+  renderTabs();
+  if (tab === 'all') renderAll(); else renderOne(tab);
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT') return;
+  const idx = kelasOrder.indexOf(activeTab);
+  if (e.key === 'ArrowRight' && idx < kelasOrder.length - 1) switchTab(kelasOrder[idx + 1]);
+  if (e.key === 'ArrowLeft' && idx > 0) switchTab(kelasOrder[idx - 1]);
+  if (e.key === 'Escape') switchTab('all');
+});
+
+// Init
+renderTabs();
+renderAll();
+</script>
+</body>
+</html>
