@@ -498,8 +498,22 @@ h3{font-size:clamp(1rem,1.8vw,1.35rem);font-weight:600}
 
 /* Search Layout */
 .search-layout{
-  max-width:480px;margin:0 auto;
-  display:flex;flex-direction:column;gap:1.8rem
+  max-width:860px;margin:0 auto;
+  display:flex;flex-direction:row;align-items:flex-start;
+  gap:1.2rem
+}
+
+/* Search Left Column */
+.search-left{
+  width:320px;flex-shrink:0;
+  position:sticky;top:80px
+}
+
+/* Mobile: stack vertically */
+@media(max-width:820px){
+  .search-layout{flex-direction:column;gap:1.2rem}
+  .search-left{width:100%;position:static}
+  .detail-wrap{max-height:none;overflow-y:visible}
 }
 
 /* Search Box */
@@ -553,13 +567,20 @@ h3{font-size:clamp(1rem,1.8vw,1.35rem);font-weight:600}
 
 /* Detail Card Container */
 .detail-wrap{
+  flex:1;min-width:0;
+  max-height:calc(100vh - 200px);
   background:var(--card);border:1px solid var(--border);
-  border-radius:16px;padding:0;overflow:hidden;
-  box-shadow:0 4px 20px rgba(0,0,0,.15)
+  border-radius:18px;padding:0;overflow-y:auto;
+  box-shadow:0 6px 28px rgba(0,0,0,.18)
 }
+.detail-wrap::-webkit-scrollbar{width:4px}
+.detail-wrap::-webkit-scrollbar-track{background:transparent}
+.detail-wrap::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
 .detail-wrap .ph{
-  padding:2.5rem 1.5rem;color:var(--muted);
-  font-size:.82rem;text-align:center
+  padding:3rem 1.5rem;color:var(--muted);
+  font-size:.85rem;text-align:center;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:200px
 }
 .detail-wrap .ph .big{font-size:2.2rem;margin-bottom:.4rem;opacity:.5}
 .detail-card{width:100%;animation:fadeUp .3s ease}
@@ -567,41 +588,41 @@ h3{font-size:clamp(1rem,1.8vw,1.35rem);font-weight:600}
 
 /* Card Header — Banner */
 .card-hd{
-  padding:.85rem 1.2rem;
-  display:flex;align-items:center;gap:.65rem;
+  padding:1rem 1.5rem;
+  display:flex;align-items:center;gap:.75rem;
   background:linear-gradient(135deg,rgba(212,168,67,.06),rgba(212,168,67,.02));
   border-bottom:1px solid rgba(212,168,67,.1)
 }
-.card-hd .icon{font-size:1.05rem;flex-shrink:0}
+.card-hd .icon{font-size:1.15rem;flex-shrink:0}
 .card-hd .txt{flex:1;min-width:0}
 .card-hd .title{
-  font-weight:600;font-size:.8rem;color:var(--gold);
-  line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+  font-weight:600;font-size:.85rem;color:var(--gold);
+  line-height:1.4;overflow:hidden;text-overflow:ellipsis
 }
 .card-hd .sub{
-  font-size:.65rem;color:var(--muted);margin-top:2px;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+  font-size:.68rem;color:var(--muted);margin-top:3px;
+  overflow:hidden;text-overflow:ellipsis
 }
 
 /* Card Body */
-.card-bd{padding:1.4rem 1.2rem;text-align:center}
+.card-bd{padding:1.6rem 1.5rem;text-align:center}
 
 /* Avatar */
 .card-bd .avatar{
-  width:52px;height:52px;border-radius:50%;
-  margin:0 auto .45rem;
+  width:60px;height:60px;border-radius:50%;
+  margin:0 auto .55rem;
   display:flex;align-items:center;justify-content:center;
-  font-size:1.05rem;font-weight:700;color:white;
-  box-shadow:0 4px 12px rgba(0,0,0,.2)
+  font-size:1.2rem;font-weight:700;color:white;
+  box-shadow:0 4px 14px rgba(0,0,0,.25)
 }
 
 /* Student Info */
 .card-bd .s-name{
-  font-size:.95rem;font-weight:700;
-  margin-bottom:.15rem;line-height:1.3
+  font-size:1.05rem;font-weight:700;
+  margin-bottom:.2rem;line-height:1.3
 }
 .card-bd .s-asal{
-  font-size:.7rem;color:var(--muted);margin-bottom:.55rem
+  font-size:.72rem;color:var(--muted);margin-bottom:.65rem
 }
 .card-bd .class-badge{
   display:inline-block;font-size:.68rem;font-weight:600;
@@ -613,47 +634,47 @@ h3{font-size:clamp(1rem,1.8vw,1.35rem);font-weight:600}
 .card-bd .divider{
   height:1px;
   background:linear-gradient(90deg,transparent,var(--border),transparent);
-  margin:.85rem 0
+  margin:1rem 0
 }
 
 /* Wali Kelas Row */
 .card-bd .walas-row{
-  display:flex;align-items:center;gap:.7rem;
+  display:flex;align-items:center;gap:.8rem;
   justify-content:center;text-align:left;
-  padding:.5rem .6rem;border-radius:10px;
+  padding:.6rem .8rem;border-radius:12px;
   background:rgba(255,255,255,.02);
-  border:1px solid rgba(255,255,255,.03)
+  border:1px solid rgba(255,255,255,.04)
 }
 .card-bd .walas-row .walas-foto{
-  width:38px;height:38px;border-radius:50%;
+  width:44px;height:44px;border-radius:50%;
   flex-shrink:0;object-fit:cover;
   border:2px solid var(--border)
 }
 .card-bd .walas-row .walas-avatar{
-  width:38px;height:38px;border-radius:50%;flex-shrink:0;
+  width:44px;height:44px;border-radius:50%;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
-  font-size:.7rem;font-weight:600;color:white
+  font-size:.78rem;font-weight:600;color:white
 }
 .card-bd .walas-txt .lbl{
-  font-size:.62rem;color:var(--muted);
+  font-size:.63rem;color:var(--muted);
   text-transform:uppercase;letter-spacing:.5px;
-  margin-bottom:1px
+  margin-bottom:2px
 }
 .card-bd .walas-txt .nm{
-  font-weight:600;font-size:.8rem;line-height:1.3
+  font-weight:600;font-size:.85rem;line-height:1.3
 }
 .card-bd .walas-txt .wa{
-  font-size:.65rem;color:var(--muted);margin-top:1px
+  font-size:.67rem;color:var(--muted);margin-top:2px
 }
 
 /* Action Buttons */
 .card-bd .wa-btns{
-  display:flex;gap:.5rem;justify-content:center;
-  flex-wrap:wrap;margin-top:.75rem
+  display:flex;gap:.6rem;justify-content:center;
+  flex-wrap:wrap;margin-top:.85rem
 }
 .card-bd .wa-btns .btn{
-  font-size:.7rem;padding:.4rem .9rem;gap:.3rem;
-  border-radius:8px;font-weight:600;
+  font-size:.75rem;padding:.5rem 1.1rem;gap:.35rem;
+  border-radius:10px;font-weight:600;
   transition:all .2s ease
 }
 .card-bd .wa-btns .btn:hover{transform:translateY(-1px)}
@@ -661,9 +682,9 @@ h3{font-size:clamp(1rem,1.8vw,1.35rem);font-weight:600}
 /* QR Link */
 .qr-link{
   display:flex;flex-direction:column;align-items:center;
-  gap:.5rem;margin-top:.8rem;padding:.8rem;
+  gap:.55rem;margin-top:.9rem;padding:.9rem;
   background:rgba(255,255,255,.03);border:1px solid var(--border);
-  border-radius:12px;text-decoration:none;
+  border-radius:14px;text-decoration:none;
   transition:all .2s ease
 }
 .qr-link:hover{
@@ -672,12 +693,12 @@ h3{font-size:clamp(1rem,1.8vw,1.35rem);font-weight:600}
   transform:translateY(-2px)
 }
 .qr-img{
-  width:120px;height:120px;
-  border-radius:8px;
+  width:130px;height:130px;
+  border-radius:10px;
   border:2px solid var(--border)
 }
 .qr-label{
-  font-size:.65rem;color:var(--muted);
+  font-size:.68rem;color:var(--muted);
   text-align:center
 }
 
@@ -707,15 +728,18 @@ footer a{color:var(--gold);text-decoration:none}
 @media(max-height:650px){
   .section-header{margin-bottom:.6rem}
   .section-tag{font-size:.6rem;padding:.15rem .7rem;margin-bottom:.3rem}
-  h2{font-size:clamp(1rem,2.5vw,1.6rem)}
+  h2{font-size:clamp(1rem,2.5vw,1.5rem);margin-bottom:.15em}
   .section-inner{max-width:980px}
   .slides-container section{padding:56px 1.2rem .8rem}
+  .detail-wrap{max-height:calc(100vh - 170px)}
 }
 @media(max-height:600px){
-  h2{font-size:clamp(.9rem,2vw,1.3rem);margin-bottom:.15em}
+  h2{font-size:clamp(.9rem,2vw,1.2rem);margin-bottom:.05em}
   .section-tag{font-size:.55rem;padding:.1rem .6rem}
   .section-header{margin-bottom:.4rem}
   .slides-container section{padding:50px 1rem .5rem}
+  .detail-wrap{max-height:calc(100vh - 150px)}
+}
   nav{padding:0 1rem;height:46px}
   nav .logo img{height:24px}
   nav .links a{font-size:.65rem;padding:.25rem .6rem}
@@ -812,17 +836,58 @@ footer a{color:var(--gold);text-decoration:none}
 
 /* ---- Cari Kelas compact (short) ---- */
 @media(max-height:650px){
-  .search-layout{gap:.6rem}
-  .detail-wrap .ph{padding:1.2rem 1rem}
-  .detail-wrap .ph .big{font-size:1.6rem}
-  .search-box{padding:.6rem .85rem}
-  .search-box label{font-size:.7rem;margin-bottom:.25rem}
+  .section-header .muted{font-size:.75rem!important}
+  .search-layout{gap:.5rem}
+  .detail-wrap .ph{padding:1.2rem 1rem;min-height:100px}
+  .detail-wrap .ph .big{font-size:1.2rem}
+  .search-left{width:260px}
+  .card-bd{padding:.8rem 1rem}
+  .card-bd .avatar{width:44px;height:44px;font-size:.95rem;margin-bottom:.35rem}
+  .card-bd .s-name{font-size:.85rem}
+  .card-bd .s-asal{font-size:.65rem;margin-bottom:.4rem}
+  .class-badge{font-size:.62rem!important;padding:.15rem .65rem!important}
+  .card-hd{padding:.55rem 1rem}
+  .card-hd .title{font-size:.75rem}
+  .card-hd .sub{font-size:.6rem}
+  .card-hd .icon{font-size:.95rem}
+  .card-bd .divider{margin:.5rem 0}
+  .card-bd .walas-row{padding:.4rem .55rem;gap:.6rem}
+  .card-bd .walas-row .walas-foto,
+  .card-bd .walas-row .walas-avatar{width:34px;height:34px;font-size:.65rem}
+  .card-bd .walas-txt .nm{font-size:.75rem}
+  .card-bd .walas-txt .wa{font-size:.6rem}
+  .card-bd .wa-btns{gap:.4rem;margin-top:.45rem}
+  .card-bd .wa-btns .btn{font-size:.65rem;padding:.35rem .75rem}
+  .qr-img{width:90px;height:90px}
+  .qr-link{padding:.5rem;gap:.3rem;margin-top:.4rem}
+  .qr-label{font-size:.6rem}
 }
 @media(max-height:600px){
-  .search-layout{gap:.4rem}
-  .detail-wrap .ph{padding:.8rem .8rem}
-  .detail-wrap .ph .big{font-size:1.2rem}
   .section-header .muted{font-size:.68rem!important}
+  .search-layout{gap:.3rem}
+  .detail-wrap .ph{padding:.6rem .6rem;min-height:60px}
+  .detail-wrap .ph .big{font-size:1rem}
+  .search-left{width:220px}
+  .card-bd{padding:.5rem .7rem}
+  .card-hd{padding:.45rem .7rem}
+  .card-hd .title{font-size:.7rem}
+  .card-hd .sub{display:none}
+  .card-hd .icon{font-size:.85rem}
+  .card-bd .avatar{width:36px;height:36px;font-size:.8rem;margin-bottom:.25rem}
+  .card-bd .s-name{font-size:.75rem;margin-bottom:.1rem}
+  .card-bd .s-asal{font-size:.6rem;margin-bottom:.25rem}
+  .card-bd .divider{margin:.35rem 0}
+  .card-bd .walas-row{padding:.3rem .4rem;gap:.45rem}
+  .card-bd .walas-row .walas-foto,
+  .card-bd .walas-row .walas-avatar{width:28px;height:28px;font-size:.55rem}
+  .card-bd .walas-txt .lbl{font-size:.55rem}
+  .card-bd .walas-txt .nm{font-size:.65rem}
+  .card-bd .walas-txt .wa{font-size:.55rem}
+  .card-bd .wa-btns{gap:.3rem;margin-top:.3rem}
+  .card-bd .wa-btns .btn{font-size:.58rem;padding:.25rem .6rem}
+  .qr-img{width:70px;height:70px}
+  .qr-link{padding:.35rem;gap:.2rem;margin-top:.25rem}
+  .qr-label{font-size:.55rem}
 }
 
 /* ---- venn-stage scale also for short viewports ---- */
@@ -1137,7 +1202,7 @@ footer a{color:var(--gold);text-decoration:none}
       <div class="section-tag">🔍 Cari Kelas</div>
       <h2>Temukan <span class="gold">Kelasmu</span></h2>
       <p class="muted" style="font-size:.82rem">Ketik namamu untuk info kelas, wali kelas, & grup WhatsApp</p>
-      <div style="margin:10px auto 0;padding:12px 16px;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.2);border-radius:8px;font-size:.8rem;color:var(--gold);max-width:500px;text-align:center">
+      <div style="margin:8px auto 0;padding:8px 12px;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.2);border-radius:8px;font-size:.75rem;color:var(--gold);max-width:480px;text-align:center;line-height:1.3">
         ⚠️ <strong>Penting:</strong> Pembagian kelas saat ini bersifat <strong>SEMENTARA</strong> dan dapat berubah. Kelas resmi akan diinfokan setelah pelaksanaan MPLS.
       </div>
     </div>
