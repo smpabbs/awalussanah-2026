@@ -136,17 +136,10 @@ document.getElementById('totalP').textContent = tP;
 // Tabs
 const tabsEl = document.getElementById('tabs');
 const contentEl = document.getElementById('content');
-let activeTab = 'all';
+let activeTab = kelasOrder[0];
 
 function renderTabs() {
   tabsEl.innerHTML = '';
-  // All tab
-  const allTab = document.createElement('div');
-  allTab.className = 'tab' + (activeTab === 'all' ? ' active' : '');
-  allTab.innerHTML = '📋 Semua Kelas <span class="badge">' + DATA.length + '</span>';
-  allTab.onclick = () => switchTab('all');
-  tabsEl.appendChild(allTab);
-
   kelasOrder.forEach(k => {
     const tab = document.createElement('div');
     tab.className = 'tab' + (activeTab === k ? ' active' : '');
@@ -187,14 +180,6 @@ function renderTable(kelas, list) {
   return html;
 }
 
-function renderAll() {
-  let html = '';
-  kelasOrder.forEach(k => {
-    html += renderTable(k, byKelas[k]);
-  });
-  contentEl.innerHTML = html;
-}
-
 function renderOne(kelas) {
   contentEl.innerHTML = renderTable(kelas, byKelas[kelas]);
 }
@@ -202,7 +187,7 @@ function renderOne(kelas) {
 function switchTab(tab) {
   activeTab = tab;
   renderTabs();
-  if (tab === 'all') renderAll(); else renderOne(tab);
+  renderOne(tab);
 }
 
 // Keyboard navigation
@@ -211,12 +196,11 @@ document.addEventListener('keydown', e => {
   const idx = kelasOrder.indexOf(activeTab);
   if (e.key === 'ArrowRight' && idx < kelasOrder.length - 1) switchTab(kelasOrder[idx + 1]);
   if (e.key === 'ArrowLeft' && idx > 0) switchTab(kelasOrder[idx - 1]);
-  if (e.key === 'Escape') switchTab('all');
 });
 
 // Init
 renderTabs();
-renderAll();
+renderOne(kelasOrder[0]);
 </script>
 </body>
 </html>
