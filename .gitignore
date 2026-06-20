@@ -38,3 +38,5 @@ walas-strip-*.png
 
 # Backup files
 index\ -\ Copy.html
+
+.vercel
