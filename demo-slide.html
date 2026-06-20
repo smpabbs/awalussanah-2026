@@ -3,362 +3,326 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Demo Transisi Slide — Awalussanah 2026</title>
+<title>Demo 3D Transisi — Awalussanah 2026</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
-  *{margin:0;padding:0;box-sizing:border-box;}
-  body{font-family:'Inter',sans-serif;background:#0a0e17;color:#e0e0e0;overflow:hidden;height:100vh;width:100vw;}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#080b12;color:#e0e0e0;overflow:hidden;height:100vh}
 
-  /* ═══ SLIDE CONTAINER ═══ */
-  #slider{position:relative;width:100vw;height:100vh;overflow:hidden;}
-  .slide{
-    position:absolute;top:0;left:0;width:100vw;height:100vh;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    padding:4rem 2rem;opacity:0;pointer-events:none;
-    transition:opacity .6s ease,transform .6s ease;
-    background:transparent;
-  }
-  .slide.active{opacity:1;pointer-events:auto;}
-  .slide h2{font-size:2rem;font-weight:800;color:#c8a45c;margin-bottom:.5rem;text-align:center;}
-  .slide .num{font-size:.7rem;font-weight:800;letter-spacing:3px;color:rgba(200,164,92,.4);text-transform:uppercase;margin-bottom:.5rem;}
-  .slide p{max-width:520px;text-align:center;color:#999;font-size:.9rem;line-height:1.7;margin-bottom:1.5rem;}
-  .slide .card-demo{
-    background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06);
-    border-radius:16px;padding:1.5rem 2rem;text-align:center;backdrop-filter:blur(10px);
-    box-shadow:0 8px 32px rgba(0,0,0,.3);max-width:380px;
-  }
-  .slide .card-demo h3{color:#2dd4bf;font-size:1.1rem;margin-bottom:.3rem;}
-  .slide .card-demo span{color:#777;font-size:.82rem;}
+/* ── NAV BAR ── */
+.top-bar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(8,11,18,.95);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(200,164,92,.1);
+  padding:.6rem 1rem;display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;
+}
+.top-bar button{
+  background:transparent;border:1px solid rgba(255,255,255,.08);
+  color:#666;font-size:.72rem;font-weight:600;padding:.35rem .8rem;
+  border-radius:16px;cursor:pointer;transition:all .3s;font-family:inherit;
+}
+.top-bar button:hover{color:#aaa;border-color:rgba(255,255,255,.15)}
+.top-bar button.active{color:#c8a45c;border-color:rgba(200,164,92,.3);background:rgba(200,164,92,.08)}
 
-  /* ═══ NAVIGATION ARROWS ═══ */
-  .nav-arrow{
-    position:fixed;top:50%;z-index:100;
-    transform:translateY(-50%);
-    width:50px;height:50px;border-radius:50%;
-    background:rgba(200,164,92,.12);border:1px solid rgba(200,164,92,.25);
-    color:#c8a45c;font-size:1.3rem;cursor:pointer;
-    display:flex;align-items:center;justify-content:center;
-    transition:all .3s ease;backdrop-filter:blur(8px);
-  }
-  .nav-arrow:hover{background:rgba(200,164,92,.25);transform:translateY(-50%) scale(1.1);}
-  .nav-arrow.prev{left:1.2rem;}
-  .nav-arrow.next{right:1.2rem;}
-  .nav-arrow.disabled{opacity:.2;pointer-events:none;}
+/* ── 3D STAGE ── */
+.stage{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  perspective:1200px;
+}
+.cube{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  transform-style:preserve-3d;
+  transition:transform .8s cubic-bezier(.4,.0,.2,1);
+}
+.face{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:5rem 2rem 4rem;backface-visibility:hidden;
+  overflow:hidden;
+}
+/* face lighting overlay */
+.face::before{
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  transition:opacity .8s;
+}
 
-  /* ═══ DOTS ═══ */
-  .dots{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);z-index:100;display:flex;gap:.5rem;}
-  .dot{
-    width:10px;height:10px;border-radius:50%;
-    background:rgba(200,164,92,.15);border:1px solid rgba(200,164,92,.25);
-    cursor:pointer;transition:all .3s ease;
-  }
-  .dot.active{background:#c8a45c;transform:scale(1.3);box-shadow:0 0 12px rgba(200,164,92,.4);}
+/* ── NAV ARROWS ── */
+.nav-arrow{
+  position:fixed;top:50%;z-index:50;
+  width:48px;height:48px;border-radius:50%;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  color:#888;font-size:1.2rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .3s;backdrop-filter:blur(8px);
+}
+.nav-arrow:hover{background:rgba(200,164,92,.1);border-color:rgba(200,164,92,.3);color:#c8a45c}
+.nav-arrow.prev{left:1rem;transform:translateY(-50%)}
+.nav-arrow.next{right:1rem;transform:translateY(-50%)}
 
-  /* ═══ TRANSITION SELECTOR ═══ */
-  .trans-selector{
-    position:fixed;top:.8rem;left:50%;transform:translateX(-50%);z-index:100;
-    display:flex;gap:.4rem;padding:.4rem .8rem;
-    background:rgba(10,14,23,.9);border:1px solid rgba(200,164,92,.15);
-    border-radius:25px;backdrop-filter:blur(12px);
-  }
-  .trans-btn{
-    padding:.35rem .7rem;border-radius:15px;border:1px solid transparent;
-    background:transparent;color:#666;font-size:.7rem;font-weight:600;
-    cursor:pointer;transition:all .3s ease;white-space:nowrap;
-  }
-  .trans-btn:hover{color:#aaa;}
-  .trans-btn.active{color:#c8a45c;border-color:rgba(200,164,92,.25);background:rgba(200,164,92,.07);}
+/* ── DOTS ── */
+.dots{position:fixed;bottom:1.2rem;left:50%;transform:translateX(-50%);z-index:50;display:flex;gap:.5rem}
+.dots span{
+  width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.15);
+  cursor:pointer;transition:all .3s;
+}
+.dots span.active{background:#c8a45c;box-shadow:0 0 8px rgba(200,164,92,.4)}
 
-  /* ═══ COUNTER ═══ */
-  .counter{
-    position:fixed;top:.8rem;right:1.2rem;z-index:100;
-    font-size:.75rem;color:rgba(200,164,92,.5);font-weight:700;letter-spacing:1px;
-  }
+/* ── SLIDE COUNTER ── */
+.counter{
+  position:fixed;top:.7rem;right:1.2rem;z-index:50;
+  font-size:.7rem;color:#555;font-weight:600;letter-spacing:1px;
+}
 
-  /* ═══ KEYBOARD HINT ═══ */
-  .key-hint{
-    position:fixed;bottom:1.5rem;right:1.2rem;z-index:100;
-    font-size:.6rem;color:#444;letter-spacing:.5px;
-  }
+/* ── KEYBOARD HINT ── */
+.hint{
+  position:fixed;bottom:1.2rem;right:1.2rem;z-index:50;
+  font-size:.6rem;color:#444;letter-spacing:.5px;
+}
 
-  /* ═══════════════════════════════════════
-     TRANSITION: SLIDE (geser horizontal)
-     ═══════════════════════════════════════ */
-  .t-slide .slide{transform:translateX(100%);opacity:0;}
-  .t-slide .slide.active{transform:translateX(0);opacity:1;}
-  .t-slide .slide.exit-left{transform:translateX(-100%);opacity:0;}
-
-  /* ═══════════════════════════════════════
-     TRANSITION: FADE (tolak tarik)
-     ═══════════════════════════════════════ */
-  .t-fade .slide{opacity:0;transform:scale(.95);}
-  .t-fade .slide.active{opacity:1;transform:scale(1);}
-  .t-fade .slide.exit-left{opacity:0;transform:scale(1.05);}
-
-  /* ═══════════════════════════════════════
-     TRANSITION: FLIP (kartu berputar)
-     ═══════════════════════════════════════ */
-  .t-flip{
-    perspective:1200px;
-  }
-  .t-flip .slide{
-    transform:rotateY(90deg);opacity:0;
-    transition:transform .5s ease,opacity .5s ease;
-  }
-  .t-flip .slide.active{transform:rotateY(0);opacity:1;}
-  .t-flip .slide.exit-left{transform:rotateY(-90deg);opacity:0;}
-
-  /* ═══════════════════════════════════════
-     TRANSITION: ZOOM (perbesar masuk)
-     ═══════════════════════════════════════ */
-  .t-zoom .slide{transform:scale(0);opacity:0;border-radius:20px;}
-  .t-zoom .slide.active{transform:scale(1);opacity:1;border-radius:0;}
-  .t-zoom .slide.exit-left{transform:scale(1.8);opacity:0;}
-
-  /* ═══════════════════════════════════════
-     TRANSITION: CUBE (kubus 3D)
-     ═══════════════════════════════════════ */
-  .t-cube{
-    perspective:1800px;
-  }
-  .t-cube .slide{
-    transform-origin:center right;
-    transform:rotateY(90deg) translateZ(100px);opacity:0;
-    transition:transform .6s ease,opacity .6s ease;
-  }
-  .t-cube .slide.active{transform:rotateY(0) translateZ(0);opacity:1;transform-origin:center center;}
-  .t-cube .slide.exit-left{transform:rotateY(-90deg) translateZ(100px);opacity:0;transform-origin:center left;}
-
-  /* ═══════════════════════════════════════
-     TRANSITION: COVERFLOW (like iTunes)
-     ═══════════════════════════════════════ */
-  .t-coverflow{
-    perspective:2000px;
-  }
-  .t-coverflow .slide{
-    transform:translateX(100%) rotateY(25deg) scale(.7);opacity:0;
-    transition:transform .7s cubic-bezier(.4,0,.2,1),opacity .5s ease;
-  }
-  .t-coverflow .slide.active{transform:translateX(0) rotateY(0) scale(1);opacity:1;}
-  .t-coverflow .slide.exit-left{transform:translateX(-100%) rotateY(-25deg) scale(.7);opacity:0;}
+/* ── CONTENT CARDS ── */
+.slide-label{
+  font-size:.6rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;
+  color:rgba(200,164,92,.4);margin-bottom:.8rem;
+}
+.slide-title{font-size:clamp(1.6rem,4vw,2.8rem);font-weight:800;color:#c8a45c;text-align:center;margin-bottom:.4rem}
+.slide-sub{font-size:.9rem;color:#888;text-align:center;max-width:500px;line-height:1.7}
+.slide-card{
+  margin-top:1.5rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);
+  border-radius:16px;padding:1.2rem 2rem;text-align:center;backdrop-filter:blur(10px);
+  max-width:380px;box-shadow:0 8px 32px rgba(0,0,0,.3);
+}
+.slide-card h3{color:#2dd4bf;font-size:1rem;margin-bottom:.3rem}
+.slide-card span{color:#666;font-size:.8rem}
 </style>
 </head>
 <body>
 
-<!-- TRANSITION SELECTOR -->
-<div class="trans-selector">
-  <button class="trans-btn active" data-trans="t-slide"> Slide </button>
-  <button class="trans-btn" data-trans="t-fade"> Fade </button>
-  <button class="trans-btn" data-trans="t-zoom"> Zoom </button>
-  <button class="trans-btn" data-trans="t-flip"> Flip </button>
-  <button class="trans-btn" data-trans="t-cube"> Cube </button>
-  <button class="trans-btn" data-trans="t-coverflow"> Coverflow </button>
+<!-- TOP BAR -->
+<div class="top-bar" id="topBar">
+  <button class="active" data-mode="cube3d">Cube 3D Realistis</button>
+  <button data-mode="cubeLit">Cube + Lampu</button>
+  <button data-mode="hexagon">Hexagon 3D</button>
+  <button data-mode="portal">Portal Warp</button>
+  <button data-mode="carousel3d">Carousel 3D</button>
+  <button data-mode="room">Room Walk</button>
 </div>
 
-<div class="counter" id="counter">1 / 6</div>
+<!-- 3D STAGE -->
+<div class="stage" id="stage">
+  <div class="cube" id="cube"></div>
+</div>
 
-<!-- NAV ARROWS -->
-<button class="nav-arrow prev disabled" id="prevBtn">◀</button>
+<!-- NAV -->
+<button class="nav-arrow prev" id="prevBtn">◀</button>
 <button class="nav-arrow next" id="nextBtn">▶</button>
-
-<!-- DOTS -->
 <div class="dots" id="dots"></div>
-
-<!-- STARFIELD (CSS-only) -->
-<div id="starfield" aria-hidden="true">
-  <div class="shooting-star"></div>
-  <div class="shooting-star"></div>
-  <div class="shooting-star"></div>
-  <div class="glow g1"></div>
-  <div class="glow g2"></div>
-  <div class="glow g3"></div>
-</div>
-
-<!-- SLIDES -->
-<div id="slider" class="t-slide">
-
-  <div class="slide active" data-index="0">
-    <div class="num">Slide 1</div>
-    <h2>🏠 Home</h2>
-    <p>Selamat datang di Awalussanah 2026/2027 — portal informasi matrikulasi siswa baru SMP ABBS Surakarta.</p>
-    <div class="card-demo"><h3>AWALUSSANAH</h3><span>TA 2026/2027 · SMP ABBS Surakarta</span></div>
-  </div>
-
-  <div class="slide" data-index="1">
-    <div class="num">Slide 2</div>
-    <h2>📚 Kurikulum</h2>
-    <p>Sinergi Kurikulum Merdeka + ICT Class Program + Tahfidz Class Program dalam satu visi pendidikan.</p>
-    <div class="card-demo"><h3>Venn Diagram</h3><span>Kurmer + ICT + TCP</span></div>
-  </div>
-
-  <div class="slide" data-index="2">
-    <div class="num">Slide 3</div>
-    <h2>💻 ICT Class Program</h2>
-    <p>3 level pembelajaran: Fondasi (L7), Elektronika (L8), Web Development (L9).</p>
-    <div class="card-demo"><h3>Level 7 → 9</h3><span>Hardware · Arduino · HTML/CSS/JS</span></div>
-  </div>
-
-  <div class="slide" data-index="3">
-    <div class="num">Slide 4</div>
-    <h2>📖 Tahfidz Class Program</h2>
-    <p>Target hafalan 10 Juz selama masa SMP — pendampingan intensif bersama ustadz/ustadzah.</p>
-    <div class="card-demo"><h3>Target 10 Juz</h3><span>Hafalan Al-Qur'an</span></div>
-  </div>
-
-  <div class="slide" data-index="4">
-    <div class="num">Slide 5</div>
-    <h2>📅 Timeline Matrikulasi</h2>
-    <p>Jadwal kegiatan matrikulasi dari Masuk Grup WhatsApp hingga MPLS.</p>
-    <div class="card-demo"><h3>6 Tahapan</h3><span>WhatsApp → Opening → Mandiri → MPLS</span></div>
-  </div>
-
-  <div class="slide" data-index="5">
-    <div class="num">Slide 6</div>
-    <h2>🔍 Cari Kelas</h2>
-    <p>Temukan kelas sementara kamu beserta info wali kelas & grup WhatsApp.</p>
-    <div class="card-demo"><h3>⚠️ Kelas Sementara</h3><span>Resmi diinfokan setelah MPLS</span></div>
-  </div>
-
-</div>
-
-<div class="key-hint">← → Arrow keys</div>
+<div class="counter" id="counter"></div>
+<div class="hint">← → Arrow keys</div>
 
 <script>
-/* ═══ STATE ═══ */
-let current = 0;
-const total = 6;
-let currentTrans = 't-slide';
+const SLIDES=[
+  {emoji:'🏠',title:'Home',sub:'Selamat datang di Awalussanah 2026/2027',bg:'linear-gradient(135deg,#0a0e17 0%,#111827 100%)'},
+  {emoji:'📚',title:'Kurikulum',sub:'Sinergi Kurmer + ICT + TCP',bg:'linear-gradient(135deg,#0a0e17 0%,#0d1520 100%)'},
+  {emoji:'💻',title:'ICT Class',sub:'Fondasi · Elektronika · Web Dev',bg:'linear-gradient(135deg,#080c14 0%,#0a1a1a 100%)'},
+  {emoji:'📖',title:'Tahfidz',sub:'Target 10 Juz — Tahfidz Class Program',bg:'linear-gradient(135deg,#0a0e17 0%,#14100a 100%)'},
+  {emoji:'📅',title:'Timeline',sub:'6 Tahapan Matrikulasi',bg:'linear-gradient(135deg,#0a0e17 0%,#0f0a1a 100%)'},
+  {emoji:'🔍',title:'Cari Kelas',sub:'⚠️ Kelas Sementara — after MPLS',bg:'linear-gradient(135deg,#0a0e17 0%,#0a1218 100%)'}
+];
+let current=0, mode='cube3d', transitioning=false;
 
-/* ═══ STARFIELD (CSS-only) — same as main site ═══ */
-/* Stars are CSS-only via ::before and ::after in #starfield */
+const cube=document.getElementById('cube');
+const dots=document.getElementById('dots');
+const counter=document.getElementById('counter');
 
-/* ═══ DOTS ═══ */
-const dotsEl = document.getElementById('dots');
-for(let i=0;i<total;i++){
-  const d=document.createElement('div');
-  d.className='dot'+(i===0?' active':'');
-  d.addEventListener('click',()=>goTo(i));
-  dotsEl.appendChild(d);
-}
-
-/* ═══ NAVIGATION ═══ */
-function goTo(idx){
-  if(idx<0||idx>=total||idx===current)return;
-  const slides=document.querySelectorAll('.slide');
-  const dots=document.querySelectorAll('.dot');
-  const prev=document.getElementById('prevBtn');
-  const next=document.getElementById('nextBtn');
-
-  // exit current
-  slides[current].classList.remove('active');
-  slides[current].classList.add(idx>current?'exit-left':'');
-  dots[current].classList.remove('active');
-
-  // remove exit class after transition
-  const oldIdx=current;
-  setTimeout(()=>{slides[oldIdx].classList.remove('exit-left');},700);
-
-  current=idx;
-  slides[current].classList.add('active');
-  dots[current].classList.add('active');
-
-  document.getElementById('counter').textContent=`${current+1} / ${total}`;
-  prev.classList.toggle('disabled',current===0);
-  next.classList.toggle('disabled',current===total-1);
-}
-
-document.getElementById('prevBtn').addEventListener('click',()=>goTo(current-1));
-document.getElementById('nextBtn').addEventListener('click',()=>goTo(current+1));
-
-/* ═══ KEYBOARD ═══ */
-document.addEventListener('keydown',e=>{
-  if(e.key==='ArrowRight'||e.key==='ArrowDown')goTo(current+1);
-  if(e.key==='ArrowLeft'||e.key==='ArrowUp')goTo(current-1);
-});
-
-/* ═══ TRANSITION SELECTOR ═══ */
-document.querySelectorAll('.trans-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.trans-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    const slider=document.getElementById('slider');
-    slider.classList.remove(currentTrans);
-    currentTrans=btn.dataset.trans;
-    slider.classList.add(currentTrans);
+/* ── BUILD SLIDES ── */
+function buildSlides(){
+  cube.innerHTML='';
+  SLIDES.forEach((s,i)=>{
+    const face=document.createElement('div');
+    face.className='face';
+    face.style.background=s.bg;
+    face.innerHTML=`
+      <div class="slide-label">Slide ${i+1}</div>
+      <div class="slide-title">${s.emoji} ${s.title}</div>
+      <div class="slide-sub">${s.sub}</div>
+      <div class="slide-card"><h3>${s.emoji} ${s.title}</h3><span>SMP ABBS Surakarta</span></div>
+    `;
+    cube.appendChild(face);
   });
+}
+
+/* ── BUILD DOTS ── */
+function buildDots(){
+  dots.innerHTML='';
+  SLIDES.forEach((_,i)=>{
+    const d=document.createElement('span');
+    if(i===0)d.classList.add('active');
+    d.onclick=()=>goTo(i);
+    dots.appendChild(d);
+  });
+}
+
+/* ── APPLY TRANSFORM ── */
+function applyTransform(){
+  const faces=cube.querySelectorAll('.face');
+  const n=SLIDES.length;
+
+  // reset
+  cube.style.transition='transform .8s cubic-bezier(.4,.0,.2,1)';
+  cube.style.transformStyle='preserve-3d';
+  document.getElementById('stage').style.perspective='1200px';
+
+  faces.forEach(f=>{f.style.backfaceVisibility='hidden';f.style.position='absolute'});
+
+  switch(mode){
+    case 'cube3d':{
+      // Realistic 3D cube: 4 visible faces at a time
+      const angle=current*90;
+      cube.style.transform=`translateZ(-50vh) rotateY(${-angle}deg)`;
+      const faceSize='100%';
+      faces.forEach((f,i)=>{
+        f.style.width='100%';f.style.height='100%';
+        const ry=i*90;
+        f.style.transform=`rotateY(${ry}deg) translateZ(50vh)`;
+        // lighting
+        const rel=((ry-angle)%360+360)%360;
+        const brightness=rel===0?1:rel===90?.7:rel===180?.4:rel===270?.6:.5;
+        f.style.filter=`brightness(${brightness})`;
+        f.style.opacity=rel<=90||rel>=270?1:rel===180?.3:.6;
+      });
+      break;
+    }
+    case 'cubeLit':{
+      // Cube with dynamic lighting + reflection
+      const angle=current*90;
+      cube.style.transform=`translateZ(-50vh) rotateY(${-angle}deg)`;
+      faces.forEach((f,i)=>{
+        f.style.width='100%';f.style.height='100%';
+        const ry=i*90;
+        f.style.transform=`rotateY(${ry}deg) translateZ(50vh)`;
+        const rel=((ry-angle)%360+360)%360;
+        // dynamic lighting
+        const light=rel===0?1:rel===90?.65:rel===180?.3:rel===270?.55:.5;
+        const saturation=rel===0?1:.7;
+        f.style.filter=`brightness(${light}) saturate(${saturation})`;
+        f.style.opacity=rel<=90||rel>=270?1:.25;
+        // reflection overlay
+        f.style.setProperty('--light',light);
+      });
+      // add reflection line on stage
+      document.getElementById('stage').style.boxShadow='inset 0 -200px 300px -150px rgba(200,164,92,.03)';
+      break;
+    }
+    case 'hexagon':{
+      // Hexagonal prism
+      const angle=current*60;
+      cube.style.transform=`translateZ(-40vh) rotateY(${-angle}deg)`;
+      faces.forEach((f,i)=>{
+        f.style.width='100%';f.style.height='100%';
+        const ry=i*60;
+        f.style.transform=`rotateY(${ry}deg) translateZ(40vh)`;
+        const rel=((ry-angle)%360+360)%360;
+        const light=rel===0?1:rel===60?.8:rel===120?.5:rel===180?.3:rel===240?.5:rel===300?.8:.5;
+        f.style.filter=`brightness(${light})`;
+        f.style.opacity=rel<=120||rel>=240?1:.2;
+      });
+      break;
+    }
+    case 'portal':{
+      // Zoom portal warp
+      faces.forEach((f,i)=>{
+        f.style.width='100%';f.style.height='100%';
+        if(i===current){
+          f.style.transform='scale(1)';
+          f.style.opacity='1';f.style.filter='brightness(1)';
+          f.style.zIndex='2';
+        }else if(i===((current-1+n)%n)){
+          f.style.transform='scale(3) translateZ(-200px)';
+          f.style.opacity='0';f.style.filter='brightness(2)';
+          f.style.zIndex='1';
+        }else{
+          f.style.transform='scale(.1) translateZ(500px)';
+          f.style.opacity='0';f.style.filter='brightness(0)';
+          f.style.zIndex='0';
+        }
+      });
+      cube.style.transform='none';
+      cube.style.transition='transform .6s';
+      break;
+    }
+    case 'carousel3d':{
+      // 3D carousel — all faces visible in circle
+      const angle=current*(360/n);
+      const radius=Math.round(50/Math.tan(Math.PI/n));
+      cube.style.transform=`rotateY(${-angle}deg)`;
+      document.getElementById('stage').style.perspective='none';
+      faces.forEach((f,i)=>{
+        f.style.width='100%';f.style.height='100%';
+        const ry=i*(360/n);
+        f.style.transform=`rotateY(${ry}deg) translateZ(${radius}vh)`;
+        const rel=((ry-angle)%360+360)%360;
+        const light=rel===0?1:rel<=120||rel>=240?.6:.3;
+        f.style.filter=`brightness(${light})`;
+        f.style.opacity=rel<=90||rel>=270?1:.15;
+      });
+      break;
+    }
+    case 'room':{
+      // Room walk — forward/back through rooms
+      const offset=-current*100;
+      cube.style.transform=`translateZ(0)`;
+      faces.forEach((f,i)=>{
+        f.style.width='100%';f.style.height='100%';
+        const z=(i-current)*100;
+        f.style.transform=`translateZ(${-z}vh)`;
+        const dist=Math.abs(z);
+        const light=Math.max(.2,1-dist*.15);
+        const blur=Math.min(dist*.5,4);
+        f.style.filter=`brightness(${light}) blur(${blur}px)`;
+        f.style.opacity=dist>200?0:Math.max(0,1-dist*.005);
+        f.style.zIndex=100-Math.abs(i-current)*10;
+      });
+      break;
+    }
+  }
+
+  // update dots
+  dots.querySelectorAll('span').forEach((d,i)=>d.classList.toggle('active',i===current));
+  counter.textContent=`${current+1} / ${SLIDES.length}`;
+}
+
+/* ── NAVIGATE ── */
+function goTo(i){
+  if(transitioning||i===current)return;
+  transitioning=true;
+  current=i;
+  applyTransform();
+  setTimeout(()=>transitioning=false,850);
+}
+function next(){goTo((current+1)%SLIDES.length)}
+function prev(){goTo((current-1+SLIDES.length)%SLIDES.length)}
+
+document.getElementById('nextBtn').onclick=next;
+document.getElementById('prevBtn').onclick=prev;
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight')next();
+  if(e.key==='ArrowLeft')prev();
 });
+
+/* ── MODE SWITCHER ── */
+document.querySelectorAll('.top-bar button').forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll('.top-bar button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    mode=btn.dataset.mode;
+    applyTransform();
+  };
+});
+
+/* ── INIT ── */
+buildSlides();
+buildDots();
+applyTransform();
 </script>
-
-<!-- ═══ STARFIELD CSS ═══ -->
-<style>
-#starfield{
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  z-index:0;pointer-events:none;overflow:hidden;
-  background:radial-gradient(ellipse at 50% 50%,#0f1420 0%,#080c14 100%);
-}
-#starfield::before,#starfield::after{
-  content:'';position:absolute;inset:0;
-  background-image:
-    radial-gradient(1px 1px at 52px 83px,rgba(255,255,255,.7),transparent),
-    radial-gradient(1px 1px at 150px 200px,rgba(200,164,92,.6),transparent),
-    radial-gradient(1.5px 1.5px at 300px 120px,rgba(255,255,255,.5),transparent),
-    radial-gradient(1px 1px at 420px 350px,rgba(200,164,92,.7),transparent),
-    radial-gradient(1.5px 1.5px at 550px 80px,rgba(255,255,255,.6),transparent),
-    radial-gradient(1px 1px at 680px 280px,rgba(255,255,255,.4),transparent),
-    radial-gradient(1px 1px at 750px 150px,rgba(200,164,92,.5),transparent),
-    radial-gradient(1.5px 1.5px at 880px 400px,rgba(255,255,255,.6),transparent),
-    radial-gradient(1px 1px at 100px 450px,rgba(200,164,92,.4),transparent),
-    radial-gradient(1px 1px at 230px 520px,rgba(255,255,255,.7),transparent),
-    radial-gradient(1.5px 1.5px at 380px 480px,rgba(255,255,255,.5),transparent),
-    radial-gradient(1px 1px at 500px 550px,rgba(200,164,92,.6),transparent),
-    radial-gradient(1px 1px at 620px 420px,rgba(255,255,255,.4),transparent),
-    radial-gradient(1.5px 1.5px at 780px 500px,rgba(200,164,92,.5),transparent),
-    radial-gradient(1px 1px at 900px 100px,rgba(255,255,255,.6),transparent);
-  background-size:1100px 650px;
-  animation:tw1 4s ease-in-out infinite alternate;
-}
-#starfield::after{
-  background-image:
-    radial-gradient(1px 1px at 80px 100px,rgba(200,164,92,.5),transparent),
-    radial-gradient(1.5px 1.5px at 200px 300px,rgba(255,255,255,.6),transparent),
-    radial-gradient(1px 1px at 350px 180px,rgba(255,255,255,.4),transparent),
-    radial-gradient(1px 1px at 500px 420px,rgba(200,164,92,.6),transparent),
-    radial-gradient(1.5px 1.5px at 650px 100px,rgba(255,255,255,.5),transparent),
-    radial-gradient(1px 1px at 780px 350px,rgba(200,164,92,.4),transparent),
-    radial-gradient(1px 1px at 900px 200px,rgba(255,255,255,.7),transparent),
-    radial-gradient(1.5px 1.5px at 120px 480px,rgba(255,255,255,.5),transparent),
-    radial-gradient(1px 1px at 300px 550px,rgba(200,164,92,.6),transparent),
-    radial-gradient(1px 1px at 450px 300px,rgba(255,255,255,.4),transparent),
-    radial-gradient(1.5px 1.5px at 600px 480px,rgba(200,164,92,.5),transparent),
-    radial-gradient(1px 1px at 750px 550px,rgba(255,255,255,.6),transparent);
-  background-size:1100px 650px;
-  animation:tw2 5s ease-in-out infinite alternate;
-  animation-delay:-2s;
-}
-@keyframes tw1{0%{opacity:.4}50%{opacity:.8}100%{opacity:.5}}
-@keyframes tw2{0%{opacity:.5}50%{opacity:.9}100%{opacity:.6}}
-
-#starfield .shooting-star{
-  position:absolute;width:120px;height:1px;
-  background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.8),rgba(200,164,92,.9));
-  border-radius:50%;transform:rotate(-35deg);animation:shoot 3s ease-in infinite;opacity:0;
-}
-#starfield .shooting-star:nth-child(1){top:15%;left:20%;animation-delay:1s;animation-duration:4s;}
-#starfield .shooting-star:nth-child(2){top:25%;left:60%;animation-delay:3s;animation-duration:3.5s;}
-#starfield .shooting-star:nth-child(3){top:8%;left:45%;animation-delay:6s;animation-duration:5s;}
-@keyframes shoot{
-  0%{opacity:0;transform:rotate(-35deg) translateX(0)}
-  5%{opacity:1}15%{opacity:1;transform:rotate(-35deg) translateX(200px)}
-  16%{opacity:0}100%{opacity:0}
-}
-
-#starfield .glow{position:absolute;border-radius:50%;filter:blur(80px);opacity:.12;}
-#starfield .glow.g1{width:400px;height:400px;top:10%;left:-5%;background:rgba(45,212,191,.3);animation:fl1 20s ease-in-out infinite;}
-#starfield .glow.g2{width:350px;height:350px;bottom:10%;right:-5%;background:rgba(200,164,92,.25);animation:fl2 25s ease-in-out infinite;}
-#starfield .glow.g3{width:300px;height:300px;top:40%;left:50%;background:rgba(139,92,246,.15);animation:fl3 22s ease-in-out infinite;}
-@keyframes fl1{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-20px)}}
-@keyframes fl2{0%,100%{transform:translate(0,0)}50%{transform:translate(-25px,15px)}}
-@keyframes fl3{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,25px)}}
-</style>
 </body>
 </html>
