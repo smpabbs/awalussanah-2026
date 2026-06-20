@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/pembagian-kelas", "destination": "/pembagian-kelas.html" }
+  ]
+}
