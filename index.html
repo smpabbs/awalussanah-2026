@@ -424,6 +424,17 @@ h3{font-size:clamp(1rem,1.8vw,1.35rem);font-weight:600}
 .kur-hub strong{color:var(--gold);font-weight:700}
 
 
+/* ================= E-MODUL ================= */
+.emodul-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;max-width:900px;margin:0 auto}
+.emodul-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem;text-align:center;transition:all .3s}
+.emodul-card:hover{border-color:rgba(200,164,92,.3);transform:translateY(-3px)}
+.emodul-icon{font-size:2rem;margin-bottom:.5rem}
+.emodul-card h3{font-size:.85rem;font-weight:700;color:var(--gold);margin-bottom:.3rem}
+.emodul-card p{font-size:.7rem;color:var(--muted);line-height:1.4}
+.emodul-support{text-align:center;font-size:.75rem;color:var(--muted);margin-top:1.2rem}
+@media(max-width:700px){.emodul-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.emodul-grid{grid-template-columns:1fr 1fr;gap:.5rem}}
+
 /* ================= TIMELINE ================= */
 #timeline{background:transparent;}
 .tl-track{
@@ -801,6 +812,11 @@ footer a{color:var(--gold);text-decoration:none}
   .ictr-text{font-size:.5rem}
   .ict-card-foot{padding:.15rem .6rem;font-size:.55rem}
   .ict-support-text{font-size:.55rem}
+  .emodul-grid{gap:.4rem}
+  .emodul-card{padding:.6rem}
+  .emodul-icon{font-size:1.4rem}
+  .emodul-card h3{font-size:.7rem}
+  .emodul-card p{font-size:.55rem}
 }
 
 /* ---- TCP compact (short) ---- */
@@ -890,7 +906,8 @@ footer a{color:var(--gold);text-decoration:none}
     <a href="#ict" data-slide="2">ICT</a>
     <a href="#tcp" data-slide="3">TCP</a>
     <a href="#timeline" data-slide="4">Jadwal</a>
-    <a href="#cari-kelas" data-slide="5" class="cta">Cari Kelas</a>
+    <a href="#emodul" data-slide="5">e-Modul</a>
+    <a href="#cari-kelas" data-slide="6" class="cta">Cari Kelas</a>
   </div>
 </nav>
 
@@ -915,7 +932,7 @@ footer a{color:var(--gold);text-decoration:none}
       <span class="hi-item">📍 Dwangsa Solo Hotel, by Lorin</span>
     </div>
     <div class="hero-btns">
-      <a href="#cari-kelas" class="btn btn-primary" data-slide="5">🔍 Cari Kelasmu</a>
+      <a href="#cari-kelas" class="btn btn-primary" data-slide="6">🔍 Cari Kelasmu</a>
       <a href="#kurikulum" class="btn btn-outline" data-slide="1">Pelajari Kurikulum</a>
     </div>
   </div>
@@ -1173,6 +1190,57 @@ footer a{color:var(--gold);text-decoration:none}
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ================= E-MODUL ================= -->
+<section id="emodul">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">Program Unggulan</div>
+      <h2>e-Modul <span class="gold">Digital</span></h2>
+      <p class="muted" style="font-size:.82rem">Semua buku dalam format digital interaktif &amp; multimedia</p>
+    </div>
+
+    <div class="emodul-grid">
+      <div class="emodul-card">
+        <div class="emodul-icon">📝</div>
+        <h3>Teks Interaktif</h3>
+        <p>Buku digital dengan highlight, catatan, &amp; bookmark</p>
+      </div>
+      <div class="emodul-card">
+        <div class="emodul-icon">🖼️</div>
+        <h3>Gambar Visual</h3>
+        <p>Ilustrasi, diagram, &amp; infografis interaktif</p>
+      </div>
+      <div class="emodul-card">
+        <div class="emodul-icon">🎬</div>
+        <h3>Video Pembelajaran</h3>
+        <p>Video penjelasan materi oleh guru</p>
+      </div>
+      <div class="emodul-card">
+        <div class="emodul-icon">✨</div>
+        <h3>Animasi</h3>
+        <p>Simulasi gerak &amp; proses sains</p>
+      </div>
+      <div class="emodul-card">
+        <div class="emodul-icon">🧪</div>
+        <h3>Virtual Lab</h3>
+        <p>Lab virtual untuk eksperimen sains</p>
+      </div>
+      <div class="emodul-card">
+        <div class="emodul-icon">🎮</div>
+        <h3>Media Interaktif</h3>
+        <p>Simulasi &amp; eksplorasi konsep</p>
+      </div>
+      <div class="emodul-card">
+        <div class="emodul-icon">📝</div>
+        <h3>Quiz Interaktif</h3>
+        <p>Soal otomatis dengan feedback instan</p>
+      </div>
+    </div>
+
+    <p class="emodul-support">✨ Semua materi tersedia offline &amp; online — belajar kapan saja</p>
   </div>
 </section>
 
