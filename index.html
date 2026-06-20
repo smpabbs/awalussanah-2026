@@ -1265,6 +1265,7 @@ footer a{color:var(--gold);text-decoration:none}
 <script>
 let SISWA = [];
 let WALAS = {};
+let KELAS_LABEL = {};
 
 // Load data dari JSON file
 async function loadData(){
@@ -1284,6 +1285,10 @@ async function loadData(){
 }
 
 function initApp(){
+  KELAS_LABEL = {
+    "7 Putra A":"7A","7 Putra B":"7B","7 Putra C":"7C",
+    "7 Putri A":"7D","7 Putri B":"7E"
+  };
   WALAS = {
     "7 Putra A": {nama:"Ifan Destya Adi Tama, S.Pd, Gr.",foto:"data/walas/walas-3.png",wa:"6281229068660",link_wa:"https://chat.whatsapp.com/FaQSmIEjtoPB72TgceNFer",qr:"data/qr/qr-7A.png",warna:"#d97706"},
     "7 Putra B": {nama:"Daffa Danendra Rizqi Nugraha, S.Pd.",foto:"data/walas/walas-4.png",wa:"6285640295816",link_wa:"https://chat.whatsapp.com/F57tlZMe98T7tE3Vj59T5C",qr:"data/qr/qr-7B.png",warna:"#2563eb"},
@@ -1317,7 +1322,7 @@ input.addEventListener('input', function(){
   suggestions.innerHTML = filtered.map((s,i) =>
     `<div class="item ${i===selectedIdx?'active':''}" onclick="pilihSiswa(${i})">
       <span class="name">${s.n}</span>
-      <span class="cls">${s.kelas}</span>
+      <span class="cls">${KELAS_LABEL[s.kelas] || s.kelas}</span>
     </div>`
   ).join('');
   suggestions.classList.add('show');
@@ -1350,20 +1355,20 @@ function pilihSiswa(idx){
   ph.style.display = 'none';
   detailCard.innerHTML = `
     <div class="card-hd">
-      <div class="title">🎉 Barakallah! ${s.kelas}</div>
+      <div class="title">🎉 Barakallah! ${KELAS_LABEL[s.kelas] || s.kelas}</div>
       <div class="sub">#Sementara</div>
     </div>
     <div class="card-body-wrap">
       <div class="card-bd">
         <div class="tagline">
-          🎉 Selamat! Kamu masuk kelas <strong>${s.kelas}</strong>
+          🎉 Selamat! Kamu masuk kelas <strong>${KELAS_LABEL[s.kelas] || s.kelas}</strong>
         </div>
         <div class="top-split">
           <div class="avatar" style="background:linear-gradient(135deg,${wrn},${wrn}88)">${inisS}</div>
           <div class="info">
             <div class="s-name">${s.n}</div>
             <div class="s-asal">${s.s}</div>
-            <div class="class-badge" style="background:${wrn}18;color:${wrn}">🎯 ${s.kelas}</div>
+            <div class="class-badge" style="background:${wrn}18;color:${wrn}">🎯 ${KELAS_LABEL[s.kelas] || s.kelas}</div>
           </div>
         </div>
         ${walas ? `
@@ -1378,7 +1383,7 @@ function pilihSiswa(idx){
           </div>
           <div class="box">
             <div class="lbl">Grup WhatsApp</div>
-            <div class="val">Kelas ${s.kelas}</div>
+            <div class="val">Kelas ${KELAS_LABEL[s.kelas] || s.kelas}</div>
             <div class="sub">👥 Anggota kelas</div>
           </div>
         </div>
@@ -1396,7 +1401,7 @@ function pilihSiswa(idx){
           ${fotoWalas}
         </div>
         <div class="qr-box">
-          <img src="${walas.qr}" alt="QR ${s.kelas}">
+          <img src="${walas.qr}" alt="QR ${KELAS_LABEL[s.kelas] || s.kelas}">
         </div>
         <div class="qr-lbl">Scan untuk join<br>Grup WhatsApp</div>
       </div>` : ''}

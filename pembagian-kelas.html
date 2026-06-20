@@ -108,6 +108,11 @@ tr:hover td{background:rgba(255,255,255,.02)}
 <div class="content" id="content"></div>
 
 <script>
+const KELAS_LABEL = {
+  "7 Putra A": "7A", "7 Putra B": "7B", "7 Putra C": "7C",
+  "7 Putri A": "7D", "7 Putri B": "7E"
+};
+
 const WALAS = {
   "7 Putra A": "Daffa Danendra Rizqi Nugraha, S.Pd.",
   "7 Putra B": "Hang Sakti Abdullah, S.Pd.",
@@ -143,8 +148,7 @@ function renderTabs() {
   kelasOrder.forEach(k => {
     const tab = document.createElement('div');
     tab.className = 'tab' + (activeTab === k ? ' active' : '');
-    const short = k.replace('7 ', '7 ');
-    tab.innerHTML = short + ' <span class="badge">' + byKelas[k].length + '</span>';
+    tab.innerHTML = KELAS_LABEL[k] + ' <span class="badge">' + byKelas[k].length + '</span>';
     tab.onclick = () => switchTab(k);
     tabsEl.appendChild(tab);
   });
@@ -156,7 +160,7 @@ function renderTable(kelas, list) {
   let pCount = list.filter(s => s.g === 'P').length;
 
   let html = '<div class="class-header">';
-  html += '<h2>' + kelas + '</h2>';
+  html += '<h2>' + (KELAS_LABEL[kelas] || kelas) + '</h2>';
   html += '<div class="walas">Wali Kelas: <strong>' + (WALAS[kelas] || '-') + '</strong></div>';
   html += '<div class="counts">';
   html += '<span class="count-badge laki">♂ ' + lCount + ' Laki-laki</span>';
