@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Mockup 3 — Glassmorphism</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:#0a0e17;font-family:system-ui,-apple-system,sans-serif;
+  display:flex;justify-content:center;align-items:center;min-height:100vh;padding:2rem;
+  background-image:radial-gradient(ellipse at 20% 50%,rgba(200,164,92,.06) 0%,transparent 60%),
+                   radial-gradient(ellipse at 80% 50%,rgba(45,212,191,.06) 0%,transparent 60%)
+}
+.card{
+  max-width:560px;width:100%;
+  background:rgba(19,26,43,.6);backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-radius:24px;border:1px solid rgba(255,255,255,.06);
+  box-shadow:0 20px 60px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.04);
+  overflow:hidden
+}
+.glow{
+  position:relative;
+  background:linear-gradient(135deg,rgba(200,164,92,.04),transparent 60%)
+}
+.glow::before{
+  content:'';position:absolute;top:-40px;right:-40px;
+  width:160px;height:160px;
+  background:radial-gradient(circle,rgba(200,164,92,.12),transparent 70%);
+  border-radius:50%;pointer-events:none
+}
+.inner{padding:1.8rem 2rem 1.5rem;position:relative;z-index:1}
+.top-row{display:flex;align-items:center;gap:1.2rem}
+.top-row .avatar{
+  width:68px;height:68px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,#c8a45c,#8b6f3a);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;font-weight:700;color:#0a0e17
+}
+.top-row .meta{flex:1}
+.top-row .badge{
+  display:inline-block;background:rgba(45,212,191,.1);color:#2dd4bf;
+  padding:.15rem .75rem;border-radius:100px;font-size:.6rem;font-weight:600;
+  letter-spacing:.04em
+}
+.top-row .nama{font-size:1.1rem;font-weight:600;color:#eee;margin-top:.15rem}
+.top-row .asal{font-size:.72rem;color:rgba(255,255,255,.4)}
+.tagline{
+  margin-top:.8rem;
+  background:rgba(200,164,92,.06);border:1px solid rgba(200,164,92,.1);
+  border-radius:10px;padding:.5rem .8rem;font-size:.72rem;color:rgba(255,255,255,.6);text-align:center
+}
+.card-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);margin:.9rem 0}
+.walas-row{display:flex;align-items:center;gap:.8rem}
+.walas-row .foto{
+  width:40px;height:40px;border-radius:12px;flex-shrink:0;
+  background:linear-gradient(135deg,#2dd4bf,#1a7a6a);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;color:#fff;font-weight:600
+}
+.walas-row .txt{flex:1}
+.walas-row .lbl{font-size:.55rem;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.06em}
+.walas-row .nm{font-size:.8rem;font-weight:500;color:#ddd}
+.walas-row .wa{font-size:.62rem;color:rgba(255,255,255,.4)}
+.btns-row{display:flex;gap:.5rem;margin-top:.8rem}
+.btns-row a{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:.35rem;
+  padding:.55rem;border-radius:12px;font-size:.7rem;font-weight:500;text-decoration:none;
+  transition:all .2s
+}
+.btns-row .chat{background:#25d366;color:#0a0e17}
+.btns-row .grup{
+  background:rgba(255,255,255,.04);color:#aaa;
+  border:1px solid rgba(255,255,255,.06)
+}
+.qr-block{text-align:center;margin-top:.7rem}
+.qr-block .qr{
+  display:inline-flex;width:88px;height:88px;border-radius:12px;
+  background:rgba(10,14,23,.5);border:1px solid rgba(255,255,255,.06);
+  align-items:center;justify-content:center;
+  font-size:1.8rem;color:#c8a45c
+}
+.qr-block .lbl{font-size:.55rem;color:rgba(255,255,255,.25);margin-top:.15rem}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="glow">
+    <div class="inner">
+      <div class="top-row">
+        <div class="avatar">AA</div>
+        <div class="meta">
+          <div class="badge">🎯 7 PUTRI B</div>
+          <div class="nama">Alisya Anindita Nurviola</div>
+          <div class="asal">SDI Al Abidin Surakarta</div>
+        </div>
+      </div>
+      <div class="tagline">🎉 Selamat! Kamu masuk kelas <strong style="color:#c8a45c">7 Putri B</strong></div>
+      <div class="card-divider"></div>
+      <div class="walas-row">
+        <div class="foto">CN</div>
+        <div class="txt">
+          <div class="lbl">Wali Kelas</div>
+          <div class="nm">Charlieta Nova Putri F, S.Kom</div>
+          <div class="wa">📞 62895346711831</div>
+        </div>
+      </div>
+      <div class="btns-row">
+        <a class="chat" href="#">💬 Chat Wali Kelas</a>
+        <a class="grup" href="#">👥 Grup WA</a>
+      </div>
+      <div class="qr-block">
+        <div class="qr">⬛</div>
+        <div class="lbl">Scan untuk join Grup WhatsApp</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

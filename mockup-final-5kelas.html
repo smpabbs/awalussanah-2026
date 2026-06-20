@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Mockup Modern — 5 Kelas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080c15;
+  --card:#0f1623;
+  --card-border:rgba(255,255,255,.06);
+  --gold:#d4a853;
+  --gold-dim:rgba(212,168,83,.15);
+  --green:#22c55e;
+  --text:#f0f0f0;
+  --text-dim:rgba(255,255,255,.45);
+  --text-muted:rgba(255,255,255,.25);
+  --glass:rgba(255,255,255,.04);
+  --glass-border:rgba(255,255,255,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--bg);font-family:'Inter',system-ui,-apple-system,sans-serif;
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;
+  padding:2.5rem 1rem;
+  background-image:
+    radial-gradient(ellipse at 15% 20%,rgba(212,168,83,.06) 0%,transparent 50%),
+    radial-gradient(ellipse at 85% 80%,rgba(34,197,94,.04) 0%,transparent 50%)
+}
+
+/* ═══ Header ═══ */
+.mock-header{text-align:center;margin-bottom:2rem}
+.mock-header h1{font-size:1.15rem;color:var(--gold);font-weight:700;letter-spacing:-.02em}
+.mock-header p{font-size:.68rem;color:var(--text-muted);margin-top:.3rem;letter-spacing:.02em}
+
+/* ═══ Tabs ═══ */
+.tabs{
+  display:inline-flex;gap:2px;margin-bottom:1.5rem;
+  background:rgba(255,255,255,.03);border-radius:12px;padding:3px;
+  border:1px solid var(--glass-border)
+}
+.tabs button{
+  padding:.45rem 1rem;border-radius:10px;border:none;
+  background:transparent;color:var(--text-dim);
+  font-size:.7rem;font-weight:500;cursor:pointer;
+  transition:all .25s cubic-bezier(.4,0,.2,1);position:relative
+}
+.tabs button:hover{color:var(--text)}
+.tabs button.active{
+  background:linear-gradient(135deg,rgba(212,168,83,.18),rgba(212,168,83,.08));
+  color:var(--gold);box-shadow:0 2px 12px rgba(212,168,83,.1)
+}
+
+/* ═══ Card ═══ */
+.card{
+  max-width:700px;width:100%;background:var(--card);
+  border-radius:18px;border:1px solid var(--card-border);
+  box-shadow:0 4px 24px rgba(0,0,0,.25),0 0 80px rgba(212,168,83,.03);
+  overflow:hidden;display:none;
+  transition:box-shadow .3s ease
+}
+.card.active{display:block}
+
+/* ═══ Header Bar ═══ */
+.header{
+  background:linear-gradient(135deg,rgba(212,168,83,.08) 0%,transparent 60%);
+  padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--glass-border)
+}
+.header h2{font-size:.82rem;color:var(--gold);font-weight:600;letter-spacing:-.01em}
+.header span{
+  font-size:.55rem;color:var(--text-muted);
+  background:var(--glass);padding:.15rem .5rem;border-radius:6px;
+  letter-spacing:.03em
+}
+
+/* ═══ Body ═══ */
+.body-wrap{display:flex}
+.main{flex:1;padding:1.2rem 1.5rem}
+
+/* ═══ Tagline ═══ */
+.tagline{
+  background:linear-gradient(135deg,rgba(212,168,83,.06),rgba(212,168,83,.02));
+  border:1px solid rgba(212,168,83,.1);
+  border-radius:10px;padding:.5rem .8rem;margin-bottom:.8rem;
+  font-size:.72rem;color:var(--text-dim);text-align:center;
+  display:flex;align-items:center;justify-content:center;gap:.4rem
+}
+.tagline strong{color:var(--gold);font-weight:600}
+.tagline .icon{font-size:.9rem}
+
+/* ═══ Avatar ═══ */
+.top-split{display:flex;gap:1rem;align-items:center}
+.top-split .avatar{
+  width:54px;height:54px;border-radius:14px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--gold),#8b6f3a);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;font-weight:700;color:var(--bg);
+  box-shadow:0 4px 16px rgba(212,168,83,.25)
+}
+.top-split .info{flex:1}
+.top-split .info .nama{
+  font-size:1.05rem;font-weight:600;color:var(--text);letter-spacing:-.01em
+}
+.top-split .info .asal{font-size:.72rem;color:var(--text-dim);margin-top:.08rem}
+.badge-row{display:flex;gap:.35rem;margin-top:.4rem}
+.badge-row .kelas{
+  background:var(--gold-dim);color:var(--gold);
+  padding:.15rem .6rem;border-radius:6px;font-size:.6rem;font-weight:600;
+  letter-spacing:.02em
+}
+
+/* ═══ Grid ═══ */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-top:.8rem}
+.grid2 .box{
+  background:var(--glass);border:1px solid var(--glass-border);
+  border-radius:12px;padding:.6rem .75rem;min-height:68px;
+  transition:border-color .2s ease
+}
+.grid2 .box:hover{border-color:rgba(212,168,83,.15)}
+.grid2 .box .lbl{
+  font-size:.5rem;color:var(--text-muted);text-transform:uppercase;
+  letter-spacing:.08em;font-weight:500
+}
+.grid2 .box .val{font-size:.76rem;font-weight:500;color:var(--text);margin-top:.1rem}
+.grid2 .box .sub{font-size:.56rem;color:var(--text-dim);margin-top:.08rem}
+
+/* ═══ Buttons ═══ */
+.btns-row{display:flex;gap:.5rem;margin-top:.7rem}
+.btns-row a{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:.35rem;
+  padding:.55rem;border-radius:10px;font-size:.7rem;font-weight:600;
+  text-decoration:none;transition:all .2s ease
+}
+.btns-row .chat{
+  background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;
+  box-shadow:0 2px 12px rgba(34,197,94,.25)
+}
+.btns-row .chat:hover{box-shadow:0 4px 20px rgba(34,197,94,.35);transform:translateY(-1px)}
+.btns-row .grup{
+  background:var(--glass);color:var(--text-dim);
+  border:1px solid var(--glass-border)
+}
+.btns-row .grup:hover{border-color:rgba(255,255,255,.12);color:var(--text)}
+
+/* ═══ QR Side ═══ */
+.qr-side{
+  width:125px;flex-shrink:0;
+  border-left:1px solid var(--glass-border);
+  display:flex;flex-direction:column;align-items:center;
+  padding:.8rem .5rem;
+  background:linear-gradient(180deg,rgba(212,168,83,.02),transparent)
+}
+.qr-side .walas-top{
+  width:100%;flex:1;border-radius:10px;overflow:hidden;flex-shrink:0;
+  border:1px solid var(--glass-border);
+  background:var(--glass);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:.5rem;min-height:70px
+}
+.qr-side .walas-top img{width:100%;height:100%;object-fit:cover}
+.qr-side .walas-top .init-fallback{
+  font-size:.65rem;font-weight:600;color:var(--text-muted)
+}
+.qr-side .qr-box{
+  width:78px;height:78px;border-radius:10px;overflow:hidden;flex-shrink:0;
+  border:1px solid var(--glass-border);
+  display:flex;align-items:center;justify-content:center;
+  background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.15)
+}
+.qr-side .qr-box img{width:100%;height:100%;object-fit:contain}
+.qr-side .qr-lbl{
+  font-size:.42rem;color:var(--text-muted);margin-top:.25rem;
+  text-align:center;line-height:1.2;letter-spacing:.02em
+}
+
+/* ═══ Walas photo in grid ═══ */
+.walas-photo{
+  width:30px;height:30px;border-radius:8px;object-fit:cover;
+  display:inline-block;vertical-align:middle;margin-right:.3rem;
+  border:1px solid var(--glass-border)
+}
+.wa-photo-row{display:flex;align-items:center;gap:.3rem}
+
+/* ═══ Animations ═══ */
+@keyframes fadeSlide{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.card.active{animation:fadeSlide .3s ease}
+</style>
+</head>
+<body>
+
+<div class="mock-header">
+  <h1>📋 Mockup Modern — Hasil Pencarian Siswa</h1>
+  <p>Desain modern dengan foto & QR code real</p>
+</div>
+
+<div class="tabs" id="tabs">
+  <button class="active" data-kelas="0">7 Putra A</button>
+  <button data-kelas="1">7 Putra B</button>
+  <button data-kelas="2">7 Putra C</button>
+  <button data-kelas="3">7 Putri A</button>
+  <button data-kelas="4">7 Putri B</button>
+</div>
+
+<div id="card-container"></div>
+
+<script>
+const dataKelas = [
+  {
+    kelas: "7 Putra A",
+    warna: "#d97706",
+    siswa: "Ahmad Rafi' Asyraf",
+    asal: "SDN 2 Pamotan",
+    walas: "Ifan Destya Adi Tama, S.Pd, Gr.",
+    wa: "6281229068660",
+    linkGrup: "https://chat.whatsapp.com/FaQSmIEjtoPB72TgceNFer",
+    fotoWalas: "data/walas/walas-3.png",
+    qr: "data/qr/qr-7A.png"
+  },
+  {
+    kelas: "7 Putra B",
+    warna: "#2563eb",
+    siswa: "Abiyu Rhamdhani Susilo",
+    asal: "SDTQ Al Abidin",
+    walas: "Daffa Danendra Rizqi Nugraha, S.Pd.",
+    wa: "6285640295816",
+    linkGrup: "https://chat.whatsapp.com/F57tlZMe98T7tE3Vj59T5C",
+    fotoWalas: "data/walas/walas-4.png",
+    qr: "data/qr/qr-7B.png"
+  },
+  {
+    kelas: "7 Putra C",
+    warna: "#059669",
+    siswa: "Al Ghazali Kenzie Ozora",
+    asal: "SDTQ Al Abidin Surakarta",
+    walas: "Hang Sakti Abdullah, S.Pd.",
+    wa: "6289529032377",
+    linkGrup: "https://chat.whatsapp.com/BaiIARqp2Mu9NQQZm3ciON",
+    fotoWalas: "data/walas/walas-5.png",
+    qr: "data/qr/qr-7C.png"
+  },
+  {
+    kelas: "7 Putri A",
+    warna: "#db2777",
+    siswa: "Adzkia Samha Saufa",
+    asal: "MIN Kota Jayapura",
+    walas: "Aulia Qisthi Rosyada, S.Pd., Gr.",
+    wa: "6287731049243",
+    linkGrup: "https://chat.whatsapp.com/GU8xXbYw7eo9a75hWU4JSE",
+    fotoWalas: "data/walas/walas-1.png",
+    qr: "data/qr/qr-7D.png"
+  },
+  {
+    kelas: "7 Putri B",
+    warna: "#7c3aed",
+    siswa: "Alisya Anindita Nurviola",
+    asal: "SDII Al Abidin Surakarta",
+    walas: "Charlieta Nova Putri Fedito, S.Kom",
+    wa: "62895346711831",
+    linkGrup: "https://chat.whatsapp.com/Db1uyaLJ7DV5BzVatcy5iq",
+    fotoWalas: "data/walas/walas-2.png",
+    qr: "data/qr/qr-7E.png"
+  }
+];
+
+function inisial(nama) {
+  return nama.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();
+}
+
+function inisialWalas(nama) {
+  return nama.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();
+}
+
+function renderCard(d, i) {
+  const inis = inisial(d.siswa);
+  const inisW = inisialWalas(d.walas);
+  return `
+    <div class="card ${i===0?'active':''}" data-index="${i}">
+      <div class="header">
+        <h2>🎉 Barakallah! ${d.kelas}</h2>
+        <span>#Sementara</span>
+      </div>
+      <div class="body-wrap">
+        <div class="main">
+          <div class="tagline">
+            <span class="icon">🎉</span>
+            Selamat! Kamu masuk kelas <strong>${d.kelas}</strong>
+          </div>
+          <div class="top-split">
+            <div class="avatar">${inis}</div>
+            <div class="info">
+              <div class="nama">${d.siswa}</div>
+              <div class="asal">${d.asal}</div>
+              <div class="badge-row">
+                <span class="kelas" style="background:${d.warna}18;color:${d.warna}">🎯 ${d.kelas}</span>
+              </div>
+            </div>
+          </div>
+          <div class="grid2">
+            <div class="box">
+              <div class="lbl">Wali Kelas</div>
+              <div class="val wa-photo-row">
+                <img class="walas-photo" src="${d.fotoWalas}" alt="${d.walas}" onerror="this.style.display='none'">
+                ${d.walas.replace(/,.+$/,'')}
+              </div>
+              <div class="sub">📞 ${d.wa}</div>
+            </div>
+            <div class="box">
+              <div class="lbl">Grup WhatsApp</div>
+              <div class="val">Kelas ${d.kelas}</div>
+              <div class="sub">👥 Anggota kelas</div>
+            </div>
+          </div>
+          <div class="btns-row">
+            <a class="chat" href="https://wa.me/${d.wa}" target="_blank">💬 Chat Wali Kelas</a>
+            <a class="grup" href="${d.linkGrup}" target="_blank">👥 Grup WA</a>
+          </div>
+        </div>
+        <div class="qr-side">
+          <div class="walas-top">
+            <img src="${d.fotoWalas}" alt="${d.walas}" onerror="this.style.display='none';this.parentNode.querySelector('.init-fallback').style.display='flex'">
+            <span class="init-fallback" style="display:none">${inisW}</span>
+          </div>
+          <div class="qr-box">
+            <img src="${d.qr}" alt="QR ${d.kelas}" onerror="this.style.background='#eee';this.alt='QR'">
+          </div>
+          <div class="qr-lbl">Scan untuk join<br>Grup WhatsApp</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// Render
+const container = document.getElementById('card-container');
+container.innerHTML = dataKelas.map((d,i) => renderCard(d,i)).join('');
+
+// Tab switching
+document.querySelectorAll('.tabs button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const idx = parseInt(btn.dataset.kelas);
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.card')[idx].classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

@@ -32,11 +32,15 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .content{max-width:1000px;margin:0 auto;padding:1.5rem 2rem}
 
 /* Class header */
-.class-header{background:linear-gradient(135deg,rgba(200,164,92,.08),rgba(45,212,191,.05));border:1px solid rgba(200,164,92,.15);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem}
-.class-header h2{font-size:1.3rem;font-weight:800;color:var(--gold);margin-bottom:.3rem}
-.class-header .walas{font-size:.85rem;color:var(--muted)}
-.class-header .walas strong{color:var(--teal)}
-.class-header .counts{display:flex;gap:1rem;margin-top:.8rem}
+.class-header{background:linear-gradient(135deg,rgba(200,164,92,.08),rgba(45,212,191,.05));border:1px solid rgba(200,164,92,.15);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.class-header-left{flex:1;min-width:0}
+.class-header-left h2{font-size:1.3rem;font-weight:800;color:var(--gold);margin-bottom:.3rem}
+.class-header-left .walas{font-size:.85rem;color:var(--muted)}
+.class-header-left .walas strong{color:var(--teal)}
+.class-header-left .counts{display:flex;gap:1rem;margin-top:.8rem}
+.class-header-right{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:.3rem}
+.class-header-right img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid rgba(200,164,92,.3)}
+.class-header-right .panggilan{font-size:.6rem;font-weight:700;color:var(--gold);text-align:center;letter-spacing:.3px;white-space:nowrap}
 .count-badge{padding:.3rem .8rem;border-radius:20px;font-size:.75rem;font-weight:600}
 .count-badge.laki{background:rgba(45,212,191,.1);color:var(--teal);border:1px solid rgba(45,212,191,.2)}
 .count-badge.perempuan{background:rgba(200,164,92,.1);color:var(--gold);border:1px solid rgba(200,164,92,.2)}
@@ -66,9 +70,9 @@ tr:hover td{background:rgba(255,255,255,.02)}
 @media print{
   body{background:#fff;color:#000}
   .topbar,.tabs,.wa-cell input{display:none!important}
-  .class-header{background:#f5f5f5;border-color:#ddd}
-  .class-header h2{color:#333}
-  .class-header .walas{color:#666}
+  .class-header{background:#f5f5f5;border-color:#ddd;flex-direction:row}
+  .class-header-left h2{color:#333}
+  .class-header-left .walas{color:#666}
   .table-wrap{border-color:#ddd}
   th{background:#f0f0f0;color:#333}
   td{color:#333;border-color:#ddd}
@@ -79,7 +83,9 @@ tr:hover td{background:rgba(255,255,255,.02)}
   .topbar{padding:.6rem 1rem;flex-direction:column;gap:.5rem}
   .tabs{padding:.5rem 1rem}
   .content{padding:1rem}
-  .class-header{padding:1rem}
+  .class-header{padding:1rem;flex-direction:column;align-items:flex-start;gap:.5rem}
+  .class-header-right{flex-direction:row;gap:.6rem;align-self:flex-start}
+  .class-header-right img{width:40px;height:40px}
   table{font-size:.75rem}
   th,td{padding:.5rem .6rem}
   .asal{max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -115,11 +121,11 @@ const KELAS_LABEL = {
 };
 
 const WALAS = {
-  "7 Putra A": "Ifan Destya Adi Tama, S.Pd, Gr.",
-  "7 Putra B": "Daffa Danendra Rizqi Nugraha, S.Pd.",
-  "7 Putra C": "Hang Sakti Abdullah, S.Pd.",
-  "7 Putri A": "Aulia Qisthi Rosyada, S.Pd., Gr.",
-  "7 Putri B": "Charlieta Nova Putri Fedito, S.Kom"
+  "7 Putra A": {nama:"Ifan Destya Adi Tama, S.Pd, Gr.", panggilan:"Mr Ifan", foto:"data/walas/walas-3.png"},
+  "7 Putra B": {nama:"Daffa Danendra Rizqi Nugraha, S.Pd.", panggilan:"Mr Danen", foto:"data/walas/walas-4.png"},
+  "7 Putra C": {nama:"Hang Sakti Abdullah, S.Pd.", panggilan:"Mr Hang", foto:"data/walas/walas-5.png"},
+  "7 Putri A": {nama:"Aulia Qisthi Rosyada, S.Pd., Gr.", panggilan:"Ms Qisti", foto:"data/walas/walas-1.png"},
+  "7 Putri B": {nama:"Charlieta Nova Putri Fedito, S.Kom", panggilan:"Ms Lita", foto:"data/walas/walas-2.png"}
 };
 
 // Inline data
@@ -159,14 +165,20 @@ function renderTable(kelas, list) {
   const isPutri = kelas.includes('Putri');
   let lCount = list.filter(s => s.g === 'L').length;
   let pCount = list.filter(s => s.g === 'P').length;
+  const w = WALAS[kelas] || {nama:'-',panggilan:'',foto:''};
 
   let html = '<div class="class-header">';
+  html += '<div class="class-header-left">';
   html += '<h2>' + (KELAS_LABEL[kelas] || kelas) + '</h2>';
-  html += '<div class="walas">Wali Kelas: <strong>' + (WALAS[kelas] || '-') + '</strong></div>';
+  html += '<div class="walas">Wali Kelas: <strong>' + w.nama + '</strong></div>';
   html += '<div class="counts">';
   html += '<span class="count-badge laki">♂ ' + lCount + ' Laki-laki</span>';
   html += '<span class="count-badge perempuan">♀ ' + pCount + ' Perempuan</span>';
   html += '<span class="count-badge total">Total: ' + list.length + ' Siswa</span>';
+  html += '</div></div>';
+  html += '<div class="class-header-right">';
+  if (w.foto) html += '<img src="' + w.foto + '" alt="' + w.panggilan + '">';
+  if (w.panggilan) html += '<span class="panggilan">' + w.panggilan + '</span>';
   html += '</div></div>';
 
   html += '<div class="table-wrap"><table>';

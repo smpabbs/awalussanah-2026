@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Mockup 2 — Elegant Minimal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0e17;font-family:system-ui,-apple-system,sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:2rem}
+.card{
+  background:#101826;border-radius:16px;border:1px solid rgba(255,255,255,.06);
+  max-width:540px;width:100%;overflow:hidden;
+  box-shadow:0 10px 40px rgba(0,0,0,.3)
+}
+.row{display:flex;align-items:stretch;min-height:200px}
+.left-col{
+  width:120px;flex-shrink:0;
+  background:linear-gradient(180deg,rgba(200,164,92,.08),transparent);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:1.2rem .8rem
+}
+.left-col .avatar{
+  width:64px;height:64px;border-radius:50%;
+  border:2px solid rgba(200,164,92,.3);
+  background:#0a0e17;display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;font-weight:700;color:#c8a45c
+}
+.left-col .label{font-size:.55rem;color:rgba(255,255,255,.3);margin-top:.4rem;text-align:center}
+.right-col{flex:1;padding:1.3rem 1.5rem}
+.badge{
+  display:inline-block;background:rgba(200,164,92,.15);color:#c8a45c;
+  padding:.15rem .7rem;border-radius:4px;font-size:.65rem;font-weight:600;
+  letter-spacing:.03em;margin-bottom:.4rem
+}
+.right-col .nama{font-size:1.05rem;font-weight:600;color:#eee}
+.right-col .asal{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.1rem}
+.divider{height:1px;background:rgba(255,255,255,.04);margin:.7rem 0}
+.walas{display:flex;align-items:center;gap:.7rem}
+.walas .foto{
+  width:36px;height:36px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,#2dd4bf,#104a40);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.65rem;color:#fff;font-weight:600
+}
+.walas .txt{flex:1}
+.walas .lbl{font-size:.55rem;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.06em}
+.walas .nm{font-size:.78rem;font-weight:500;color:#ddd}
+.walas .wa{font-size:.62rem;color:rgba(255,255,255,.4)}
+.btns{margin-top:.7rem;display:flex;gap:.5rem}
+.btns a{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:.3rem;
+  padding:.5rem .6rem;border-radius:8px;font-size:.7rem;font-weight:500;text-decoration:none
+}
+.btns .chat{background:#25d366;color:#0a0e17}
+.btns .grup{background:rgba(255,255,255,.04);color:#aaa;border:1px solid rgba(255,255,255,.06)}
+.qr-foot{text-align:center;border-top:1px solid rgba(255,255,255,.04);padding:.7rem}
+.qr-foot .qr-box{
+  display:inline-block;width:80px;height:80px;border-radius:6px;
+  background:linear-gradient(135deg,#1a2340,#0a0e17);
+  border:1px solid rgba(255,255,255,.06);
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:1.6rem;color:#c8a45c
+}
+.qr-foot .lbl{font-size:.55rem;color:rgba(255,255,255,.3);margin-top:.2rem}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="row">
+    <div class="left-col">
+      <div class="avatar">AA</div>
+      <div class="label">Siswi</div>
+    </div>
+    <div class="right-col">
+      <div class="badge">🎯 7 PUTRI B</div>
+      <div class="nama">Alisya Anindita Nurviola</div>
+      <div class="asal">SDI Al Abidin Surakarta</div>
+      <div class="divider"></div>
+      <div class="walas">
+        <div class="foto">CN</div>
+        <div class="txt">
+          <div class="lbl">Wali Kelas</div>
+          <div class="nm">Charlieta Nova Putri F, S.Kom</div>
+          <div class="wa">+62 895-3467-11831</div>
+        </div>
+      </div>
+      <div class="btns">
+        <a class="chat" href="#">💬 Chat</a>
+        <a class="grup" href="#">👥 Grup</a>
+      </div>
+    </div>
+  </div>
+  <div class="qr-foot">
+    <div class="qr-box">⬛</div>
+    <div class="lbl">Scan untuk join Grup WA</div>
+  </div>
+</div>
+</body>
+</html>

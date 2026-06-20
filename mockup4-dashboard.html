@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Mockup 4 — Dashboard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0e17;font-family:system-ui,-apple-system,sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:2rem}
+.card{
+  max-width:600px;width:100%;background:#131a2b;
+  border-radius:16px;border:1px solid rgba(212,168,67,.12);
+  box-shadow:0 15px 50px rgba(0,0,0,.35);overflow:hidden
+}
+.header{
+  background:linear-gradient(135deg,#1a2340,#0a0e17);
+  padding:.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid rgba(212,168,67,.08)
+}
+.header h2{font-size:.85rem;color:#c8a45c;font-weight:600}
+.header span{font-size:.65rem;color:rgba(255,255,255,.35)}
+.body-card{padding:1.3rem 1.5rem}
+.top-split{display:flex;gap:1.2rem;align-items:center}
+.top-split .avatar{
+  width:56px;height:56px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,#c8a45c,#8b6f3a);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;font-weight:700;color:#0a0e17
+}
+.top-split .info{flex:1}
+.top-split .info .nama{font-size:1rem;font-weight:600;color:#eee}
+.top-split .info .asal{font-size:.7rem;color:rgba(255,255,255,.4);margin-top:.05rem}
+.badge-row{display:flex;gap:.4rem;margin-top:.35rem}
+.badge-row .kelas{
+  background:rgba(200,164,92,.12);color:#c8a45c;
+  padding:.12rem .65rem;border-radius:4px;font-size:.6rem;font-weight:600
+}
+.badge-row .tag{
+  background:rgba(45,212,191,.08);color:#2dd4bf;
+  padding:.12rem .65rem;border-radius:4px;font-size:.6rem;font-weight:500
+}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.75rem}
+.grid2 .box{
+  background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);
+  border-radius:10px;padding:.55rem .7rem
+}
+.grid2 .box .lbl{font-size:.55rem;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.05em}
+.grid2 .box .val{font-size:.78rem;font-weight:500;color:#ddd;margin-top:.05rem}
+.grid2 .box .sub{font-size:.6rem;color:rgba(255,255,255,.4);margin-top:.05rem}
+.btns-row{display:flex;gap:.5rem;margin-top:.7rem}
+.btns-row a{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:.3rem;
+  padding:.5rem;border-radius:8px;font-size:.7rem;font-weight:500;text-decoration:none
+}
+.btns-row .chat{background:#25d366;color:#0a0e17}
+.btns-row .grup{background:rgba(255,255,255,.04);color:#aaa;border:1px solid rgba(255,255,255,.06)}
+.qr-bar{
+  margin-top:.6rem;padding:.5rem;background:rgba(255,255,255,.02);
+  border-radius:10px;border:1px dashed rgba(255,255,255,.05);
+  display:flex;align-items:center;gap:.7rem;justify-content:center
+}
+.qr-bar .qr-box{
+  width:70px;height:70px;border-radius:6px;flex-shrink:0;
+  background:linear-gradient(135deg,#1a2340,#0a0e17);
+  border:1px solid rgba(255,255,255,.06);
+  display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#c8a45c
+}
+.qr-bar .qr-lbl{font-size:.6rem;color:rgba(255,255,255,.3)}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <h2>🎉 Barakallah! 7 Putri B</h2>
+    <span>#Sementara</span>
+  </div>
+  <div class="body-card">
+    <div class="top-split">
+      <div class="avatar">AA</div>
+      <div class="info">
+        <div class="nama">Alisya Anindita Nurviola</div>
+        <div class="asal">SDI Al Abidin Surakarta</div>
+        <div class="badge-row">
+          <span class="kelas">🎯 7 Putri B</span>
+          <span class="tag">📅 2026/2027</span>
+        </div>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="box">
+        <div class="lbl">Wali Kelas</div>
+        <div class="val">Charlieta Nova P, S.Kom</div>
+        <div class="sub">📞 62895346711831</div>
+      </div>
+      <div class="box">
+        <div class="lbl">Grup WhatsApp</div>
+        <div class="val">Kelas 7 Putri B</div>
+        <div class="sub">👥 32 anggota</div>
+      </div>
+    </div>
+    <div class="btns-row">
+      <a class="chat" href="#">💬 Chat Wali Kelas</a>
+      <a class="grup" href="#">👥 Grup WA</a>
+    </div>
+    <div class="qr-bar">
+      <div class="qr-box">⬛</div>
+      <span class="qr-lbl">Scan QR untuk join Grup WhatsApp</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>
