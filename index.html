@@ -498,23 +498,12 @@ h3{font-size:clamp(1rem,1.8vw,1.35rem);font-weight:600}
 
 /* Search Layout */
 .search-layout{
-  max-width:860px;margin:0 auto;
-  display:flex;flex-direction:row;align-items:flex-start;
-  gap:1.2rem
+  max-width:640px;margin:0 auto;
+  display:flex;flex-direction:column;
+  gap:0.75rem
 }
 
-/* Search Left Column */
-.search-left{
-  width:320px;flex-shrink:0;
-  position:sticky;top:80px
-}
-
-/* Mobile: stack vertically */
-@media(max-width:820px){
-  .search-layout{flex-direction:column;gap:1.2rem}
-  .search-left{width:100%;position:static}
-  .detail-wrap{max-height:none;overflow-y:visible}
-}
+.search-box{width:100%}
 
 /* Search Box */
 .search-box label{
@@ -567,17 +556,18 @@ h3{font-size:clamp(1rem,1.8vw,1.35rem);font-weight:600}
 
 /* Detail Card Container */
 .detail-wrap{
-  flex:1;min-width:0;
-  max-height:calc(100vh - 200px);
+  width:100%;
+  max-height:calc(100vh - 320px);
   background:var(--card);border:1px solid var(--border);
   border-radius:18px;padding:0;overflow-y:auto;
-  box-shadow:0 6px 28px rgba(0,0,0,.18)
+  box-shadow:0 4px 24px rgba(0,0,0,.25),0 0 80px rgba(212,168,83,.03);
+  display:flex;flex-direction:column
 }
 .detail-wrap::-webkit-scrollbar{width:4px}
 .detail-wrap::-webkit-scrollbar-track{background:transparent}
 .detail-wrap::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
 .detail-wrap .ph{
-  padding:3rem 1.5rem;color:var(--muted);
+  flex:1;padding:3rem 1.5rem;color:var(--muted);
   font-size:.85rem;text-align:center;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   min-height:200px
@@ -586,120 +576,139 @@ h3{font-size:clamp(1rem,1.8vw,1.35rem);font-weight:600}
 .detail-card{width:100%;animation:fadeUp .3s ease}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-/* Card Header — Banner */
+/* ─── Card Header (Modern) ─── */
 .card-hd{
-  padding:1rem 1.5rem;
-  display:flex;align-items:center;gap:.75rem;
-  background:linear-gradient(135deg,rgba(212,168,67,.06),rgba(212,168,67,.02));
-  border-bottom:1px solid rgba(212,168,67,.1)
+  padding:.75rem 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(135deg,rgba(212,168,83,.08),transparent 60%);
+  border-bottom:1px solid var(--border)
 }
-.card-hd .icon{font-size:1.15rem;flex-shrink:0}
-.card-hd .txt{flex:1;min-width:0}
 .card-hd .title{
-  font-weight:600;font-size:.85rem;color:var(--gold);
-  line-height:1.4;overflow:hidden;text-overflow:ellipsis
+  font-size:.82rem;color:var(--gold);font-weight:600;
+  letter-spacing:-.01em
 }
 .card-hd .sub{
-  font-size:.68rem;color:var(--muted);margin-top:3px;
-  overflow:hidden;text-overflow:ellipsis
+  font-size:.55rem;color:var(--muted);
+  background:rgba(255,255,255,.03);padding:.15rem .5rem;border-radius:6px;
+  letter-spacing:.03em;white-space:nowrap
 }
 
-/* Card Body */
-.card-bd{padding:1.6rem 1.5rem;text-align:center}
+/* ─── Card Body (Modern: flex row) ─── */
+.card-body-wrap{display:flex}
+.card-bd{
+  flex:1;padding:1.2rem 1.5rem;text-align:left
+}
 
-/* Avatar */
-.card-bd .avatar{
-  width:60px;height:60px;border-radius:50%;
-  margin:0 auto .55rem;
+/* Tagline */
+.card-bd .tagline{
+  background:linear-gradient(135deg,rgba(212,168,83,.06),rgba(212,168,83,.02));
+  border:1px solid rgba(212,168,83,.1);
+  border-radius:10px;padding:.5rem .8rem;margin-bottom:.8rem;
+  font-size:.72rem;color:var(--muted);text-align:center;
+  display:flex;align-items:center;justify-content:center;gap:.4rem
+}
+.card-bd .tagline strong{color:var(--gold);font-weight:600}
+
+/* Avatar + Info row */
+.card-bd .top-split{
+  display:flex;gap:1rem;align-items:center
+}
+.card-bd .top-split .avatar{
+  width:54px;height:54px;border-radius:14px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--gold),#8b6f3a);
   display:flex;align-items:center;justify-content:center;
-  font-size:1.2rem;font-weight:700;color:white;
-  box-shadow:0 4px 14px rgba(0,0,0,.25)
+  font-size:1rem;font-weight:700;color:var(--bg);
+  box-shadow:0 4px 16px rgba(212,168,83,.25)
+}
+.card-bd .top-split .info{flex:1}
+.card-bd .top-split .s-name{
+  font-size:1.05rem;font-weight:600;color:var(--text);
+  letter-spacing:-.01em;margin-bottom:0
+}
+.card-bd .top-split .s-asal{
+  font-size:.72rem;color:var(--muted);margin-top:.08rem;margin-bottom:0
+}
+.card-bd .top-split .class-badge{
+  display:inline-block;margin-top:.4rem;
+  background:rgba(212,168,83,.15);color:var(--gold);
+  padding:.15rem .6rem;border-radius:6px;font-size:.6rem;font-weight:600;
+  letter-spacing:.02em
 }
 
-/* Student Info */
-.card-bd .s-name{
-  font-size:1.05rem;font-weight:700;
-  margin-bottom:.2rem;line-height:1.3
+/* Grid 2 kolom */
+.card-bd .grid2{
+  display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-top:.8rem
 }
-.card-bd .s-asal{
-  font-size:.72rem;color:var(--muted);margin-bottom:.65rem
+.card-bd .grid2 .box{
+  background:rgba(255,255,255,.03);border:1px solid var(--border);
+  border-radius:12px;padding:.6rem .75rem;min-height:68px;
+  transition:border-color .2s ease
 }
-.card-bd .class-badge{
-  display:inline-block;font-size:.68rem;font-weight:600;
-  padding:.2rem .85rem;border-radius:50px;
-  letter-spacing:.3px
+.card-bd .grid2 .box .lbl{
+  font-size:.5rem;color:var(--muted);text-transform:uppercase;
+  letter-spacing:.08em;font-weight:500
 }
-
-/* Divider */
-.card-bd .divider{
-  height:1px;
-  background:linear-gradient(90deg,transparent,var(--border),transparent);
-  margin:1rem 0
+.card-bd .grid2 .box .val{
+  font-size:.76rem;font-weight:500;color:var(--text);margin-top:.1rem
 }
-
-/* Wali Kelas Row */
-.card-bd .walas-row{
-  display:flex;align-items:center;gap:.8rem;
-  justify-content:center;text-align:left;
-  padding:.6rem .8rem;border-radius:12px;
-  background:rgba(255,255,255,.02);
-  border:1px solid rgba(255,255,255,.04)
+.card-bd .grid2 .box .sub{
+  font-size:.56rem;color:var(--muted);margin-top:.08rem
 }
-.card-bd .walas-row .walas-foto{
-  width:44px;height:44px;border-radius:50%;
-  flex-shrink:0;object-fit:cover;
-  border:2px solid var(--border)
+.card-bd .walas-photo{
+  width:30px;height:30px;border-radius:8px;object-fit:cover;
+  display:inline-block;vertical-align:middle;margin-right:.3rem;
+  border:1px solid var(--border)
 }
-.card-bd .walas-row .walas-avatar{
-  width:44px;height:44px;border-radius:50%;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  font-size:.78rem;font-weight:600;color:white
-}
-.card-bd .walas-txt .lbl{
-  font-size:.63rem;color:var(--muted);
-  text-transform:uppercase;letter-spacing:.5px;
-  margin-bottom:2px
-}
-.card-bd .walas-txt .nm{
-  font-weight:600;font-size:.85rem;line-height:1.3
-}
-.card-bd .walas-txt .wa{
-  font-size:.67rem;color:var(--muted);margin-top:2px
-}
+.card-bd .wa-photo-row{display:flex;align-items:center;gap:.3rem}
 
 /* Action Buttons */
-.card-bd .wa-btns{
-  display:flex;gap:.6rem;justify-content:center;
-  flex-wrap:wrap;margin-top:.85rem
+.card-bd .btns-row{
+  display:flex;gap:.5rem;margin-top:.7rem
 }
-.card-bd .wa-btns .btn{
-  font-size:.75rem;padding:.5rem 1.1rem;gap:.35rem;
-  border-radius:10px;font-weight:600;
-  transition:all .2s ease
+.card-bd .btns-row .btn{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:.35rem;
+  padding:.55rem;border-radius:10px;font-size:.7rem;font-weight:600;
+  text-decoration:none;transition:all .2s ease
 }
-.card-bd .wa-btns .btn:hover{transform:translateY(-1px)}
+.card-bd .btns-row .btn-primary{
+  background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;
+  box-shadow:0 2px 12px rgba(34,197,94,.25)
+}
+.card-bd .btns-row .btn-primary:hover{
+  box-shadow:0 4px 20px rgba(34,197,94,.35);transform:translateY(-1px)
+}
+.card-bd .btns-row .btn-outline{
+  background:rgba(255,255,255,.03);color:var(--muted);
+  border:1px solid var(--border)
+}
+.card-bd .btns-row .btn-outline:hover{border-color:rgba(255,255,255,.12);color:var(--text)}
 
-/* QR Link */
-.qr-link{
+/* ─── QR Side Panel ─── */
+.qr-side{
+  width:125px;flex-shrink:0;
+  border-left:1px solid var(--border);
   display:flex;flex-direction:column;align-items:center;
-  gap:.55rem;margin-top:.9rem;padding:.9rem;
-  background:rgba(255,255,255,.03);border:1px solid var(--border);
-  border-radius:14px;text-decoration:none;
-  transition:all .2s ease
+  padding:.8rem .5rem;
+  background:linear-gradient(180deg,rgba(212,168,83,.02),transparent)
 }
-.qr-link:hover{
-  background:rgba(255,255,255,.05);
-  border-color:var(--gold);
-  transform:translateY(-2px)
+.qr-side .walas-top{
+  width:100%;flex:1;border-radius:10px;overflow:hidden;flex-shrink:0;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.03);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:.5rem;min-height:70px
 }
-.qr-img{
-  width:130px;height:130px;
-  border-radius:10px;
-  border:2px solid var(--border)
+.qr-side .walas-top img{width:100%;height:100%;object-fit:cover}
+.qr-side .qr-box{
+  width:78px;height:78px;border-radius:10px;overflow:hidden;flex-shrink:0;
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.15)
 }
-.qr-label{
-  font-size:.68rem;color:var(--muted);
-  text-align:center
+.qr-side .qr-box img{width:100%;height:100%;object-fit:contain}
+.qr-side .qr-lbl{
+  font-size:.42rem;color:var(--muted);margin-top:.25rem;
+  text-align:center;line-height:1.2;letter-spacing:.02em
 }
 
 /* ================= LOADING ================= */
@@ -838,9 +847,9 @@ footer a{color:var(--gold);text-decoration:none}
 @media(max-height:650px){
   .section-header .muted{font-size:.75rem!important}
   .search-layout{gap:.5rem}
+  .detail-wrap{max-height:calc(100vh - 260px)}
   .detail-wrap .ph{padding:1.2rem 1rem;min-height:100px}
   .detail-wrap .ph .big{font-size:1.2rem}
-  .search-left{width:260px}
   .card-bd{padding:.8rem 1rem}
   .card-bd .avatar{width:44px;height:44px;font-size:.95rem;margin-bottom:.35rem}
   .card-bd .s-name{font-size:.85rem}
@@ -850,7 +859,6 @@ footer a{color:var(--gold);text-decoration:none}
   .card-hd .title{font-size:.75rem}
   .card-hd .sub{font-size:.6rem}
   .card-hd .icon{font-size:.95rem}
-  .card-bd .divider{margin:.5rem 0}
   .card-bd .walas-row{padding:.4rem .55rem;gap:.6rem}
   .card-bd .walas-row .walas-foto,
   .card-bd .walas-row .walas-avatar{width:34px;height:34px;font-size:.65rem}
@@ -865,9 +873,9 @@ footer a{color:var(--gold);text-decoration:none}
 @media(max-height:600px){
   .section-header .muted{font-size:.68rem!important}
   .search-layout{gap:.3rem}
+  .detail-wrap{max-height:calc(100vh - 220px)}
   .detail-wrap .ph{padding:.6rem .6rem;min-height:60px}
   .detail-wrap .ph .big{font-size:1rem}
-  .search-left{width:220px}
   .card-bd{padding:.5rem .7rem}
   .card-hd{padding:.45rem .7rem}
   .card-hd .title{font-size:.7rem}
@@ -876,7 +884,6 @@ footer a{color:var(--gold);text-decoration:none}
   .card-bd .avatar{width:36px;height:36px;font-size:.8rem;margin-bottom:.25rem}
   .card-bd .s-name{font-size:.75rem;margin-bottom:.1rem}
   .card-bd .s-asal{font-size:.6rem;margin-bottom:.25rem}
-  .card-bd .divider{margin:.35rem 0}
   .card-bd .walas-row{padding:.3rem .4rem;gap:.45rem}
   .card-bd .walas-row .walas-foto,
   .card-bd .walas-row .walas-avatar{width:28px;height:28px;font-size:.55rem}
@@ -1207,16 +1214,14 @@ footer a{color:var(--gold);text-decoration:none}
       </div>
     </div>
     <div class="search-layout">
-      <div class="search-left">
-        <div class="search-box">
-          <label>Ketik namamu</label>
-          <div class="input-wrap">
-            <span class="icon">🔎</span>
-            <input type="text" id="searchInput" placeholder="Misal: Alisya Anindita..." autocomplete="off">
-          </div>
+      <div class="search-box">
+        <label>Ketik namamu</label>
+        <div class="input-wrap">
+          <span class="icon">🔎</span>
+          <input type="text" id="searchInput" placeholder="Misal: Alisya Anindita..." autocomplete="off">
         </div>
-        <div class="suggestions" id="suggestions"></div>
       </div>
+      <div class="suggestions" id="suggestions"></div>
       <div class="detail-wrap" id="detailWrap">
         <div class="ph" id="ph">
           <div class="big">🔍</div>
@@ -1337,50 +1342,71 @@ function pilihSiswa(idx){
   
   const walas = WALAS[s.kelas];
   const wrn = (WALAS[s.kelas] && WALAS[s.kelas].warna) || '#d4a843';
-  const inis = walas ? inisial(walas.nama) : '?';
-  const fotoWalas = walas && walas.foto ? `<img class="walas-foto" src="${walas.foto}" alt="${walas.nama}">` : `<div class="walas-avatar" style="background:linear-gradient(135deg,${wrn},${wrn}88)">${inis}</div>`;
+  const inisS = inisial(s.n);
+  const inisW = walas ? inisial(walas.nama) : '?';
+  const fotoWalas = walas && walas.foto ? `<img src="${walas.foto}" alt="${walas.nama}">` : `<span class="init-fallback">${inisW}</span>`;
+  const fotoWalasGrid = walas && walas.foto ? `<img class="walas-photo" src="${walas.foto}" alt="${walas.nama}">` : '';
   
   ph.style.display = 'none';
   detailCard.innerHTML = `
     <div class="card-hd">
-      <span class="icon">🎉</span>
-      <div class="txt">
-        <div class="title">Barokalloh! Kamu masuk ke <strong>${s.kelas}</strong></div>
-        <div class="sub">Kelas sementara sampai MPLS selesai &bull; Kelas real setelah MPLS</div>
-      </div>
+      <div class="title">🎉 Barakallah! ${s.kelas}</div>
+      <div class="sub">#Sementara</div>
     </div>
-    <div class="card-bd">
-      <div class="avatar" style="background:linear-gradient(135deg,${wrn},${wrn}88)">${inisial(s.n)}</div>
-      <div class="s-name">${s.n}</div>
-      <div class="s-asal">${s.s}</div>
-      <div class="class-badge" style="background:${wrn}22;color:${wrn};border:1px solid ${wrn}44">${s.kelas}</div>
-      ${walas ? `<div class="divider"></div>
-      <div class="walas-row">
-        ${fotoWalas}
-        <div class="walas-txt">
-          <div class="lbl">Wali Kelas</div>
-          <div class="nm">${walas.nama}</div>
-          <div class="wa">${walas.wa}</div>
+    <div class="card-body-wrap">
+      <div class="card-bd">
+        <div class="tagline">
+          🎉 Selamat! Kamu masuk kelas <strong>${s.kelas}</strong>
         </div>
+        <div class="top-split">
+          <div class="avatar" style="background:linear-gradient(135deg,${wrn},${wrn}88)">${inisS}</div>
+          <div class="info">
+            <div class="s-name">${s.n}</div>
+            <div class="s-asal">${s.s}</div>
+            <div class="class-badge" style="background:${wrn}18;color:${wrn}">🎯 ${s.kelas}</div>
+          </div>
+        </div>
+        ${walas ? `
+        <div class="grid2">
+          <div class="box">
+            <div class="lbl">Wali Kelas</div>
+            <div class="val wa-photo-row">
+              ${fotoWalasGrid}
+              ${walas.nama.replace(/,.+$/,'')}
+            </div>
+            <div class="sub">📞 ${walas.wa}</div>
+          </div>
+          <div class="box">
+            <div class="lbl">Grup WhatsApp</div>
+            <div class="val">Kelas ${s.kelas}</div>
+            <div class="sub">👥 Anggota kelas</div>
+          </div>
+        </div>
+        <div class="btns-row">
+          <a href="https://wa.me/${walas.wa}" target="_blank" class="btn btn-primary" style="box-shadow:0 2px 12px rgba(34,197,94,.25)">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Chat Wali Kelas
+          </a>
+          <a href="${walas.link_wa}" target="_blank" class="btn btn-outline">👥 Grup WA</a>
+        </div>` : '<p class="muted" style="padding:1rem">Data wali kelas belum tersedia</p>'}
       </div>
-      <div class="wa-btns">
-        <a href="https://wa.me/${walas.wa}" target="_blank" class="btn btn-primary" style="background:#25D366">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Chat Wali Kelas
-        </a>
-        <a href="${walas.link_wa}" target="_blank" class="btn btn-outline">💬 Grup WA</a>
-      </div>
-      ${walas.qr ? `<a href="${walas.link_wa}" target="_blank" class="qr-link">
-        <img src="${walas.qr}" alt="QR Grup WA ${s.kelas}" class="qr-img">
-        <span class="qr-label">Scan untuk join Grup WA</span>
-      </a>` : ''}` : '<p class="muted" style="padding:1rem">Data wali kelas belum tersedia</p>'}
+      ${walas ? `
+      <div class="qr-side">
+        <div class="walas-top">
+          ${fotoWalas}
+        </div>
+        <div class="qr-box">
+          <img src="${walas.qr}" alt="QR ${s.kelas}">
+        </div>
+        <div class="qr-lbl">Scan untuk join<br>Grup WhatsApp</div>
+      </div>` : ''}
     </div>
   `;
 }
 
 // Tutup suggestions
 document.addEventListener('click', e => {
-  if(!e.target.closest('.search-left')) suggestions.classList.remove('show');
+  if(!e.target.closest('.search-layout')) suggestions.classList.remove('show');
 });
 
 // ===== LOAD =====
